@@ -24,7 +24,7 @@ function classNames(...classes) {
 
 function Header({ placeholder }) {
 
-  const {state:{authenticated},dispatch}=useContext(AuthContext);
+  const {state:{authenticated,user},dispatch}=useContext(AuthContext);
   const router=useRouter();
 
 
@@ -46,6 +46,7 @@ function Header({ placeholder }) {
 
     console.log('in header ');
     console.log(authenticated);
+    
     authenticated?console.log('is true'):console.log('is false')
 
   },[])
@@ -149,7 +150,16 @@ function Header({ placeholder }) {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        
+                      <Menu.Item>
+                       
+                       {
+                        user? 
+                       <span className="'block px-4 py-2 text-sm font-bold text-gray-700 '">{user.displayName}</span>: <span className="'block px-4 py-2  font-bold text-sm text-gray-700 '">Not Logged In</span>
+                       }
+                     </Menu.Item>
                         <Menu.Item>
+                       
                           {({ active }) => (
                            authenticated? 
                           <Link href="/dashboard#overview">

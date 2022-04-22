@@ -1,5 +1,5 @@
 import axios from "axios";
-import firebase from "../firebase";
+import firebase from "../auth/initFirebase";
 
 
 //if dunnid send token then use this
