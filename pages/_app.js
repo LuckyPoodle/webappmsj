@@ -1,10 +1,11 @@
 
 import "tailwindcss/tailwind.css";
 import '../styles/globals.css'
-import {AuthProvider} from "../auth/useAuth";
-import { ToastContainer } from "react-toastify";
+import {AuthProvider} from "../context/useAuth";
+import { Provider } from "../context";
+import toast, { Toaster } from 'react-hot-toast';
 function MyApp({ Component, pageProps }) {
-  return <AuthProvider> <ToastContainer /><Component {...pageProps} /></AuthProvider>
+  return <Provider><AuthProvider> <Component {...pageProps} /><Toaster /></AuthProvider></Provider>
  
 }
 

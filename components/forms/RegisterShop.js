@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { Select } from "antd";
-const { Option } = Select;
+import { useState } from "react";
+
+
 import Resizer from "react-image-file-resizer";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTiktok, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+
 import { axiosAuth } from "../../actions/axios";
-import { XCircleIcon } from '@heroicons/react/solid';
+
 import SearchBox from "../searchBox";
 
 import { toast } from "react-toastify";
@@ -39,6 +37,10 @@ const RegisterShopForm = ({
     siteLinkTwo: "",
     siteLinkThree: "",
     siteLinkFour: "",
+    shopContactEmail:"",
+    shopContactNumber:"",
+    bankAccountNumber:"",
+    bankName:""
 
 
   });
@@ -182,6 +184,83 @@ const RegisterShopForm = ({
                   </div>
                 </div>
 
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
+                      Shop Contact Email
+                    </label>
+           
+                    <div className="mt-1 flex rounded-md shadow-sm">
+
+                      <input
+                        type="text"
+                        name="shopContactEmail"
+                        onChange={handleChange}
+                        id="shopContactEmail"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                        placeholder="E.g example@example.com"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
+                      Shop Contact Number
+                    </label>
+           
+                    <div className="mt-1 flex rounded-md shadow-sm">
+
+                      <input
+                        type="text"
+                        name="shopContactNumber"
+                        onChange={handleChange}
+                        id="shopContactNumber"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                        placeholder="E.g 91234567"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
+                      Bank Account Number
+                    </label>
+           
+                    <div className="mt-1 flex rounded-md shadow-sm">
+
+                      <input
+                        type="text"
+                        name="bankAccountNumber"
+                        onChange={handleChange}
+                        id="bankAccountNumber"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                        placeholder="E.g xxxx-xxxx-xxxx"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <label htmlFor="company-website" className="block text-sm font-medium text-gray-700">
+                      Bank Name
+                    </label>
+           
+                    <div className="mt-1 flex rounded-md shadow-sm">
+
+                      <input
+                        type="text"
+                        name="bankName"
+                        onChange={handleChange}
+                        id="bankName"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                        placeholder="E.g xxxx-xxxx-xxxx"
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <label htmlFor="about" className="block text-sm font-medium text-gray-700">
                     Description
@@ -204,7 +283,7 @@ const RegisterShopForm = ({
                       Select Your Shop Location
                     </label>
                     <div className="mt-1">
-                      <SearchBox onSelectAddress={(address, latitude, longitude) => {
+                      <SearchBox className='z-50' onSelectAddress={(address, latitude, longitude) => {
 
                         setValues({ ...values, "latitude": latitude, "address": address, "longitude": longitude });
 

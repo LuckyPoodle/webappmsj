@@ -90,12 +90,12 @@ function ReadySearchBox({onSelectAddress,defaultValue}){
         <Combobox onSelect={handleSelect}>
 
             <ComboboxInput 
-            id="search" className="w-full p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+            id="search" className="w-full z-50 p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
              value={value} onChange={handleChange} disabled={!ready} 
               placeholder="Search locations" autoComplete="off"  />
 
-            <ComboboxPopover>
-               {status==="OK" && data.map(({place_id,description})=>(<ComboboxOption key={place_id} value={description} ></ComboboxOption>))} 
+            <ComboboxPopover className='z-50'>
+               {status==="OK" && data.map(({place_id,description})=>(<ComboboxOption  key={place_id} value={description} ></ComboboxOption>))} 
             </ComboboxPopover>
         </Combobox>
     )

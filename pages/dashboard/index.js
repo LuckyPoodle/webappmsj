@@ -182,7 +182,8 @@ useEffect(() => {
 
 
 export const getServerSideProps=async ({ req, res }) => {
-    const uid = await loadIdToken(req);
+    try{
+      const uid = await loadIdToken(req);
 
     const { data } = await axios.get(`${process.env.api}/get-shop-details-for-owner`, {
       headers: {
@@ -203,6 +204,11 @@ export const getServerSideProps=async ({ req, res }) => {
 
   
     return { props: {shopData:data} };
+    }catch(err){
+      res.setHeader("location", "/login");
+      res.statusCode = 302;
+      res.end();
+    }
   };
   
 

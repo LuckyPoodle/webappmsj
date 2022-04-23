@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import  { useRouter} from "next/router";
-import { AuthContext } from "../auth/useAuth";
+import { AuthContext } from "../context/useAuth";
 import firebase from "../auth/initFirebase";
 import { useState ,useContext,useEffect} from "react";
 import { Fragment } from 'react'
