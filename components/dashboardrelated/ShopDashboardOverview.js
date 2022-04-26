@@ -18,7 +18,7 @@ const ShopDashboardOverview=({shopData})=> {
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
      {
-       dashboardShowProductsDetails?<ProductsDetailsDashboard />:shopData[0].owner.ownShop?<ShopDetails shopData={shopData} />: /* Start Shop Form */
+       dashboardShowProductsDetails?<ProductsDetailsDashboard shopData={shopData}  />:shopData[0].owner.ownShop?<ShopDetails shopData={shopData} />: /* Start Shop Form */
 
        <>
        <div>

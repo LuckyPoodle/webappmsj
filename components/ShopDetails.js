@@ -111,7 +111,7 @@ const ShopDetails = ({ shopData }) => {
 
       console.log("setShowImageDeleteButton --- > ", showImageDeleteButton)
     } catch (err) {
-      toast('Something went wrong uploading')
+      notify('Something went wrong', false)
     }
   };
 

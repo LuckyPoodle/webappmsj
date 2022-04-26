@@ -7,7 +7,7 @@ import { axiosAuth } from "../../actions/axios";
 
 import SearchBox from "../searchBox";
 
-import { toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 //shopTitle, slug,shopImage,description,mainLocation,address,owner
 
 // shopTitle: "A Poet's Corner",
@@ -21,6 +21,13 @@ const RegisterShopForm = ({
 
 
 }) => {
+
+  const notify = (message, success) => toast(message, {
+    style: {
+      border: success ? '1px solid green' : '1px solid red',
+    },
+  });
+
 
 
   const [loading, setLoading] = useState(false);
@@ -85,7 +92,7 @@ const RegisterShopForm = ({
 
       console.log("setShowImageDeleteButton --- > ", showImageDeleteButton)
     } catch (err) {
-      toast('Something went wrong uploading')
+      notify('Something went wrong', false)
     }
   };
 
@@ -122,11 +129,11 @@ const RegisterShopForm = ({
       const { data } = await axiosAuth.post("/create-shop", { body: { values: values, image: image }, });
       console.log(data);
 
-      toast(data.message);
+      notify('Created. Please refresh page', true)
 
       //router.push("/instructor");
     } catch (err) {
-      toast(err.response.data);
+      notify('Something went wrong', false)
     }
 
 
