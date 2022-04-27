@@ -183,7 +183,17 @@ useEffect(() => {
 
 export const getServerSideProps=async ({ req, res }) => {
     try{
-      const uid = await loadIdToken(req);
+    const uid = await loadIdToken(req);
+    console.log('uid is ===>')
+    console.log(uid)
+    console.log('req token cookies');
+    console.log(req.cookies.token)
+    if (!uid) {
+      res.setHeader("location", "/login");
+      res.statusCode = 302;
+      res.end();
+    }
+
 
     const { data } = await axios.get(`${process.env.api}/get-shop-details-for-owner`, {
       headers: {
@@ -195,12 +205,7 @@ export const getServerSideProps=async ({ req, res }) => {
     console.log(data)
 
   
-    if (!uid) {
-      res.setHeader("location", "/login");
-      res.statusCode = 302;
-      res.end();
-    }
-
+    
 
   
     return { props: {shopData:data} };

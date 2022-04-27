@@ -7,11 +7,12 @@ import Resizer from "react-image-file-resizer";
 import toast, { Toaster } from 'react-hot-toast';
 import { axiosAuth } from "../actions/axios";
 
-import { Context } from './../context'
+import { Context } from '../context'
 import { useContext } from 'react';
 
 
-const ShopDetails = ({ shopData }) => {
+const ShopDetailsDashboard
+ = ({ shopData }) => {
 
   const {state:{dashboardShowProductsDetails},dispatch}=useContext(Context);
 
@@ -511,4 +512,4 @@ const ShopDetails = ({ shopData }) => {
   )
 }
 
-export default ShopDetails
+export default ShopDetailsDashboard

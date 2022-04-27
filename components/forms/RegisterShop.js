@@ -223,7 +223,7 @@ const RegisterShopForm = ({
                         name="shopContactNumber"
                         onChange={handleChange}
                         id="shopContactNumber"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                        className=" shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                         placeholder="E.g 91234567"
                       />
                     </div>
