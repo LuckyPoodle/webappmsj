@@ -3,7 +3,7 @@ import Resizer from "react-image-file-resizer";
 import { axiosAuth } from "../../actions/axios";
 import { Avatar, Badge } from "antd";
 
-const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,productValues, setProductValues,uploadMainImageLoading, images, handleImageRemove,handleMainImageRemove,handleImage, loading, handleMainImage }) => {
+const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSubmit,productValues, setProductValues,uploadMainImageLoading, images, handleImageRemove,handleMainImageRemove,handleImage, loading, handleMainImage }) => {
 
 
 
@@ -40,7 +40,7 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
               name="name"
               className="w-full  text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Product Title - e.g Strawberry Cake / Dogwalking 1 hour"
-              value={productValues.name}
+              value={productValues.name??''}
               onChange={handleChange}
             />
           </div>
@@ -56,7 +56,7 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
               required
               cols="7"
               rows="7"
-              value={productValues.description}
+              value={productValues.description??''}
               className="shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               onChange={handleChange}
             ></textarea>
@@ -71,9 +71,9 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
               style={{ width: "100%" }}
               size="large"
               required
-              value={productValues.category}
+              value={productValues.category??'Food'}
               name="category"
-            
+              defaultValue={'Food'}
               onChange={handleChange}
               className='text-gray-900 '
             >
@@ -106,7 +106,7 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
               required
               className="w-full text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Product Price"
-              value={productValues.price}
+              value={productValues.price??0}
               min={0}
               onChange={handleChange}
             />
@@ -135,7 +135,7 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
               min={0}
               className="w-full text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Delivery Price"
-              value={productValues.deliveryPrice}
+              value={productValues.deliveryPrice??0}
               onChange={handleChange}
             />
           </div> : <></>}
@@ -143,7 +143,7 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
 
           {
             productValues.mainImage ?
-              <span class="relative inline-block">
+              <span className="relative inline-block">
                 <Avatar key={productValues.mainImage} src={productValues.mainImage} size={20} shape="square" className='w-5' />
                 <span onClick={() => handleMainImageRemove(productValues.mainImage)}
                   class="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full cursor-pointer">x</span>
@@ -189,10 +189,10 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
 
 
 
-            <span class="relative inline-block">
+            <span className="relative inline-block">
               <Avatar key={image} src={image} size={20} shape="square" className='w-5' />
               <span onClick={() => handleImageRemove(image)}
-                class="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full cursor-pointer">x</span>
+                className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full cursor-pointer">x</span>
             </span>
 
 
@@ -229,7 +229,7 @@ const EditProductForm = ({cancelButtonRef,  exitEditProduct, handleSubmit,produc
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={handleSubmit}
                   >
-                    Submit
+                    {isEditing?'Update':"Create"}
                   </button>
                   <button
                     type="button"
