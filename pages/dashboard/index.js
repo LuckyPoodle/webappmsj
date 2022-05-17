@@ -1,7 +1,7 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadIdToken } from "../../auth/firebaseAdmin";
 import Header from "../../components/Header"
-import  { useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { Fragment } from 'react';
 import axios from "axios";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
@@ -25,47 +25,44 @@ function classNames(...classes) {
 
 
 
-function Dashboard({shopData}) {
+function Dashboard({ shopData }) {
 
-const router=useRouter();
+  const router = useRouter();
 
 
-const [renderWindow, setRenderWindow] = useState(false); /// condition that code only run client-side 
-const [current, setCurrent] = useState("");  ///current selected nav item 
-const [clickedOnNav,setClickedOnNav]=useState(false)  /// state useEffect that adjust current depends on 
- 
-//this only run on mount 
+  const [renderWindow, setRenderWindow] = useState(false); /// condition that code only run client-side 
+  const [current, setCurrent] = useState("#overview");  ///current selected nav item 
+  const [clickedOnNav, setClickedOnNav] = useState(false)  /// state useEffect that adjust current depends on 
+
+  //this only run on mount 
   useEffect(() => {
     setRenderWindow(true);
-    setClickedOnNav(true); 
+    setClickedOnNav(true);
 
   }, []);
 
 
-useEffect(() => {
+  useEffect(() => {
 
-  console.log('hey clickedOnNav changed!!!!!');
-
-
-
+    console.log('hey clickedOnNav changed!!!!!');
     console.log('current hash is ');
     console.log(window.location.hash)
     setCurrent(window.location.hash);
-  
-
-
-}, [clickedOnNav]);
 
 
 
+  }, [clickedOnNav]);
 
 
 
-    return (
-        <div>
-            <Header />
 
-            <div className="min-h-full">
+
+
+  return (
+    <div>
+      <Header />
+
+      <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
@@ -83,16 +80,16 @@ useEffect(() => {
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
                           <a
-                            onClick={()=>{setClickedOnNav(!clickedOnNav)}}
+                            onClick={() => { setClickedOnNav(!clickedOnNav) }}
                             key={item.name}
                             href={item.href}
                             className={classNames(
-                              item.href==current
+                              item.href == current
                                 ? 'bg-gray-900 text-white'
                                 : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                               'px-3 py-2 rounded-md text-sm font-medium'
                             )}
-                            aria-current={item.href==current? 'page' : undefined}
+                            aria-current={item.href == current ? 'page' : undefined}
                           >
                             {item.name}
                           </a>
@@ -110,7 +107,7 @@ useEffect(() => {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button> */}
 
-                   
+
                     </div>
                   </div>
                   <div className="-mr-2 flex md:hidden">
@@ -130,21 +127,21 @@ useEffect(() => {
               <Disclosure.Panel className="md:hidden">
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   {navigation.map((item) => (
-                    <a href={item.href}  onClick={()=>{setClickedOnNav(!clickedOnNav)}}> <Disclosure.Button
+                    <a href={item.href} onClick={() => { setClickedOnNav(!clickedOnNav) }}> <Disclosure.Button
                       key={item.name}
                       as="a"
                       href={item.href}
                       className={classNames(
-                        item.href==current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        item.href == current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'block px-3 py-2 rounded-md text-base font-medium'
                       )}
-                      aria-current={item.href==current? 'page' : undefined}
+                      aria-current={item.href == current ? 'page' : undefined}
                     >
-                     {item.name}
+                      {item.name}
                     </Disclosure.Button></a>
                   ))}
                 </div>
-               
+
               </Disclosure.Panel>
             </>
           )}
@@ -157,32 +154,32 @@ useEffect(() => {
         </header>
         <main>
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            {/* Replace with your content */}
+
             <div className="px-4 py-6 sm:px-0">
               {/* <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
                 
                         {current=='#overview'?
                         <DashboardOverview  total={100} totalCompletedOrders={90}/>:current=='#shop'?<h1>shop</h1>:<h1>Other</h1>}
                 </div> */}
-                 {current=='#overview'?
-                        <DashboardOverview  total={100} totalCompletedOrders={90}/>:current=='#shop'?<ShopDashboardOverview shopData={shopData} />:<h1>Other</h1>}
-              
+              {current == '#overview' ?
+                <DashboardOverview total={100} totalCompletedOrders={90} /> : current == '#shop' ? <ShopDashboardOverview shopData={shopData} /> : <h1>Other</h1>}
+
             </div>
-            {/* /End replace */}
+
           </div>
         </main>
       </div>
 
-       
-        </div>
-    );
+
+    </div>
+  );
 }
 
 
 
 
-export const getServerSideProps=async ({ req, res }) => {
-    try{
+export const getServerSideProps = async ({ req, res }) => {
+  try {
     const uid = await loadIdToken(req);
     console.log('uid is ===>')
     console.log(uid)
@@ -193,28 +190,20 @@ export const getServerSideProps=async ({ req, res }) => {
       res.statusCode = 302;
       res.end();
     }
-
-
     const { data } = await axios.get(`${process.env.api}/get-shop-details-for-owner`, {
       headers: {
         token: req.cookies.token,
       },
     });
-
     console.log('data is ==>');
-    console.log(data)
+    console.log(data);
+    return { props: { shopData: data } };
+  } catch (err) {
+    res.setHeader("location", "/login");
+    res.statusCode = 302;
+    res.end();
+  }
+};
 
-  
-    
-
-  
-    return { props: {shopData:data} };
-    }catch(err){
-      res.setHeader("location", "/login");
-      res.statusCode = 302;
-      res.end();
-    }
-  };
-  
 
 export default Dashboard

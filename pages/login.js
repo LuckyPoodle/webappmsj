@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header'
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { loadIdToken } from "../auth/firebaseAdmin";
 import FirebaseAuth from '../components/firebaseAuth'
 const Login = () => {
   return (
@@ -25,5 +26,29 @@ const Login = () => {
    </div>
   )
 }
+
+export const getServerSideProps=async ({ req, res }) => {
+  try{
+  const uid = await loadIdToken(req);
+  console.log('uid is ===>')
+  console.log(uid)
+  console.log('req token cookies');
+  console.log(req.cookies.token)
+  if (uid) {
+    res.setHeader("location", "/dashboard/#shop");
+    res.statusCode = 302;
+    res.end();
+  }
+  
+
+  }catch(err){
+    console.log("ERROR DIRECTING TO DASHBOARD/LOGIN");
+    console.log(err)
+    res.setHeader("location", "/");
+    res.statusCode = 302;
+    res.end();
+  }
+  return { props: {} };
+};
 
 export default Login

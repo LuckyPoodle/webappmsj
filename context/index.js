@@ -1,5 +1,40 @@
 import { createContext,useReducer } from "react";
 
+
+// const addItemToCart=(cartItems,cartitemtoadd)=>{
+//     const existingCartItem=cartItems.find(cartItem=>cartItem.id==cartitemtoadd.id);
+//     console.log(existingCartItem);
+//     console.log("existing item");
+//     if (existingCartItem){
+//         console.log(cartItems)
+//         return cartItems.map(cartItem=>cartItem._id===cartitemtoadd._id?{...cartItem,quantity:cartItem.quantity+1}:cartItem)
+//     }
+
+//     console.log("not existing");
+//     return [...cartItems,{...cartitemtoadd,quantity:1}]
+
+// }
+
+const addItemToCart=(cartItems,cartitemtoadd)=>{
+    const existingCartItem=cartItems.find(cartItem=>cartItem.id==cartitemtoadd.id);
+    console.log(existingCartItem);
+
+    return [...cartItems,{...cartitemtoadd}]
+
+}
+
+function removeItemOnce(arr, value) {
+    console.log('hey removing from cart')
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    console.log('the arr');
+    console.log(arr)
+    return arr;
+  }
+
+
 //reducer
 // a function to update state,it will take action (a type of object and payload) and update state
 const reducer=(state,action)=>{
@@ -14,6 +49,10 @@ const reducer=(state,action)=>{
 
         case 'SET_CURRENT_SELECTED_SHOP':
             return {...state,currentSelectedShop:action.payload}
+        case 'ADDTOCART':
+            return {...state,cartItems:addItemToCart(state.cartItems,action.payload),accumulatedCartQty:state.accumulatedCartQty+1}
+        case 'REMOVEFROMCART':
+            return {...state,cartItems:removeItemOnce(state.cartItems,action.payload),accumulatedCartQty:state.accumulatedCartQty-1}
         default:
             return state;
     }
@@ -24,8 +63,9 @@ const initialState={
    
     showSidebar: false,
     dashboardShowProductsDetails:false,
-
-    currentSelectedShop:''
+    currentSelectedShop:'',
+    cartItems:[],
+    accumulatedCartQty:0
 }
 
 

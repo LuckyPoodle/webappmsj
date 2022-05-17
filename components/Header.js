@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import  { useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { AuthContext } from "../context/useAuth";
+
 import firebase from "../auth/initFirebase";
-import { useState ,useContext,useEffect} from "react";
+import { useState, useContext, useEffect } from "react";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon,SearchIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, XIcon, SearchIcon,UserCircleIcon } from '@heroicons/react/outline'
+import CartIcon from "./cartIcon";
+import User from "../../newmakeshipjoy/server/models/user";
 
 const navigation = [
   { name: 'About ', href: '#', current: false },
@@ -24,36 +27,37 @@ function classNames(...classes) {
 
 function Header({ placeholder }) {
 
-  const {state:{authenticated,user},dispatch}=useContext(AuthContext);
-  const router=useRouter();
+  const { state: { authenticated, user }, dispatch } = useContext(AuthContext);
+
+  const router = useRouter();
 
 
   const [searchInput, setSearchInput] = useState("");
   const [clickedOnProfile, setClickedOnProfile] = useState(false);
 
-  const handleLogoutClick=()=>{
+  const handleLogoutClick = () => {
     console.log('hi, in logout')
 
-    firebase.auth().signOut().then(()=>{
+    firebase.auth().signOut().then(() => {
       router.push('/');
-    }).catch((e)=>{
-        console.log(e);
+    }).catch((e) => {
+      console.log(e);
     });
     dispatch({ type: 'LOGOUT' })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
 
     console.log('in header ');
     console.log(authenticated);
-    
-    authenticated?console.log('is true'):console.log('is false')
 
-  },[])
+    authenticated ? console.log('is true') : console.log('is false')
+
+  }, [])
 
   return (
     <header className="sticky z-50 top-0 ">
-      <Disclosure as="nav" className="bg-white">
+      <Disclosure as="nav" className={'bg-white'} >
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -73,13 +77,13 @@ function Header({ placeholder }) {
                   <div className="flex-shrink-0 flex items-center">
 
                     <img
-                      onClick={()=>router.push('/')}
+                      onClick={() => router.push('/')}
                       className="block lg:hidden h-8 w-auto"
                       src="https://res.cloudinary.com/delhozzsh/image/upload/v1648724247/makeshipjoy_1_wecqeg.png"
                       alt="Workflow"
                     />
                     <img
-                            onClick={()=>router.push('/')}
+                      onClick={() => router.push('/')}
                       className="hidden lg:block h-8 w-auto"
                       src="https://res.cloudinary.com/delhozzsh/image/upload/v1648724247/makeshipjoy_1_wecqeg.png"
                       alt="Workflow"
@@ -88,21 +92,21 @@ function Header({ placeholder }) {
 
 
                   {/*  DESKTOP MENU  */}
-                  <div className=" hidden sm:block sm:ml-6">
+                  <div className="hidden sm:block sm:ml-6">
                     <div className="flex w-full">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
-                          'px-3 py-3 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                      {navigation.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className={classNames(
+                            item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+                            'px-3 py-3 rounded-md text-sm font-medium'
+                          )}
+                          aria-current={item.current ? 'page' : undefined}
+                        >
+                          {item.name}
+                        </a>
+                      ))}
                       <div className="grow h-14 items-center rounded-full md:shadow-sm py-2">
                         <input
                           value={searchInput}
@@ -115,11 +119,16 @@ function Header({ placeholder }) {
                         {/* hidden search icon, show only in medium screen */}
                         <SearchIcon className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
                       </div>
-                     
+
                     </div>
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <div className="w-8 h-8 bg-gray-800 rounded-full">
+
+                    <CartIcon />
+                  </div>
+
                   <button
                     type="button"
                     className="bg-gray-800 p-1 rounded-full text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -133,11 +142,8 @@ function Header({ placeholder }) {
                     <div>
                       <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
+                        <UserCircleIcon className="h-8 w-8 rounded-full text-white" />
+                      
                       </Menu.Button>
                     </div>
                     <Transition
@@ -150,28 +156,28 @@ function Header({ placeholder }) {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        
-                      <Menu.Item>
-                       
-                       {
-                        user? 
-                       <span className="'block px-4 py-2 text-sm font-bold text-gray-700 '">{user.displayName}</span>: <span className="'block px-4 py-2  font-bold text-sm text-gray-700 '">Not Logged In</span>
-                       }
-                     </Menu.Item>
+
                         <Menu.Item>
-                       
+
+                          {
+                            user ?
+                              <span className="'block px-4 py-2 text-sm font-bold text-gray-700 '">{user.displayName}</span> : <span className="'block px-4 py-2  font-bold text-sm text-gray-700 '">Not Logged In</span>
+                          }
+                        </Menu.Item>
+                        <Menu.Item>
+
                           {({ active }) => (
-                           authenticated? 
-                          <Link href="/dashboard#overview">
-                            <a className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 ')}>
-                              Dashboard
-                              </a></Link>: <Link
-                              href="/login"
-    
-                            >
-                              <a      
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 ')}>Sign In/Sign Up</a>
-                            </Link>
+                            authenticated ?
+                              <Link href="/dashboard#overview">
+                                <a className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 ')}>
+                                  Dashboard
+                                </a></Link> : <Link
+                                  href="/login"
+
+                                >
+                                <a
+                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 ')}>Sign In/Sign Up</a>
+                              </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
@@ -186,13 +192,13 @@ function Header({ placeholder }) {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            authenticated?<a
                               href="#"
                               onClick={handleLogoutClick}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Sign out
-                            </a>
+                            </a>:<></>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -207,18 +213,18 @@ function Header({ placeholder }) {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
-              <div className="flex items-center border-2 rounded-full md:shadow-sm py-2">
-                        <input
-                          value={searchInput}
-                          onChange={(e) => setSearchInput(e.target.value)}
-                          onKeyDown={(e) => e.key === "Enter" && search()}
-                          placeholder={placeholder || "Search for anything"}
-                          className="flex-1 w-300 text-sm text-gray-600 pl-5 placeholder-gray-400 outline-none bg-transparent"
-                        />
-                        {/* flex-grow so can grow  */}
-                        {/* hidden search icon, show only in medium screen */}
-                        <SearchIcon className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
-                      </div>
+                <div className="flex items-center border-2 rounded-full md:shadow-sm py-2">
+                  <input
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && search()}
+                    placeholder={placeholder || "Search for anything"}
+                    className="flex-1 w-300 text-sm text-gray-600 pl-5 placeholder-gray-400 outline-none bg-transparent"
+                  />
+                  {/* flex-grow so can grow  */}
+                  {/* hidden search icon, show only in medium screen */}
+                  <SearchIcon className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
+                </div>
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}

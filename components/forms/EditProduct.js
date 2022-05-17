@@ -2,18 +2,32 @@ import React, { useState } from 'react'
 import Resizer from "react-image-file-resizer";
 import { axiosAuth } from "../../actions/axios";
 import { Avatar, Badge } from "antd";
+import 'react-quill/dist/quill.snow.css'
 
-const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSubmit,productValues, setProductValues,uploadMainImageLoading, images, handleImageRemove,handleMainImageRemove,handleImage, loading, handleMainImage }) => {
+import dynamic from "next/dynamic";
+
+const ReactQuill =dynamic(()=>import('react-quill'),{ssr:false});
+import {QuillModules,QuillFormats} from "../../helper/quill";
+
+const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSubmit, productValues, setProductValues, uploadMainImageLoading, images, handleImageRemove, handleMainImageRemove, handleImage, loading, handleMainImage }) => {
 
 
 
 
 
 
+  const [description,setDescription]=useState(productValues.description);
 
   const handleChange = (e) => {
     setProductValues({ ...productValues, [e.target.name]: e.target.value });
 
+  }
+  const handleDescription=(e)=>{
+
+    console.log(productValues.description);
+    console.log('--------------');
+    setDescription(e)
+    setProductValues({...productValues,description:e});
   }
 
   const handleCheckBox = (e) => {
@@ -31,7 +45,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
     <>
 
       {productValues && (
-        <form  onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className='container'>
             <h5 className='font-bold text-black'>Title</h5>
             <input
@@ -40,15 +54,19 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
               name="name"
               className="w-full  text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Product Title - e.g Strawberry Cake / Dogwalking 1 hour"
-              value={productValues.name??''}
+              value={productValues.name ?? ''}
               onChange={handleChange}
             />
           </div>
 
           <br />
+        
+        <div className='container'>
+          <ReactQuill modules={QuillModules} formats={QuillFormats} value={description} placeholder={"Describe"} onChange={handleDescription} />
+        </div>
 
 
-          <div className='container'>
+          {/* <div className='container'>
             <h5 className='font-bold text-black'>Description</h5>
             <textarea
               name="description"
@@ -56,11 +74,11 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
               required
               cols="7"
               rows="7"
-              value={productValues.description??''}
+              value={productValues.description ?? ''}
               className="shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               onChange={handleChange}
             ></textarea>
-          </div>
+          </div> */}
           <br />
 
           <div className='container'>
@@ -71,7 +89,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
               style={{ width: "100%" }}
               size="large"
               required
-              value={productValues.category??'Food'}
+              value={productValues.category ?? 'Food'}
               name="category"
               defaultValue={'Food'}
               onChange={handleChange}
@@ -95,7 +113,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
 
             </select>
 
-            
+
           </div>
           <br />
           <div className='container'>
@@ -106,7 +124,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
               required
               className="w-full text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Product Price"
-              value={productValues.price??0}
+              value={productValues.price ?? 0}
               min={0}
               onChange={handleChange}
             />
@@ -116,7 +134,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
             <h5 className='font-bold text-black'>Delivery Available?</h5>
             <input
               type="checkbox"
-              
+
               name="deliveryAvailable"
               checked={productValues.deliveryAvailable}
 
@@ -135,16 +153,16 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
               min={0}
               className="w-full text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Delivery Price"
-              value={productValues.deliveryPrice??0}
+              value={productValues.deliveryPrice ?? 0}
               onChange={handleChange}
             />
           </div> : <></>}
-
+          <br />
 
           {
             productValues.mainImage ?
               <span className="relative inline-block">
-                <Avatar key={productValues.mainImage} src={productValues.mainImage} size={20} shape="square" className='w-5' />
+                <div className='w-24 h-24'><Avatar key={productValues.mainImage} src={productValues.mainImage} size={6} shape="square" className='w-5' /></div>
                 <span onClick={() => handleMainImageRemove(productValues.mainImage)}
                   class="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full cursor-pointer">x</span>
               </span> : <></>
@@ -162,7 +180,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
 
           </div>
 
-          <br/>
+          <br />
 
           <div className='container'>
             <h5 className='font-bold text-black'>Main Product Alt Text</h5>
@@ -190,7 +208,9 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
 
 
             <span className="relative inline-block">
-              <Avatar key={image} src={image} size={20} shape="square" className='w-5' />
+              <div className='w-24 h-24 p-2'>
+                <Avatar key={image} src={image} size={20} shape="square" className='w-5' />
+              </div>
               <span onClick={() => handleImageRemove(image)}
                 className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full cursor-pointer">x</span>
             </span>
@@ -201,7 +221,7 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
 
 
 
-      
+
 
 
 
@@ -224,22 +244,22 @@ const EditProductForm = ({isEditing, cancelButtonRef,  exitEditProduct, handleSu
           </div>
 
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse text-black">
-                  <button
-                    type="button"
-                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={handleSubmit}
-                  >
-                    {isEditing?'Update':"Create"}
-                  </button>
-                  <button
-                    type="button"
-                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={exitEditProduct}
-                    ref={cancelButtonRef}
-                  >
-                    Cancel
-                  </button>
-                </div>
+            <button
+              type="button"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+              onClick={handleSubmit}
+            >
+              {isEditing ? 'Update' : "Create"}
+            </button>
+            <button
+              type="button"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              onClick={exitEditProduct}
+              ref={cancelButtonRef}
+            >
+              Cancel
+            </button>
+          </div>
 
 
 

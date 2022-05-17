@@ -132,7 +132,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
   const fetchShopProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axiosAuth.get(`/get-shop-products/${shopData[0]._id}`, {});
+      const { data } = await axiosAuth.get(`/get-shop-products/${shopData[0].slug}`, {});
       console.log(data);
       console.log("~~~~~~~~~~~~~~~~~~fetch products~~~~~~~~~~~~~~~~~~~~~~");
 
@@ -181,6 +181,10 @@ const ProductsDetailsDashboard = ({ shopData }) => {
         productValues.shop = shopData[0]._id;
         productValues.owner = shopData[0].owner._id;
         productValues.images = images;
+        productValues.shopName=shopData[0].shopTitle;
+        productValues.address=shopData[0].address;
+        productValues.latitude=shopData[0].latitude;
+        productValues.longitude=shopData[0].longitude;
         const { data } = await axiosAuth.post(`/create-product/${shopData[0]._id}`, { body: { values: productValues }, });
         console.log('this is data from handlesubmit!')
         console.log(data);
@@ -201,7 +205,14 @@ const ProductsDetailsDashboard = ({ shopData }) => {
      
       try{
         console.log('HANDLE SUBMIT UPDATE');
-      console.log(productValues._id);
+   
+      productValues.shop = shopData[0]._id;
+      productValues.owner = shopData[0].owner._id;
+      productValues.images = images;
+      productValues.shopName=shopData[0].shopTitle;
+      productValues.address=shopData[0].address;
+      productValues.latitude=shopData[0].latitude;
+      productValues.longitude=shopData[0].longitude;
       const {data}=await axiosAuth.post(`/update-product/${productValues.id}`,{body:{values:productValues}});
       console.log('this is data from handlesubmit update');
       console.log(data)
@@ -266,6 +277,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
       mainImage: product.mainImage,
       mainImageAlt: product.mainImageAlt
     });
+    setImages(product.images)
 
 
     setOpen(true);
@@ -296,6 +308,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
 
       images: [],
     });
+    setImages([])
     setOpen(false)
     setIsEditing(false);
   }
