@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/useAuth";
-
+import SearchBox from "../components/searchBox";
 import firebase from "../auth/initFirebase";
 import { useState, useContext, useEffect } from "react";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon, SearchIcon,UserCircleIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, XIcon, SearchIcon, UserCircleIcon } from '@heroicons/react/outline'
 import CartIcon from "./cartIcon";
 import User from "../../newmakeshipjoy/server/models/user";
 
@@ -29,11 +29,20 @@ function Header({ placeholder }) {
 
   const { state: { authenticated, user }, dispatch } = useContext(AuthContext);
 
+
   const router = useRouter();
 
-
+  const [location, setLocation] = useState("")
   const [searchInput, setSearchInput] = useState("");
   const [clickedOnProfile, setClickedOnProfile] = useState(false);
+  const [values, setValues] = useState({
+    address: '',
+    latitude: 0,
+    longitude: 0,
+
+
+
+  });
 
   const handleLogoutClick = () => {
     console.log('hi, in logout')
@@ -44,6 +53,14 @@ function Header({ placeholder }) {
       console.log(e);
     });
     dispatch({ type: 'LOGOUT' })
+  }
+
+  const handleSearch = () => {
+    console.log(values);
+    console.log(searchInput);
+    //localhost:3000/search?item=abc&longitude=1000&latitude=900&address=mmmm
+    router.push(`/search?item=${searchInput}&longitude=${values.longitude}&latitude=${values.latitude}&address=${values.address}`)
+
   }
 
   useEffect(() => {
@@ -107,18 +124,33 @@ function Header({ placeholder }) {
                           {item.name}
                         </a>
                       ))}
-                      <div className="grow h-14 items-center rounded-full md:shadow-sm py-2">
+                      <div className="flex rounded-full flex-grow md:shadow-sm py-2">
                         <input
                           value={searchInput}
                           onChange={(e) => setSearchInput(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && search()}
                           placeholder={placeholder || "Search for anything"}
-                          className="text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
+                          className=" flex-grow text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
                         />
+                        <span className="p-1 mt-1">|</span>
+                        {/* <input
+                              className="flex-grow text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
+                              type="text"
+                              placeholder="Location"
+                              value={location}
+                              onChange={(e) => setLocation(e.target.value)}
+                            /> */}
+
+                        <SearchBox className='z-50 flex-grow text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
+
+                          setValues({ "latitude": latitude, "address": address, "longitude": longitude });
+
+                        }} defaultValue="" searchBoxText="Region" />
                         {/* flex-grow so can grow  */}
                         {/* hidden search icon, show only in medium screen */}
-                        <SearchIcon className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
+                        <SearchIcon onClick={handleSearch} className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
                       </div>
+
 
                     </div>
                   </div>
@@ -143,7 +175,7 @@ function Header({ placeholder }) {
                       <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span className="sr-only">Open user menu</span>
                         <UserCircleIcon className="h-8 w-8 rounded-full text-white" />
-                      
+
                       </Menu.Button>
                     </div>
                     <Transition
@@ -164,6 +196,7 @@ function Header({ placeholder }) {
                               <span className="'block px-4 py-2 text-sm font-bold text-gray-700 '">{user.displayName}</span> : <span className="'block px-4 py-2  font-bold text-sm text-gray-700 '">Not Logged In</span>
                           }
                         </Menu.Item>
+
                         <Menu.Item>
 
                           {({ active }) => (
@@ -192,13 +225,13 @@ function Header({ placeholder }) {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            authenticated?<a
+                            authenticated ? <a
                               href="#"
                               onClick={handleLogoutClick}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Sign out
-                            </a>:<></>
+                            </a> : <></>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -221,9 +254,14 @@ function Header({ placeholder }) {
                     placeholder={placeholder || "Search for anything"}
                     className="flex-1 w-300 text-sm text-gray-600 pl-5 placeholder-gray-400 outline-none bg-transparent"
                   />
+                  <SearchBox className='flex-1 w-300 text-sm text-gray-600 pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
+
+                    setValues({ "latitude": latitude, "address": address, "longitude": longitude });
+
+                  }} defaultValue="" searchBoxText="Region" />
                   {/* flex-grow so can grow  */}
                   {/* hidden search icon, show only in medium screen */}
-                  <SearchIcon className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
+                  <SearchIcon onClick={handleSearch} className="h-8  md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
                 </div>
                 {navigation.map((item) => (
                   <Disclosure.Button

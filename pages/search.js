@@ -32,12 +32,23 @@ const CategoryPage = () => {
       .then(({ hits }) => {
         console.log("INDEX SEARCH HITS")
         console.log(hits);
+        setSearchResults(hits)
+        
       })
       .catch(err => {
         console.log(err);
       });
 
   }, [router.query])
+
+  useEffect(()=>{
+    searchResults.map((p)=>{
+      console.log('SEARCH RESULTS?')
+      console.log(p.name)
+      console.log(p.price)
+    })
+
+  },[searchResults])
 
   return (
     <div className='h-screen'>
@@ -47,24 +58,30 @@ const CategoryPage = () => {
       <main className='flex'>
         <section className='flex-grow pt-14 px-6'>
           <p className='text-xs'>
-            Apple Pie
+              {router.query.item}   -   {router.query.address?"Near "+router.query.address:"Anywhere"}
+       
+             
           </p>
           <div className='flex flex-col'>
-            {searchResults.map((pdt) => {
+            {searchResults?searchResults.map((pdt) => (
               <SmallCard
-                shopName={pdt.shop.shopTitle}
-                shopSlug={pdt.shop.slug}
+                shopName={pdt.shopName}
+                shopSlug={pdt.shopSlug}
                 slug={pdt.slug}
-                key={pdt._id}
+                key={pdt.objectID}
                 img={pdt.mainImage}
                 price={pdt.price}
                 name={pdt.name}
-                address={pdt.shop.address}
+                address={pdt.address}
               />
-            })}
+            )):<p>Loading</p>}
+        
           </div>
         </section>
         <section className='hidden xl:inline-flex xl:min-w-[600px]'>
+  
+
+
 
         </section>
       </main>

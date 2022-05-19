@@ -294,7 +294,7 @@ const RegisterShopForm = ({
 
                         setValues({ ...values, "latitude": latitude, "address": address, "longitude": longitude });
 
-                      }} defaultValue="" />
+                      }} searchBoxText="Search Location" defaultValue="" />
                     </div>
                   </div>
                   <p className="mt-2 text-sm text-gray-500">

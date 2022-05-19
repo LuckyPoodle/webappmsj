@@ -8,6 +8,7 @@ import LargeCard from '../components/LargeCard';
 import Header from '../components/Header';
 import axios from "axios";
 import Hero from '../components/Hero';
+import Banner from '../components/banner';
 export default function Home({ products }) {
   return (
 
@@ -17,7 +18,8 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Hero />
+      {/* <Hero /> */}
+      <Banner />
 
       <main className='max-w-7xl mx-auto px-8 sm:px-16'>
         <section className='pt-6'>

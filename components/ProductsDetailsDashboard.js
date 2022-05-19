@@ -163,7 +163,8 @@ const ProductsDetailsDashboard = ({ shopData }) => {
     owner: '',
     images: [],
     mainImage: '',
-    mainImageAlt: ''
+    mainImageAlt: '',
+    description:''
   });
 
 
@@ -185,6 +186,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
         productValues.address=shopData[0].address;
         productValues.latitude=shopData[0].latitude;
         productValues.longitude=shopData[0].longitude;
+        productValues.shopSlug=shopData[0].slug
         const { data } = await axiosAuth.post(`/create-product/${shopData[0]._id}`, { body: { values: productValues }, });
         console.log('this is data from handlesubmit!')
         console.log(data);
@@ -210,6 +212,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
       productValues.owner = shopData[0].owner._id;
       productValues.images = images;
       productValues.shopName=shopData[0].shopTitle;
+
       productValues.address=shopData[0].address;
       productValues.latitude=shopData[0].latitude;
       productValues.longitude=shopData[0].longitude;

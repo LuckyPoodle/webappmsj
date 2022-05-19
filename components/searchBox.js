@@ -15,7 +15,7 @@ console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
 
 
 
-const SearchBox = ({onSelectAddress,defaultValue}) => {
+const SearchBox = ({onSelectAddress,defaultValue,searchBoxText}) => {
 
   const [loaded,setLoaded]=useState(false);
 
@@ -36,7 +36,7 @@ const SearchBox = ({onSelectAddress,defaultValue}) => {
 
   
   return (
-   loaded? <ReadySearchBox onSelectAddress={onSelectAddress} defaultValue={defaultValue } />:<h1>loading</h1>
+   loaded? <ReadySearchBox onSelectAddress={onSelectAddress} defaultValue={defaultValue } searchBoxText={searchBoxText}/>:<h1>loading</h1>
   )
 
 
@@ -46,8 +46,15 @@ const SearchBox = ({onSelectAddress,defaultValue}) => {
  
 }
 
-function ReadySearchBox({onSelectAddress,defaultValue}){
-    const {ready,value,setValue,suggestions:{status,data},clearSuggestions}=usePlacesAutocomplete({debounce:300,defaultValue});
+function ReadySearchBox({onSelectAddress,defaultValue,searchBoxText}){
+    const {ready,value,setValue,suggestions:{status,data},clearSuggestions}=usePlacesAutocomplete({debounce:300,defaultValue,cache: 24 * 60 * 60,
+      requestOptions: {
+        types: ["address"],
+        componentRestrictions: {
+          country: ["sg"],
+        }}
+      /* Define search scope here */
+    });
 
     //when user picks one
     const handleSelect=async(address)=>{
@@ -90,9 +97,9 @@ function ReadySearchBox({onSelectAddress,defaultValue}){
         <Combobox onSelect={handleSelect}>
 
             <ComboboxInput 
-            id="search" className="w-full z-50 p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+            id="search" className="w-full z-50 p-2 outline-none focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm  border-gray-300 rounded-md"
              value={value} onChange={handleChange} disabled={!ready} 
-              placeholder="Search locations" autoComplete="off"  />
+              placeholder={searchBoxText} autoComplete="off"  />
 
             <ComboboxPopover className='z-50'>
                {status==="OK" && data.map(({place_id,description})=>(<ComboboxOption  key={place_id} value={description} ></ComboboxOption>))} 
