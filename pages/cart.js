@@ -52,7 +52,7 @@ const Cart = () => {
                     <div className="flex md:flex-row flex-col justify-end" id="cart">
                         <div className="w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-white overflow-y-auto overflow-x-hidden h-screen" id="scroll">
 
-                            <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
+                            <p className="text-5xl font-black leading-10 text-gray-800 pt-10">Bag</p>
                           
                             {cartItems.map((item)=>
                                 <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">

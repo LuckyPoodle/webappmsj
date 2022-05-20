@@ -9,7 +9,7 @@ const SmallCard = ({ shopName, shopSlug,slug, img, name,address, price }) => {
  <Link href={`/${shopSlug}/${slug}`}>
     <div className="flex items-center m-2 space-x-4 mt-5 rounded-xl cursor-pointer hover:bg-gray-100 hover:scale-105 transition transform duration-200 ease-out">
     <div className="relative h-16 w-16">
-      <Image src={img} layout="fill" className="rounded-lg" />
+      <Image src={img?img:'https://media.publit.io/file/Untitled-4-h.jpeg'} layout="fill" className="rounded-lg" />
     </div>
     <div>
       <h5 className='text-sm italic'>{shopName}</h5>

@@ -227,7 +227,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
 
 
           <div className=''>
-            <h5 className='font-bold py-4 text-black'>Upload Other Product Images</h5>
+            <h5 className='font-bold py-4 text-black'>Upload Other Product Images (Optional)</h5>
             {loading ? <span>Uploading</span> : <label className="ml-5 p-6  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Upload Images
               <input

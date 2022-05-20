@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import SmallCard from '../components/SmallCard';
 import Header from '../components/Header'
 import dynamic from 'next/dynamic'
 import algoliasearch from "algoliasearch"
+import { Context } from '../context'
+import Footer from "../components/Footer";
 //localhost:3000/search?term=eraser&latitude=11&longitude=11&address=abc
 import { useRouter } from "next/router";
 
@@ -16,75 +18,132 @@ const CategoryPage = () => {
   const client = algoliasearch(process.env.algoliaApp, process.env.algoliaAdminApiKey);
   const index = client.initIndex("shopproducts");
 
- // const { term, latitude, longitude, address } = router.query;
-//http://localhost:3000/search?location=ll&startDate=2022-05-14T10%3A05%3A18.813Z&endDate=2022-05-14T10%3A05%3A18.813Z&noOfGuests=1
+  const { state: { currentSelectedPdtId }, dispatch } = useContext(Context);
+
+  // const { term, latitude, longitude, address } = router.query;
+  //http://localhost:3000/search?location=ll&startDate=2022-05-14T10%3A05%3A18.813Z&endDate=2022-05-14T10%3A05%3A18.813Z&noOfGuests=1
   const [searchResults, setSearchResults] = useState([]);
+  const [filteredByLocationResults, setFilteredByLocationResults] = useState([])
 
   useEffect(() => {
-    console.log(router.query)
+
     console.log('hey in search');
-    console.log(router.query.item);
-    console.log(router.query.latitude);
-    console.log(router.query.longitude);
-    console.log(router.query.address);
+
     index
       .search(router.query.item)
       .then(({ hits }) => {
         console.log("INDEX SEARCH HITS")
         console.log(hits);
         setSearchResults(hits)
-        
+
       })
       .catch(err => {
         console.log(err);
       });
 
-  }, [router.query])
+  }, [router.query]);
 
-  useEffect(()=>{
-    searchResults.map((p)=>{
-      console.log('SEARCH RESULTS?')
-      console.log(p.name)
-      console.log(p.price)
-    })
+  function getDistanceInKm(lat1, lon1, lat2, lon2) {
+    var radlat1 = Math.PI * lat1 / 180
+    var radlat2 = Math.PI * lat2 / 180
+    var theta = lon1 - lon2
+    var radtheta = Math.PI * theta / 180
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist)
+    dist = dist * 180 / Math.PI
+    dist = dist * 60 * 1.1515
+    dist = dist * 1.609344
 
-  },[searchResults])
+    return dist
+  }
+
+
+
+
+  useEffect(() => {
+    console.log('FILTERINNGGGG')
+
+    console.log(router.query.latitude == null)
+    if (router.query.latitude == 0 && router.query.longitude == 0 || router.query.latitude == 'null' || router.query.longitude == 'null') {
+      console.log('NO LOCATION FILTER');
+
+      console.log(searchResults)
+      setFilteredByLocationResults(searchResults)
+    } else {
+      let templist = []
+      searchResults.map((p) => {
+        console.log('SEARCH RESULTS?')
+        let distance = getDistanceInKm(p.latitude, p.longitude, router.query.latitude, router.query.longitude);
+        console.log('distance is ' + distance);
+        if (distance < 5) {
+          console.log('added to filtered results')
+          templist.push(p);
+
+        }
+      });
+      setFilteredByLocationResults(templist);
+
+      console.log('SETTTITNGG SEARCH OUTPUT')
+
+    }
+
+  }, [searchResults])
+
 
   return (
-    <div className='h-screen'>
+    <div className='bg-yellow h-screen'>
 
       <Header />
 
-      <main className='flex'>
-        <section className='flex-grow pt-14 px-6'>
-          <p className='text-xs'>
-              {router.query.item}   -   {router.query.address?"Near "+router.query.address:"Anywhere"}
+
+      <p className='text-lg pl-5'>
+        {router.query.item}   -   {router.query.address ? "Within 5 KM of  " + router.query.address : "Anywhere"}
+
+
+      </p>
+      <div className='bg-white h-full'>
        
-             
-          </p>
-          <div className='flex flex-col'>
-            {searchResults?searchResults.map((pdt) => (
-              <SmallCard
-                shopName={pdt.shopName}
-                shopSlug={pdt.shopSlug}
-                slug={pdt.slug}
-                key={pdt.objectID}
-                img={pdt.mainImage}
-                price={pdt.price}
-                name={pdt.name}
-                address={pdt.address}
-              />
-            )):<p>Loading</p>}
-        
-          </div>
-        </section>
-        <section className='hidden xl:inline-flex xl:min-w-[600px]'>
-  
+
+        <main className='flex flex-wrap h-screen w-full'>
+          <section className='w-full h-1/2 md:h-full  md:w-1/2 lg:w-1/2 xl:w-1/3  overflow-scroll  '>
+
+            <div className=' h-screen grid grid-cols-2 '>
+              {filteredByLocationResults ? filteredByLocationResults.map((pdt) => (
+                <div onMouseEnter={() => dispatch({
+                  type: "SET_CURRENT_SELECTED_PRDT_ID",
+                  payload: pdt.objectID,
+                })} onTouchStart={() => dispatch({
+                  type: "SET_CURRENT_SELECTED_PRDT_ID",
+                  payload: pdt.objectID,
+                })}   >
+                  <SmallCard
+                    shopName={pdt.shopName}
+                    shopSlug={pdt.shopSlug}
+                    slug={pdt.slug}
+                    key={pdt.objectID}
+                    img={pdt.mainImage}
+                    price={pdt.price}
+                    name={pdt.name}
+                    address={pdt.address}
+                  />
+
+                </div>
+              )) : <p>Loading</p>}
+
+            </div>
+          </section>
+          <section className='bg-white w-full h-1/2 xl:w-2/3 md:w-1/2 lg:w-1/2 xl:w-2/3 lg:h-full sm:h-full md:h-full overflow-x-scroll overflow-y-hidden  p-5 '>
+
+            <div className='h-full w-full '> {filteredByLocationResults.length>1?<Map searchResults={filteredByLocationResults} />:<></>}</div>
 
 
-
-        </section>
-      </main>
+          </section>
+        </main>
+      </div>
+      {/* <Footer /> */}
 
     </div>
   )

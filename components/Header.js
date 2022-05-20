@@ -145,7 +145,7 @@ function Header({ placeholder }) {
 
                           setValues({ "latitude": latitude, "address": address, "longitude": longitude });
 
-                        }} defaultValue="" searchBoxText="Region" />
+                        }} defaultValue="" searchBoxText="Anywhere in Singapore" />
                         {/* flex-grow so can grow  */}
                         {/* hidden search icon, show only in medium screen */}
                         <SearchIcon onClick={handleSearch} className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
