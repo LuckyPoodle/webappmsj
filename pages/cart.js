@@ -1,13 +1,37 @@
 import React, { useEffect, useContext,useState } from 'react';
 import Header from '../components/Header';
-
+import { axiosAuth } from '../actions/axios';
+import { AuthContext } from "../context/useAuth";
 import { Context } from '../context'
 
-const Cart = () => {
+const Cart = ({history}) => {
 
 
     const { state: { cartItems }, dispatch } = useContext(Context);
-    const [totalPrice,setTotalPrice]=useState(0)
+    const { state: { authenticated, user }, } = useContext(AuthContext);
+    const [totalPrice,setTotalPrice]=useState(0);
+
+
+    const saveCartToDB=async()=>{
+        console.log(totalPrice)
+        if (!authenticated || user==null){
+            console.log('LOGIN FIRST')
+            history.push('/login')
+        }else{
+            console.log('SEND CART TO SERVER')
+          axiosAuth.post(`/cart`,{cartItems,totalPrice}).then((res)=>{
+              console.log('RESPONSE BACK FOR SAVING CART');
+              console.log(res.data)
+                if (res.data.ok){
+                    history.push("/checkout");
+                    
+                }
+            }).catch((err)=>{
+                
+            })
+        }
+        
+    }
 
     useEffect(()=>{
         console.log('cart items!!!!')
@@ -91,7 +115,7 @@ const Cart = () => {
                                         <p className="text-2xl leading-normal text-gray-800">Total</p>
                                         <p className="text-2xl font-bold leading-normal text-right text-gray-800">${totalPrice}</p>
                                     </div>
-                                    <button onClick={() => setShow(!show)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                    <button onClick={saveCartToDB} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                         Checkout
                                     </button>
                                 </div>

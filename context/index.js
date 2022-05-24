@@ -56,6 +56,8 @@ const reducer = (state, action) => {
             return { ...state, cartItems: addItemToCart(state.cartItems, action.payload), accumulatedCartQty: state.accumulatedCartQty + 1 }
         case 'REMOVEFROMCART':
             return { ...state, cartItems: removeItemOnce(state.cartItems, action.payload), accumulatedCartQty: state.accumulatedCartQty - 1 }
+        case 'CLEARCART':
+            return {...state,cartItems:[],accumulatedCartQty:0}
         default:
             return state;
     }

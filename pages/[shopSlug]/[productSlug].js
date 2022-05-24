@@ -1,5 +1,5 @@
-import { useEffect, useState,useContext } from 'react'
-import {Context} from '../../context'
+import { useEffect, useState, useContext } from 'react'
+import { Context } from '../../context'
 import Link from 'next/link'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
@@ -11,16 +11,16 @@ import { Carousel } from "react-responsive-carousel";
 
 const ProductDetails = ({ product }) => {
 
-    const { state: { cartItems,accumulatedCartQty }, dispatch } = useContext(Context);
+    const { state: { cartItems, accumulatedCartQty }, dispatch } = useContext(Context);
 
-   const handlePressAddToCart=(pdt)=>{
-    console.log("HANDLE PRESS ADD TO CART");
-    pdt.inclusivePrice=inclusivePrice
-    dispatch({
-      type: "ADDTOCART",
-      payload: pdt,
-    });
-  }
+    const handlePressAddToCart = (pdt) => {
+        console.log("HANDLE PRESS ADD TO CART");
+        pdt.inclusivePrice = inclusivePrice
+        dispatch({
+            type: "ADDTOCART",
+            payload: pdt,
+        });
+    }
 
     const images = [
         'https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
@@ -34,16 +34,16 @@ const ProductDetails = ({ product }) => {
     const [currentImage, setCurrentImage] = useState(product.mainImage);
     const [imagesToShow, setImagesToShow] = useState([]);
     const [shipping, setShipping] = useState("false");
-    const [inclusivePrice,setInclusivePrice]=useState(0);
+    const [inclusivePrice, setInclusivePrice] = useState(0);
 
 
 
     const handleSelectShipping = (e) => {
         setShipping(e.target.value);
-        if (e.target.value=="true"){
-            let newprice=product.deliveryPrice+product.price;
+        if (e.target.value == "true") {
+            let newprice = product.deliveryPrice + product.price;
             setInclusivePrice(newprice)
-        }else{
+        } else {
             setInclusivePrice(product.price)
         }
     }
@@ -107,8 +107,8 @@ const ProductDetails = ({ product }) => {
                 </div>
                 <div className="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
                     <div className=" border-b border-gray-200 pb-6">
-                            <Link href={`/${product.shop.slug}`}><a className="text-sm leading-none text-gray-600">{product.shop.shopTitle}</a></Link>
-                       
+                        <Link href={`/${product.shop.slug}`}><a className="text-sm leading-none text-gray-600">{product.shop.shopTitle}</a></Link>
+
                         <h1
                             className="
                 lg:text-2xl
@@ -122,28 +122,32 @@ const ProductDetails = ({ product }) => {
                         >
                             {product.name}
                         </h1>
-                        <br/>
+                        <span className='text-md'>qty remaining : {product.stockAvailable}</span>
+                        <br />
+
+
                         <span className='text-black text-lg  '>$ {inclusivePrice}</span>
                     </div>
-                    {product.deliveryAvailable?
-                    <div className="py-4 border-b border-gray-200 flex items-center justify-between">
-                    <p className="text-base leading-4 text-gray-800">Local Delivery?</p>
-                    <div className="flex items-center justify-center">
+                    {product.deliveryAvailable ?
+                        <div className="py-4 border-b border-gray-200 flex items-center justify-between">
+                            <p className="text-base leading-4 text-gray-800">Local Delivery?</p>
+                            <div className="flex items-center justify-center">
 
 
-                        <select className='text-black' value={shipping} onChange={handleSelectShipping}>
-                            <option value="true">Yes (+ ${product.deliveryPrice})</option>
-                            <option value="false">No</option>
+                                <select className='text-black' value={shipping} onChange={handleSelectShipping}>
+                                    <option value="true">Yes (+ ${product.deliveryPrice})</option>
+                                    <option value="false">No</option>
 
-                        </select>
-                    </div>
-                </div>:<p>No Delivery Option</p>}
+                                </select>
+                            </div>
+                        </div> : <p>No Delivery Option</p>}
 
 
 
-                    <button
-                        onClick={()=>handlePressAddToCart(product)}
-                        className="
+                    {product.stockAvailable > 0 ?
+                        <button
+                            onClick={() => handlePressAddToCart(product)}
+                            className="
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800
             text-base
             flex
@@ -156,10 +160,30 @@ const ProductDetails = ({ product }) => {
             py-4
             hover:bg-gray-700
         "
-                    >
+                        >
 
-                        Add To Cart
-                    </button>
+                            Add To Cart
+                        </button> :
+                        <button
+                       
+                            disabled={true}
+                            className="
+           
+            text-base
+            flex
+            items-center
+            justify-center
+            leading-none
+            text-white
+            bg-gray-800
+            w-full
+            py-4
+           
+        "
+                        >
+
+                            Out of Stock
+                        </button>}
                     <div>
                         <p className="xl:pr-8 text-base lg:leading-tight leading-normal text-gray-600 mt-7">{renderHTML(product.description)}</p>
 

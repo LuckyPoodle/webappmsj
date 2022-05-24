@@ -164,7 +164,8 @@ const ProductsDetailsDashboard = ({ shopData }) => {
     images: [],
     mainImage: '',
     mainImageAlt: '',
-    description: ''
+    description: '',
+    stockAvailable:0
   });
 
 
@@ -174,6 +175,10 @@ const ProductsDetailsDashboard = ({ shopData }) => {
 
     if (productValues.category.trim() == '' || productValues.name.trim() == '' || productValues.description.trim() == '' || productValues.mainImage == '') {
       notify('Please fill in all required fields', false);
+      return;
+    }
+    if (productValues.stockAvailable<0 || productValues.price<0 || productValues.deliveryAvailable<0){
+      notify('No Negative Numbers', false);
       return;
     }
     if (!isEditing) {
@@ -278,7 +283,8 @@ const ProductsDetailsDashboard = ({ shopData }) => {
       owner: product.owner,
       images: product.images,
       mainImage: product.mainImage,
-      mainImageAlt: product.mainImageAlt
+      mainImageAlt: product.mainImageAlt,
+      stockAvailable:product.stockAvailable,
     });
     setImages(product.images)
 
@@ -309,6 +315,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
       mainImage: '',
       mainImageAlt: '',
       description: '',
+      stockAvailable:0,
 
       images: [],
     });

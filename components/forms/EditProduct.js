@@ -117,7 +117,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
           </div>
           <br />
           <div className='container'>
-            <h5 className='font-bold text-black'>Price</h5>
+            <h5 className='font-bold text-black'>Price ($)</h5>
             <input
               type="number"
               name="price"
@@ -130,6 +130,19 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
             />
           </div>
           <br />
+          <div className='container'>
+            <h5 className='font-bold text-black'>Quantity Available</h5>
+            <input
+              type="number"
+              name="stockAvailable"
+              required
+              className="w-full text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+              placeholder="Quantity Available"
+              value={productValues.stockAvailable ?? 0}
+              min={0}
+              onChange={handleChange}
+            />
+          </div><br/>
           <div className='container'>
             <h5 className='font-bold text-black'>Delivery Available?</h5>
             <input
