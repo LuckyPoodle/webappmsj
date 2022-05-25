@@ -3,13 +3,21 @@ import Header from '../components/Header';
 import { axiosAuth } from '../actions/axios';
 import { AuthContext } from "../context/useAuth";
 import { Context } from '../context'
+import { useRouter } from "next/router";
 
-const Cart = ({history}) => {
+const Cart = () => {
 
+    const router = useRouter();
 
     const { state: { cartItems }, dispatch } = useContext(Context);
     const { state: { authenticated, user }, } = useContext(AuthContext);
     const [totalPrice,setTotalPrice]=useState(0);
+
+    useEffect(()=>{
+        console.log('********************* CART *********************');
+        console.log(history)
+
+    },[])
 
 
     const saveCartToDB=async()=>{
@@ -22,8 +30,10 @@ const Cart = ({history}) => {
           axiosAuth.post(`/cart`,{cartItems,totalPrice}).then((res)=>{
               console.log('RESPONSE BACK FOR SAVING CART');
               console.log(res.data)
+
                 if (res.data.ok){
-                    history.push("/checkout");
+                    console.log('ok is true!!!')
+                    router.push("/checkout");
                     
                 }
             }).catch((err)=>{

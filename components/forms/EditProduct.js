@@ -83,8 +83,6 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
 
           <div className='container'>
             <h5 className='font-bold text-black'>Select Product Type</h5>
-
-
             <select
               style={{ width: "100%" }}
               size="large"
@@ -95,7 +93,6 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
               onChange={handleChange}
               className='text-gray-900 '
             >
-
               <option value={'Food'}  >Food</option>
               <option value={"Beverage"}  >Beverage</option>
               <option value={"Crafts"}  >Crafts</option>
@@ -106,14 +103,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
               <option value={"Delivery"}  >Delivery</option>
               <option value={"Other Services"}  >Other Services</option>
               <option value={"Other Products"}  >Other Products</option>
-
-
-
-
-
             </select>
-
-
           </div>
           <br />
           <div className='container'>

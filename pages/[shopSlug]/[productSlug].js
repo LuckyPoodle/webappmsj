@@ -136,11 +136,11 @@ const ProductDetails = ({ product }) => {
 
                                 <select className='text-black' value={shipping} onChange={handleSelectShipping}>
                                     <option value="true">Yes (+ ${product.deliveryPrice})</option>
-                                    <option value="false">No</option>
+                                    <option value="false">No (Pickup) </option>
 
                                 </select>
                             </div>
-                        </div> : <p>No Delivery Option</p>}
+                        </div> : <p>Pick Up Only</p>}
 
 
 
