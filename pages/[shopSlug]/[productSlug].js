@@ -1,47 +1,55 @@
 import { useEffect, useState, useContext } from 'react'
 import { Context } from '../../context'
 import Link from 'next/link'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+
 import renderHTML from "react-render-html";
 import Header from '../../components/Header'
 import Image from 'next/image'
 import axios from "axios";
-import { Carousel } from "react-responsive-carousel";
 
+import { useRouter } from "next/router";
 const ProductDetails = ({ product }) => {
 
     const { state: { cartItems, accumulatedCartQty }, dispatch } = useContext(Context);
-
+    const router=useRouter();
     const handlePressAddToCart = (pdt) => {
         console.log("HANDLE PRESS ADD TO CART");
         pdt.inclusivePrice = inclusivePrice
+        pdt.shipping=shipping;
+        pdt.shopId=product.shop._id;
+        pdt.shopName=product.shop.shopTitle
+        pdt.shopShippingFee=product.shop.deliveryFee
+        
         dispatch({
             type: "ADDTOCART",
             payload: pdt,
         });
     }
 
-    const images = [
-        'https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        'https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        'https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        'https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
-    ]
+
 
     const [currentImage, setCurrentImage] = useState(product.mainImage);
     const [imagesToShow, setImagesToShow] = useState([]);
     const [shipping, setShipping] = useState("false");
     const [inclusivePrice, setInclusivePrice] = useState(0);
 
+    useEffect(()=>{
+        //to reset shipping state
+        console.log('reset shipping state');
+        console.log(shipping)
+        setShipping("false")
+
+    },[router.query])
+
 
 
     const handleSelectShipping = (e) => {
         setShipping(e.target.value);
         if (e.target.value == "true") {
-            let newprice = product.deliveryPrice + product.price;
+            //UPDATE : currently not implementing individual product delivery fee
+            //let newprice = product.deliveryPrice + product.price;
+            let newprice=product.price;
+
             setInclusivePrice(newprice)
         } else {
             setInclusivePrice(product.price)
@@ -135,7 +143,7 @@ const ProductDetails = ({ product }) => {
 
 
                                 <select className='text-black' value={shipping} onChange={handleSelectShipping}>
-                                    <option value="true">Yes (+ ${product.deliveryPrice})</option>
+                                    <option value="true">Yes</option>
                                     <option value="false">No (Pickup) </option>
 
                                 </select>
@@ -165,7 +173,7 @@ const ProductDetails = ({ product }) => {
                             Add To Cart
                         </button> :
                         <button
-                       
+
                             disabled={true}
                             className="
            

@@ -57,7 +57,14 @@ const reducer = (state, action) => {
         case 'REMOVEFROMCART':
             return { ...state, cartItems: removeItemOnce(state.cartItems, action.payload), accumulatedCartQty: state.accumulatedCartQty - 1 }
         case 'CLEARCART':
-            return {...state,cartItems:[],accumulatedCartQty:0}
+            return { ...state, cartItems: [], accumulatedCartQty: 0 }
+
+        case 'SET_DELIVERY_ADDRESS':
+            return { ...state, address: action.payload }
+        case 'SET_CONTACT':
+            return { ...state, contactNumber: action.payload }
+        case 'SET_SAVE_DELIVERY_CONTACT':
+            return { ...state, saveAddressContact: action.payload }
         default:
             return state;
     }
@@ -72,6 +79,9 @@ const initialState = {
     cartItems: [],
     accumulatedCartQty: 0,
     currentSelectedPdtId: '',
+    contactNumber: '',
+    address: '',
+    saveAddressContact: false
 
 }
 

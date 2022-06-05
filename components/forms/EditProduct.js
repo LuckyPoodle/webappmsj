@@ -147,7 +147,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
             />
           </div>
 
-          {productValues.deliveryAvailable ? <div className='container'>
+          {/* {productValues.deliveryAvailable ? <div className='container'>
             <h5 className='font-bold text-black'>Delivery Price (Optional)</h5>
             <span>Enter your delivery price if you offer delivery on the product</span>
             <input
@@ -159,7 +159,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
               value={productValues.deliveryPrice ?? 0}
               onChange={handleChange}
             />
-          </div> : <></>}
+          </div> : <></>} */}
           <br />
 
           {

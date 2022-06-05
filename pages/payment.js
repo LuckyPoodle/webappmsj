@@ -1,22 +1,27 @@
 import React from "react";
-import {loadStripe} from "@stripe/stripe-js";
-import {Elements} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import StripeCheckout from "../components/StripeCheckout";
+import Header from "../components/Header"
 
-const promise=loadStripe(process.env.NEXT_STRIPE_KEY);
+const promise = loadStripe(process.env.NEXT_STRIPE_KEY);
 
 
-const Payment=()=>{
+const Payment = () => {
     return (
-        <div className="container p-5 text-center">
-            <h4>Complete Your Purchase</h4>
-            <h6></h6>
-            <Elements stripe={promise}>
-                <div className="col">
-                    <StripeCheckout />
-                </div>
-            </Elements>
+        <div className="h-screen">
+            <Header />
+            <div className="container text-center p-10">
+                <h1 className="font-bold text-4xl text-black">Complete Your Purchase</h1>
+      
+                <Elements stripe={promise}>
+                    <div className="container p-10">
+                        <StripeCheckout />
+                    </div>
+                </Elements>
 
+
+            </div>
         </div>
     )
 }

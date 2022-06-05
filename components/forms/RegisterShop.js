@@ -48,8 +48,9 @@ const RegisterShopForm = ({
     shopContactNumber: "",
     bankAccountNumber: "",
     bankName: "",
-    deliveryPickUpOption:"Delivery and Pickup Available",
-    deliveryPickUpInfo:""
+    deliveryPickUpOption: "Delivery and Pickup Available",
+    deliveryPickUpInfo: "",
+    deliveryFee:0
 
 
   });
@@ -166,7 +167,7 @@ const RegisterShopForm = ({
                     <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
                       Shop Name
                     </label>
-                    <p>* Please choose wisely. Shop name cannot be edited. </p>
+                    <p>* Please choose wisely. Changing of shop name is bad for SEO. </p>
                     <div className="mt-1 flex rounded-md shadow-sm">
 
                       <input
@@ -258,7 +259,7 @@ const RegisterShopForm = ({
                   </div>
                 </div>
 
-                 <div >
+                <div >
                   <label htmlFor="about" className="block text-md font-medium text-gray-700">
                     Description
                   </label>
@@ -293,7 +294,7 @@ const RegisterShopForm = ({
                 </div>
 
                 <div>
-                <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                  <label htmlFor="about" className="block text-md font-medium text-gray-700">
                     Delivery and Pickup Option for your shop
                   </label>
                   <select
@@ -310,25 +311,40 @@ const RegisterShopForm = ({
                     <option value={'Delivery and Pickup Available'}  >Both Delivery And Pickup Available</option>
                     <option value={"Delivery Only"}  >Delivery Only</option>
                     <option value={"Pickup Only"}  >Pickup Only</option>
-  
+
                   </select>
                 </div>
-           
                 <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                   Additional Delivery / Pickup Information.
-                  </label>
-               
-                  <div >
-                    <textarea
-                      id="deliveryPickupInfo"
-                      name="deliveryPickUpInfo"
-                      rows={3}
-                      onChange={handleChange}
-                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                      placeholder="E.g Will use Singpost Registered Mail / Will meet at lobby for pickup/ Call xxxx-xxxx to arange delivery "
-                      defaultValue={''}
-                    />
-                  </div>
+                  Delivery Fee (if Delivery is provided)
+                </label>
+
+                <div >
+                  <input
+                    type="number"
+                    name="deliveryFee"
+                    min={0}
+                    className="w-full text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                    placeholder="Delivery Price"
+                    value={values.deliveryFee}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                  Additional Delivery / Pickup Information.
+                </label>
+
+                <div >
+                  <textarea
+                    id="deliveryPickupInfo"
+                    name="deliveryPickUpInfo"
+                    rows={3}
+                    onChange={handleChange}
+                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
+                    placeholder="E.g Will use Singpost Registered Mail / Will meet at lobby for pickup/ Call xxxx-xxxx to arange delivery "
+                    defaultValue={''}
+                  />
+                </div>
 
                 <div>
                   <label className="block text-md font-medium text-gray-700">External Links</label>

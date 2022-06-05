@@ -46,8 +46,10 @@ const ShopDetailsDashboard
     const [shopContactNumber, setShopContactNumber] = useState("")
     const [bankAccountNumber, setBankAccountNumber] = useState("")
     const [bankName, setBankName] = useState("")
-    const [deliveryPickUpOption,setDeliveryPickUpOption]=useState("");
-    const [deliveryPickUpInfo,setDeliveryPickUpInfo]=useState("");
+    const [deliveryPickUpOption, setDeliveryPickUpOption] = useState("");
+    const [deliveryPickUpInfo, setDeliveryPickUpInfo] = useState("");
+    const [deliveryFee, setDeliveryFee] = useState(0);
+    const [shopTitle, setShopTitle] = useState("")
     //image-related editing
     const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -83,15 +85,19 @@ const ShopDetailsDashboard
       } else if (fieldToEdit == 'shopContactNumber') {
         setShopContactNumber(e.target.value)
 
-      }else if (fieldToEdit=='bankAccountNumber'){
+      } else if (fieldToEdit == 'bankAccountNumber') {
         setBankAccountNumber(e.target.value)
-      }else if (fieldToEdit=='bankName'){
+      } else if (fieldToEdit == 'bankName') {
         setBankName(e.target.value)
-      }else if (fieldToEdit=='deliveryPickUpOption'){
-        console.log("deliveryPickUpOption -  ",e.target.value);
+      } else if (fieldToEdit == 'deliveryPickUpOption') {
+        console.log("deliveryPickUpOption -  ", e.target.value);
         setDeliveryPickUpOption(e.target.value)
-      }else if (fieldToEdit=='deliveryPickUpInfo'){
+      } else if (fieldToEdit == 'deliveryPickUpInfo') {
         setDeliveryPickUpInfo(e.target.value)
+      } else if (fieldToEdit == 'deliveryFee') {
+        setDeliveryFee(e.target.value)
+      } else if (fieldToEdit == 'shopTitle') {
+        setShopTitle(e.target.value)
       }
     }
 
@@ -239,7 +245,7 @@ const ShopDetailsDashboard
           notify('Something went wrong', false)
           setOpen(false)
         }
-      }else if (field=='deliveryPickUpOption'){
+      } else if (field == 'deliveryPickUpOption') {
         try {
           const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { deliveryPickUpOption: deliveryPickUpOption } }, });
           console.log(data);
@@ -250,7 +256,7 @@ const ShopDetailsDashboard
           setOpen(false)
         }
 
-      }else if (field=='deliveryPickUpInfo'){
+      } else if (field == 'deliveryPickUpInfo') {
         try {
           const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { deliveryPickUpInfo: deliveryPickUpInfo } }, });
           console.log(data);
@@ -259,6 +265,31 @@ const ShopDetailsDashboard
         } catch (err) {
           notify('Something went wrong', false)
           setOpen(false)
+        }
+
+      } else if (field == 'deliveryFee') {
+        try {
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { deliveryFee: deliveryFee } } });
+          console.log(data)
+          notify('Updated. Please refresh page', true)
+          setOpen(false)
+
+        } catch (err) {
+          notify('Something went wrong', false)
+          setOpen(false)
+
+        }
+      } else if (field == 'shopTitle') {
+        try {
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { shopTitle: shopTitle } } });
+          console.log(data)
+          notify('Updated. Please refresh page', true)
+          setOpen(false)
+
+        } catch (err) {
+          notify('Something went wrong', false)
+          setOpen(false)
+
         }
 
       }
@@ -282,7 +313,8 @@ const ShopDetailsDashboard
           <dl>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Shop name</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].shopTitle}</dd>
+              {/* <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].shopTitle}</dd> */}
+              <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].shopTitle}</dd><button onClick={() => handleEdit('shopTitle')}>edit</button> </div>
 
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -293,6 +325,12 @@ const ShopDetailsDashboard
               <dt className="text-sm font-medium text-gray-500">Shop Delivery/Pick up option</dt>
               <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].deliveryPickUpOption}</dd><button onClick={() => handleEdit('deliveryPickUpOption')}>edit</button> </div>
             </div>
+
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Delivery Fee</dt>
+              <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].deliveryFee}</dd><button onClick={() => handleEdit('deliveryFee')}>edit</button> </div>
+            </div>
+
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Shop Delivery/Pick up Info</dt>
               <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].deliveryPickUpInfo}</dd><button onClick={() => handleEdit('deliveryPickUpInfo')}>edit</button> </div>
@@ -534,14 +572,14 @@ const ShopDetailsDashboard
                                                     />
                                                   </div></div>
                                               </> : fieldToEdit == 'deliveryPickUpOption' ? <>
-                                              <label htmlFor="about" className="block text-sm font-medium text-gray-700">
-                                                    Delivery / Pick Up Option
-                                                  </label>
+                                                <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+                                                  Delivery / Pick Up Option
+                                                </label>
                                                 <select
                                                   style={{ width: "100%" }}
                                                   size="large"
                                                   required
-                                
+
                                                   name="deliveryPickUpOption"
                                                   defaultValue={'Delivery and Pickup Available'}
                                                   onChange={handleChange}
@@ -552,7 +590,26 @@ const ShopDetailsDashboard
                                                   <option value={"Delivery Only"}  >Delivery Only</option>
                                                   <option value={"Pickup Only"}  >Pickup Only</option>
 
-                                                </select></> :
+                                                </select></> : fieldToEdit == 'deliveryFee' ? <>
+                                                  <input
+                                                    type="number"
+                                                    name="deliveryFee"
+                                                    min={0}
+                                                    className="w-full text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                    placeholder="Delivery Price"
+                                                    value={deliveryFee}
+                                                    onChange={handleChange}
+                                                  />
+                                                </> : fieldToEdit == 'shopTitle' ? <>
+                                                  <input
+                                                    type="text"
+                                                    name="shopName"
+                                                    onChange={handleChange}
+                                                    id="shopName"
+                                                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
+                                                
+                                                  />
+                                                </> :
 
 
 
