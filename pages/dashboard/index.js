@@ -4,6 +4,7 @@ import Header from "../../components/Header"
 import { useRouter } from "next/router";
 import { Fragment } from 'react';
 import axios from "axios";
+import { axiosAuth } from '../../actions/axios';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DashboardOverview from '../../components/dashboardrelated/DashboardOverview';
@@ -34,11 +35,32 @@ function Dashboard({ shopData }) {
   const [current, setCurrent] = useState("#overview");  ///current selected nav item 
   const [clickedOnNav, setClickedOnNav] = useState(false)  /// state useEffect that adjust current depends on 
 
+
+  const getAccountStatistics=()=>{
+    axiosAuth.get(`/get-statistics/${shopData[0]._id}` ).then((res) => {
+      console.log('RESPONSE BACK FROM GET ACCT');
+      console.log(res.data)
+
+      if (res.data.ok) {
+        
+
+      }
+  }).catch((err) => {
+
+  })
+
+
+  }
+
   //this only run on mount 
   useEffect(() => {
+    console.log('Obtained ShopData ==========>');
+    console.log(shopData)
     setRenderWindow(true);
     setClickedOnNav(true);
 
+
+    getAccountStatistics();
   }, []);
 
 
