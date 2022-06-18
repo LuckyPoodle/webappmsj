@@ -61,7 +61,8 @@ export async function getServerSideProps({ query }) {
   );
   console.log('gotten back DATA ===========>>>>>>>>>>');
   console.log(data)
-
+  
+  console.log('HI i am in getServerSideprops of [shopSlug]/index');
   const productsData = await axios.get(`${process.env.api}/get-shop-products/${query.shopSlug}`);
 
 

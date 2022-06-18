@@ -162,7 +162,7 @@ const ShopDetailsDashboard
         try {
           console.log(address);
 
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: addressValues }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: addressValues }, });
           console.log(data);
 
           notify('Updated. Please refresh page', true)
@@ -180,7 +180,7 @@ const ShopDetailsDashboard
 
       } else if (field == 'description') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { description: description } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { description: description } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -192,7 +192,7 @@ const ShopDetailsDashboard
 
       } else if (field == 'image') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { shopImage: image } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { shopImage: image } }, });
           console.log(data);
           setOpen(false)
 
@@ -204,7 +204,7 @@ const ShopDetailsDashboard
         }
       } else if (field == 'shopContactNumber') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { shopContactNumber: shopContactNumber } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { shopContactNumber: shopContactNumber } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -216,7 +216,7 @@ const ShopDetailsDashboard
 
       } else if (field == 'shopContactEmail') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { shopContactEmail: shopContactEmail } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { shopContactEmail: shopContactEmail } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -227,7 +227,7 @@ const ShopDetailsDashboard
 
       } else if (field == 'bankAccountNumber') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { bankAccountNumber: bankAccountNumber } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { bankAccountNumber: bankAccountNumber } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -237,7 +237,7 @@ const ShopDetailsDashboard
         }
       } else if (field == 'bankName') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { bankName: bankName } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { bankName: bankName } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -247,7 +247,7 @@ const ShopDetailsDashboard
         }
       } else if (field == 'deliveryPickUpOption') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { deliveryPickUpOption: deliveryPickUpOption } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { deliveryPickUpOption: deliveryPickUpOption } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -258,7 +258,7 @@ const ShopDetailsDashboard
 
       } else if (field == 'deliveryPickUpInfo') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { deliveryPickUpInfo: deliveryPickUpInfo } }, });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { deliveryPickUpInfo: deliveryPickUpInfo } }, });
           console.log(data);
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -269,7 +269,7 @@ const ShopDetailsDashboard
 
       } else if (field == 'deliveryFee') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { deliveryFee: deliveryFee } } });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { deliveryFee: deliveryFee } } });
           console.log(data)
           notify('Updated. Please refresh page', true)
           setOpen(false)
@@ -281,7 +281,7 @@ const ShopDetailsDashboard
         }
       } else if (field == 'shopTitle') {
         try {
-          const { data } = await axiosAuth.post(`/update-shop/${shopData[0].slug}`, { body: { values: { shopTitle: shopTitle } } });
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { shopTitle: shopTitle } } });
           console.log(data)
           notify('Updated. Please refresh page', true)
           setOpen(false)

@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { loadIdToken } from "../../auth/firebaseAdmin";
 import Header from "../../components/Header"
 import { useRouter } from "next/router";
-import { Fragment } from 'react';
+
 import axios from "axios";
 import { axiosAuth } from '../../actions/axios';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DashboardOverview from '../../components/dashboardrelated/DashboardOverview';
 import ShopDashboardOverview from '../../components/dashboardrelated/ShopDashboardOverview';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import { passThroughSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
 
 const navigation = [
   { name: 'Dashboard', href: '#overview', current: true },
@@ -34,20 +45,74 @@ function Dashboard({ shopData }) {
   const [renderWindow, setRenderWindow] = useState(false); /// condition that code only run client-side 
   const [current, setCurrent] = useState("#overview");  ///current selected nav item 
   const [clickedOnNav, setClickedOnNav] = useState(false)  /// state useEffect that adjust current depends on 
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalCompletedRevenue, setTotalCompletedRevenue] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalCompletedOrders, setTotalCompletedOrders] = useState(0);
+  const [totalRevenuePendingCompletion, setTotalRevenuePendingCompletion] = useState(0);
+  const [totalOrdersPendingCompletion,setTotalOrdersPendingCompletion]=useState(0);
+
+  const [monthlyOrderCount, setMonthlyOrderCount] = useState([]);
+  const [monthlyRevenueCount,setMonthlyRevenueCount]=useState([])
+
+  const getMonthlyOrderCount = (list) => {
+    try{
+      console.log('IN MONTHLY COUNT!!!!');
+    console.log(list)
+    let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let monthorderresults=[]
+    let monthrevenueresults=[]
+    months.forEach(month => {
+      const item = list.find(item => item._id === month);
+      
+      if (item) {
+        monthorderresults.push(item.numberoforders);
+        monthrevenueresults.push(item.monthrevenue);
+      } else {
+        monthorderresults.push(0);
+        monthrevenueresults.push(0);
+      }
+    })
+    console.log('monthly ordrcount!!!jahahahahah');
+    console.log(monthorderresults);
+    console.log(monthrevenueresults)
+    setMonthlyOrderCount(monthorderresults);
+    setMonthlyRevenueCount(monthrevenueresults);
+    }catch(err){
+      alert(err)
+    }
+    
+  }
 
 
-  const getAccountStatistics=()=>{
-    axiosAuth.get(`/get-statistics/${shopData[0]._id}` ).then((res) => {
+
+
+  const getAccountStatistics = () => {
+    axiosAuth.get(`/get-statistics/${shopData[0]._id}`).then((res) => {
       console.log('RESPONSE BACK FROM GET ACCT');
       console.log(res.data)
+      console.log('count of order????');
+      console.log(res.data.totalCount)
 
       if (res.data.ok) {
-        
+        setTotalRevenue(res.data.totalRevenue);
+        setTotalCompletedRevenue(res.data.completedRevenue.totalCompletedRevenue);
+        setTotalOrders(res.data.totalCount)
+        setTotalCompletedOrders(res.data.completedRevenue.totalCompletedCount)
+        let revenuepending = res.data.totalRevenue - res.data.completedRevenue.totalCompletedRevenue;
+        console.log('montly order count ======');
+        console.log(res.data.monthlyOrderCount)
+        setTotalRevenuePendingCompletion(revenuepending);
+        getMonthlyOrderCount(res.data.monthlyOrderCount,true);
+
+
+
+
 
       }
-  }).catch((err) => {
+    }).catch((err) => {
 
-  })
+    })
 
 
   }
@@ -58,8 +123,6 @@ function Dashboard({ shopData }) {
     console.log(shopData)
     setRenderWindow(true);
     setClickedOnNav(true);
-
-
     getAccountStatistics();
   }, []);
 
@@ -92,7 +155,7 @@ function Dashboard({ shopData }) {
                 <div className="flex items-center justify-between h-16">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                     
+
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -180,7 +243,7 @@ function Dashboard({ shopData }) {
                         <DashboardOverview  total={100} totalCompletedOrders={90}/>:current=='#shop'?<h1>shop</h1>:<h1>Other</h1>}
                 </div> */}
               {current == '#overview' ?
-                <DashboardOverview total={100} totalCompletedOrders={90} /> : current == '#shop' ? <ShopDashboardOverview shopData={shopData} /> : <h1>Other</h1>}
+                <DashboardOverview  monthlyRevenueCount={monthlyRevenueCount} monthlyOrderCount={monthlyOrderCount}  total={totalRevenue} totalCompletedOrders={totalCompletedOrders} totalOrders={totalOrders} totalCompletedRevenue={totalCompletedRevenue} totalRevenuePendingCompletion={totalRevenuePendingCompletion} /> : current == '#shop' ? <ShopDashboardOverview shopData={shopData} /> : <h1>Other</h1>}
 
             </div>
 

@@ -248,22 +248,53 @@ const ProductDetails = ({ product }) => {
     )
 }
 
-export async function getServerSideProps({ query }) {
-    console.log('_____ query slug ______')
-    console.log(query.productSlug)
+
+
+
+// export async function getServerSideProps({ query }) {
+//     console.log('_____ query slug ______')
+//     console.log(query.productSlug)
+//     const { data } = await axios.get(
+//         `${process.env.api}/read-product/${query.shopSlug}/${query.productSlug}`
+//     );
+//     console.log('gotten back DATA ===========>>>>>>>>>>');
+//     console.log(data)
+//     return {
+//         props: {
+//             product: data,
+//         },
+//     };
+// }
+
+
+export async function getStaticProps(context){
+    const {params}=context;
+    const {shopSlug,productSlug}=params;
+    console.log('IN GET STATIC PROPS');
     const { data } = await axios.get(
-        `${process.env.api}/read-product/${query.shopSlug}/${query.productSlug}`
+        `${process.env.api}/read-product/${shopSlug}/${productSlug}`
     );
-    console.log('gotten back DATA ===========>>>>>>>>>>');
-    console.log(data)
-    return {
-        props: {
-            product: data,
+    return{
+        props:{
+            product:data
+
         },
-    };
+        revalidate:600
+    }
 }
 
-
+export async function getStaticPaths(){
+    const { data } = await axios.get(
+        `${process.env.api}/get-all-products`
+      );
+      console.log('gotten back all products ===========>>>>>>>>>>');
+      console.log(data)
+      const paths=data.map(pdt=>({params:{productSlug:pdt.slug,shopSlug:pdt.shopSlug}}));
+    return{
+        paths:paths,
+        fallback:false
+    }
+}
 
 export default ProductDetails;
 
