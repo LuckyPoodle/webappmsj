@@ -8,8 +8,8 @@ const Login = () => {
 
    <div >
      <Header />
-     <div className="h-screen flex items-center justify-center  sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+     <div className="p-6 h-screen flex flex-col items-center justify-center text-center ">
+        <div className="w-full">
           <div>
             <img
               className="mx-auto h-12 w-auto"
@@ -17,9 +17,12 @@ const Login = () => {
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in/ Sign up</h2>
-          
+
           </div>
-          <FirebaseAuth/>
+
+          <div className=''>
+            <FirebaseAuth/></div>
+
           
         </div>
       </div>

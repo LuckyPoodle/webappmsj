@@ -306,12 +306,16 @@ const ProductsDetailsDashboard = ({ shopData }) => {
   const exitEditProduct = () => {
     setProductValues({
 
+      id: '',
       name: '',
       shop: '',
       price: 0,
       category: 'Food',
+      slug: '',
       deliveryPrice: 0,
       deliveryAvailable: false,
+      owner: '',
+      images: [],
       mainImage: '',
       mainImageAlt: '',
       description: '',

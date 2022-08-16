@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Header from '../../components/Header';
-import Image from 'next/image'
+import { PhoneIcon,MailIcon } from '@heroicons/react/outline'
 import axios from "axios";
 import ProductCard from "../../components/ProductCard";
 import Link from 'next/link'
@@ -29,8 +29,11 @@ const ShopFront = ({ shop, products }) => {
             <p class="lg:w-2/3 mx-auto  font-bold  leading-relaxed text-base">{shop.description}</p>
 
             <p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.address}</p>
+            <div className='flex flex-row'><MailIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactEmail}</p></div>
+            <div className='flex flex-row'><PhoneIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactNumber}</p></div>
+            <p className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkOne}</p>
           </div>
-          <div class="flex flex-wrap -m-4">
+          <div class="flex flex-wrap m-10 ">
             {products.map((pdt) => (
               <Link href={`/${shop.slug}/${pdt.slug}`}>
                 <a>

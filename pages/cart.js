@@ -107,6 +107,8 @@ const Cart = () => {
             console.log('SEND CART TO SERVER')
             console.log(cartPayableByCreditCard);
             console.log(cartPayableByCash)
+            console.log('CART ITEMS ==================>');
+            console.log(cartItems)
             axiosAuth.post(`/cart`, { cartItems,totalCostToPay ,deliveryCost , cartPayableByCash,cartPayableByCreditCard,delivery} ).then((res) => {
                 console.log('RESPONSE BACK FOR SAVING CART');
                 console.log(res.data)

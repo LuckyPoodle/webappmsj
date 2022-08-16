@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import Resizer from "react-image-file-resizer";
 import { axiosAuth } from "../../actions/axios";
 import { Avatar, Badge } from "antd";
-import 'react-quill/dist/quill.snow.css'
+import '../react-quill/dist/quill.snow.css'
+//import '../../node_modules/react-quill/dist/quill.snow.css'
 
 import dynamic from "next/dynamic";
 

@@ -68,7 +68,8 @@ const Checkout = ({ }) => {
             if (res.data.ok) {
                 dispatch({
                     type: 'CLEARCART',
-                })
+                });
+                router.push('/dashboard')
             }
 
 

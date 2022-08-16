@@ -8,14 +8,6 @@ import { axiosAuth } from "../../actions/axios";
 import SearchBox from "../searchBox";
 
 import toast, { Toaster } from 'react-hot-toast';
-//shopTitle, slug,shopImage,description,mainLocation,address,owner
-
-// shopTitle: "A Poet's Corner",
-// description: "A Shop For All Poets",
-// slug: "poet-corner",
-// shopImage: "",
-// mainLocation:"The Tower of Destinies",
-// address: "The Burnt Palace",
 
 const RegisterShopForm = ({
 
@@ -152,9 +144,9 @@ const RegisterShopForm = ({
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">Enter your shop details</h3>
+              <h3 className="text-lg font-medium leading-6 text-gray-900 p-5">Enter your shop details</h3>
               <p className="mt-1 text-md text-gray-600">
-                This information will be displayed publicly so be careful what you share.
+                
               </p>
             </div>
           </div>
@@ -167,7 +159,8 @@ const RegisterShopForm = ({
                     <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
                       Shop Name
                     </label>
-                    <p>* Please choose wisely. Changing of shop name is bad for SEO. </p>
+                    <p>* Please choose wisely. Name change is bad for SEO.  </p>
+                    <p className="italic">We reserve the right to remove names which are vulgar or violate copyright</p>
                     <div className="mt-1 flex rounded-md shadow-sm">
 
                       <input

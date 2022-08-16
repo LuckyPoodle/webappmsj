@@ -1,25 +1,31 @@
 import { useEffect, useState, useContext } from 'react'
-import { Context } from '../../context'
+import { Context } from '../../../context'
 import Link from 'next/link'
 
 import renderHTML from "react-render-html";
-import Header from '../../components/Header'
+import Header from '../../../components/Header'
 import Image from 'next/image'
 import axios from "axios";
 
 import { useRouter } from "next/router";
 const ProductDetails = ({ product }) => {
 
+    if (!product) {
+        return <div> NIL </div>
+    }
+    const [menu, setMenu] = useState(true);
+    const [menu1, setMenu1] = useState(false);
+
     const { state: { cartItems, accumulatedCartQty }, dispatch } = useContext(Context);
-    const router=useRouter();
+    const router = useRouter();
     const handlePressAddToCart = (pdt) => {
         console.log("HANDLE PRESS ADD TO CART");
         pdt.inclusivePrice = inclusivePrice
-        pdt.shipping=shipping;
-        pdt.shopId=product.shop._id;
-        pdt.shopName=product.shop.shopTitle
-        pdt.shopShippingFee=product.shop.deliveryFee
-        
+        pdt.shipping = shipping;
+        pdt.shopId = product.shop._id;
+        pdt.shopName = product.shop.shopTitle
+        pdt.shopShippingFee = product.shop.deliveryFee
+
         dispatch({
             type: "ADDTOCART",
             payload: pdt,
@@ -33,13 +39,13 @@ const ProductDetails = ({ product }) => {
     const [shipping, setShipping] = useState("false");
     const [inclusivePrice, setInclusivePrice] = useState(0);
 
-    useEffect(()=>{
+    useEffect(() => {
         //to reset shipping state
         console.log('reset shipping state');
         console.log(shipping)
         setShipping("false")
 
-    },[router.query])
+    }, [router.query])
 
 
 
@@ -48,7 +54,7 @@ const ProductDetails = ({ product }) => {
         if (e.target.value == "true") {
             //UPDATE : currently not implementing individual product delivery fee
             //let newprice = product.deliveryPrice + product.price;
-            let newprice=product.price;
+            let newprice = product.price;
 
             setInclusivePrice(newprice)
         } else {
@@ -130,6 +136,7 @@ const ProductDetails = ({ product }) => {
                         >
                             {product.name}
                         </h1>
+                        <div className='p-4 italic'> *****   <Link href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link></div>
                         <span className='text-md'>qty remaining : {product.stockAvailable}</span>
                         <br />
 
@@ -239,8 +246,20 @@ const ProductDetails = ({ product }) => {
                                 If you have any questions on how to return your item to us, contact us.
                             </div>
                         </div>
+
+
+
+
+
+
                     </div>
+
                 </div>
+
+
+
+
+
             </div>
         </div>
 
@@ -267,32 +286,34 @@ const ProductDetails = ({ product }) => {
 // }
 
 
-export async function getStaticProps(context){
-    const {params}=context;
-    const {shopSlug,productSlug}=params;
+export async function getStaticProps(context) {
+    const { params } = context;
+    const { shopSlug, productSlug } = params;
     console.log('IN GET STATIC PROPS');
     const { data } = await axios.get(
         `${process.env.api}/read-product/${shopSlug}/${productSlug}`
     );
-    return{
-        props:{
-            product:data
+    return {
+        props: {
+            product: data
 
         },
-        revalidate:600
+        revalidate: 600
     }
 }
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
     const { data } = await axios.get(
         `${process.env.api}/get-all-products`
-      );
-      console.log('gotten back all products ===========>>>>>>>>>>');
-      console.log(data)
-      const paths=data.map(pdt=>({params:{productSlug:pdt.slug,shopSlug:pdt.shopSlug}}));
-    return{
-        paths:paths,
-        fallback:false
+    );
+    console.log('gotten back all products ===========>>>>>>>>>>');
+    console.log(data)
+    const paths = data.map(pdt => ({ params: { productSlug: pdt.slug, shopSlug: pdt.shopSlug } }));
+    /// TO CHANGE THIS TO PREFETCH FEATURED PRODUCTS ONLY
+    /// AND THEN SET FALLBACK TO TRUE SO if app encounters non-generated slug it will dynamically fetch
+    return {
+        paths: paths,
+        fallback: true
     }
 }
 

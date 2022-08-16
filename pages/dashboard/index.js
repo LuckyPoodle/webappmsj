@@ -9,6 +9,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DashboardOverview from '../../components/dashboardrelated/DashboardOverview';
 import ShopDashboardOverview from '../../components/dashboardrelated/ShopDashboardOverview';
+import OrdersDashboard from '../../components/dashboardrelated/OrdersDashboard';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -37,7 +38,7 @@ function classNames(...classes) {
 
 
 
-function Dashboard({ shopData }) {
+function Dashboard({ shopData, statistics }) {
 
   const router = useRouter();
 
@@ -50,70 +51,77 @@ function Dashboard({ shopData }) {
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalCompletedOrders, setTotalCompletedOrders] = useState(0);
   const [totalRevenuePendingCompletion, setTotalRevenuePendingCompletion] = useState(0);
-  const [totalOrdersPendingCompletion,setTotalOrdersPendingCompletion]=useState(0);
+  const [totalOrdersPendingCompletion, setTotalOrdersPendingCompletion] = useState(0);
 
   const [monthlyOrderCount, setMonthlyOrderCount] = useState([]);
-  const [monthlyRevenueCount,setMonthlyRevenueCount]=useState([])
+  const [monthlyRevenueCount, setMonthlyRevenueCount] = useState([])
 
   const getMonthlyOrderCount = (list) => {
-    try{
+    try {
+    if(list===0){
+      setMonthlyOrderCount(0);
+      setMonthlyRevenueCount(0);
+
+    }else{
       console.log('IN MONTHLY COUNT!!!!');
-    console.log(list)
-    let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    let monthorderresults=[]
-    let monthrevenueresults=[]
-    months.forEach(month => {
-      const item = list.find(item => item._id === month);
-      
-      if (item) {
-        monthorderresults.push(item.numberoforders);
-        monthrevenueresults.push(item.monthrevenue);
-      } else {
-        monthorderresults.push(0);
-        monthrevenueresults.push(0);
-      }
-    })
-    console.log('monthly ordrcount!!!jahahahahah');
-    console.log(monthorderresults);
-    console.log(monthrevenueresults)
-    setMonthlyOrderCount(monthorderresults);
-    setMonthlyRevenueCount(monthrevenueresults);
-    }catch(err){
+      console.log(list)
+      let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      let monthorderresults = []
+      let monthrevenueresults = []
+      months.forEach(month => {
+        const item = list.find(item => item._id === month);
+
+        if (item) {
+          monthorderresults.push(item.numberoforders);
+          monthrevenueresults.push(item.monthrevenue);
+        } else {
+          monthorderresults.push(0);
+          monthrevenueresults.push(0);
+        }
+      })
+      console.log('monthly ordrcount!!!jahahahahah');
+      console.log(monthorderresults);
+      console.log(monthrevenueresults)
+      setMonthlyOrderCount(monthorderresults);
+      setMonthlyRevenueCount(monthrevenueresults);
+    }
+    } catch (err) {
       alert(err)
     }
-    
+
   }
 
 
 
 
   const getAccountStatistics = () => {
-    axiosAuth.get(`/get-statistics/${shopData[0]._id}`).then((res) => {
-      console.log('RESPONSE BACK FROM GET ACCT');
-      console.log(res.data)
-      console.log('count of order????');
-      console.log(res.data.totalCount)
-
-      if (res.data.ok) {
-        setTotalRevenue(res.data.totalRevenue);
-        setTotalCompletedRevenue(res.data.completedRevenue.totalCompletedRevenue);
-        setTotalOrders(res.data.totalCount)
-        setTotalCompletedOrders(res.data.completedRevenue.totalCompletedCount)
-        let revenuepending = res.data.totalRevenue - res.data.completedRevenue.totalCompletedRevenue;
-        console.log('montly order count ======');
-        console.log(res.data.monthlyOrderCount)
-        setTotalRevenuePendingCompletion(revenuepending);
-        getMonthlyOrderCount(res.data.monthlyOrderCount,true);
 
 
+   if (statistics!==[]){
 
+    setTotalRevenue(statistics.totalRevenue);
+    setTotalCompletedRevenue(statistics.completedRevenue.totalCompletedRevenue);
+    setTotalOrders(statistics.totalCount)
+    setTotalCompletedOrders(statistics.completedRevenue.totalCompletedCount)
+    let revenuepending = statistics.totalRevenue - statistics.completedRevenue.totalCompletedRevenue;
+    let orderspending = statistics.totalCount - statistics.completedRevenue.totalCompletedCount;
+    console.log('montly order count ======');
+    console.log(statistics.monthlyOrderCount)
+    setTotalRevenuePendingCompletion(revenuepending);
+    getMonthlyOrderCount(statistics.monthlyOrderCount, true);
+    setTotalOrdersPendingCompletion(orderspending);
 
+   }else{
+     //no shop orders
 
-      }
-    }).catch((err) => {
-
-    })
-
+     setTotalRevenuePendingCompletion(0);
+     getMonthlyOrderCount(0, true);
+     setTotalOrdersPendingCompletion(0);
+     setTotalRevenue(0);
+     setTotalCompletedRevenue(0);
+     setTotalOrders(0)
+     setTotalCompletedOrders(0)
+   }
 
   }
 
@@ -138,13 +146,40 @@ function Dashboard({ shopData }) {
 
   }, [clickedOnNav]);
 
+  useEffect(() => {
+    setCurrent(window.location.hash);
+
+  }, [renderWindow?window.location.hash:renderWindow]);
+
+  // const useReactPath = () => {
+  //   const [path, setPath] = React.useState(window.location.hash);
+  //   const listenToPopstate = () => {
+  //     const winPath = window.location.hash;
+  //     setPath(winPath);
+  //   };
+  //   React.useEffect(() => {
+  //     window.addEventListener("popstate", listenToPopstate);
+  //     return () => {
+  //       window.removeEventListener("popstate", listenToPopstate);
+  //     };
+  //   }, []);
+  //   return path;
+  // };
+
+  // const path = useReactPath();
+  // useEffect(() => {
+  //   setCurrent(window.location.hash);
+  // }, [path]);
+
+
+
 
 
 
 
 
   return (
-    <div>
+    <div >
       <Header />
 
       <div className="min-h-full">
@@ -234,7 +269,7 @@ function Dashboard({ shopData }) {
           </div>
         </header>
         <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 min-h-screen">
 
             <div className="px-4 py-6 sm:px-0">
               {/* <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
@@ -243,7 +278,9 @@ function Dashboard({ shopData }) {
                         <DashboardOverview  total={100} totalCompletedOrders={90}/>:current=='#shop'?<h1>shop</h1>:<h1>Other</h1>}
                 </div> */}
               {current == '#overview' ?
-                <DashboardOverview  monthlyRevenueCount={monthlyRevenueCount} monthlyOrderCount={monthlyOrderCount}  total={totalRevenue} totalCompletedOrders={totalCompletedOrders} totalOrders={totalOrders} totalCompletedRevenue={totalCompletedRevenue} totalRevenuePendingCompletion={totalRevenuePendingCompletion} /> : current == '#shop' ? <ShopDashboardOverview shopData={shopData} /> : <h1>Other</h1>}
+                <DashboardOverview purchasedProducts={shopData[0].owner.purchasedProducts} orders={shopData[0].owner.orders} shopTitle={shopData[0].shopTitle} totalOrdersPendingCompletion={totalOrdersPendingCompletion} monthlyRevenueCount={monthlyRevenueCount} monthlyOrderCount={monthlyOrderCount} total={totalRevenue} totalCompletedOrders={totalCompletedOrders} totalOrders={totalOrders} totalCompletedRevenue={totalCompletedRevenue} totalRevenuePendingCompletion={totalRevenuePendingCompletion} /> :
+                current == '#shop' ? <ShopDashboardOverview shopData={shopData} /> :
+                  current == '#orders' ? <OrdersDashboard shopId={shopData[0]._id} purchasedOrders={shopData[0].owner.orders} /> : <h1>Other</h1>}
 
             </div>
 
@@ -262,11 +299,9 @@ function Dashboard({ shopData }) {
 export const getServerSideProps = async ({ req, res }) => {
   try {
     const uid = await loadIdToken(req);
-    console.log('uid is ===>')
-    console.log(uid)
-    console.log('req token cookies');
-    console.log(req.cookies.token)
+
     if (!uid) {
+      console.log('NO UID!!!')
       res.setHeader("location", "/login");
       res.statusCode = 302;
       res.end();
@@ -276,13 +311,39 @@ export const getServerSideProps = async ({ req, res }) => {
         token: req.cookies.token,
       },
     });
-    console.log('data is ==>');
-    console.log(data);
-    return { props: { shopData: data } };
+    console.log('shop id!!!!!?')
+    console.log(data[0]._id);
+    if (data[0]._id) {
+      const statistics = await axios.get(`${process.env.api}/get-statistics/${data[0]._id}`, {
+        headers: {
+          token: req.cookies.token,
+        },
+      });
+
+      console.log('statistics is ==>');
+      console.log(statistics.data);
+      console.log(statistics.data!==undefined)
+
+  
+
+      if (statistics.data!==undefined){
+        return { props: { shopData: data, statistics: statistics.data } };
+      }else{
+        return { props: { shopData: data, statistics:[] }};
+      }
+    } else {
+      console.log('User has NO SHOP');
+      console.log(data)
+      return { props: { shopData: data, statistics: { _id: null, totalRevenue: 0, totalCount: 0, ok: false, monthlyOrderCount: [], completedRevenue: { _id: null, totalCompletedRevenue: 0, totalCompletedCount: 0 } } } };
+    }
+
+
   } catch (err) {
-    res.setHeader("location", "/login");
-    res.statusCode = 302;
-    res.end();
+    // res.setHeader("location", "/login");
+    // res.statusCode = 302;
+    // res.end();
+    console.log("ERRROR!!!!!! ");
+    console.log(err)
   }
 };
 

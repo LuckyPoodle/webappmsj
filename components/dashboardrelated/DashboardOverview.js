@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import DashboardBox from './DashboardBox'
 import { ShopFilled, EditFilled, ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/outline'
-
+import Link from "next/link"
 
 import {
   Chart as ChartJS,
@@ -55,7 +55,7 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 
 
-const DashboardOverview = ({ total, monthlyOrderCount, monthlyRevenueCount, totalCompletedOrders, totalCompletedRevenue, totalOrders, totalRevenuePendingCompletion }) => {
+const DashboardOverview = ({ purchasedProducts,orders,shopTitle, total, monthlyOrderCount, monthlyRevenueCount, totalOrdersPendingCompletion, totalCompletedOrders, totalCompletedRevenue, totalOrders, totalRevenuePendingCompletion }) => {
 
 
 
@@ -89,33 +89,47 @@ const DashboardOverview = ({ total, monthlyOrderCount, monthlyRevenueCount, tota
   return (
     <div className='container flex flex-wrap'>
 
-      <div class="flex-initial w-full h-full sm:w-1/2 sm:h-1/2">
+      <div class=" flex-initial w-full h-full sm:w-1/2 sm:h-1/2 p-2">
+        <div className='flex-initial w-1/3 text-sm italic'>
+         {shopTitle? <p>Total Number Of {shopTitle} Orders: {totalOrders}</p>:<p>User has no shop yet</p>}
+        </div>
         <><Bar options={optionsOrders} data={dataOrders} /></>
         <>
           <div className='flex-initial w-1/3 '>
-            <div className='flex-col'>
-              <p>Total Number Of Orders: {totalOrders}</p>
-            </div>
+
 
           </div>
         </>
 
       </div>
 
-      <div class="flex-initial w-full h-full sm:w-1/2 sm:h-1/2">
+      <div class=" flex-initial w-full h-full sm:w-1/2 sm:h-1/2">
+      <div className='flex-initial w-1/3 text-sm italic '>  {shopTitle?<p>Total Revenue: ${total}</p>:<p>User has no shop yet</p>}</div>
         <><Bar options={optionsRevenue} data={dataRevenue} /></>
-        <><div className='flex-initial w-1/3 '>  <p>Total Revenue: ${total}</p></div></>
       </div>
-      <div class="flex-initial w-full h-full sm:w-1/2 sm:h-1/2">
-          <div className=' p-5 shadow-md '>
-            <div className='flex flex-col'>
-                <h3 className='font-bold text-center'>Shop Orders</h3>
-                <p>Order number 123456 ------ $1000 ----- Submitted</p>
+      <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">
+        <div className=' p-5 shadow-md '>
+          <div className='flex flex-col items-center'>
+            <span>{shopTitle?shopTitle:'User has no shop yet'}</span>
+            <h3 className='font-bold text-center mb-5'>{totalOrdersPendingCompletion} Orders pending completion</h3>
+            <button className='bg-indigo-500 p-2 text-white w-1/4 rounded text-center'><Link href="/dashboard#orders"><a>View Shop Orders</a></Link></button>
 
-            </div>
+
           </div>
+        </div>
       </div>
-  
+      <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">
+        <div className=' p-5 shadow-md '>
+          <div className='flex flex-col items-center'>
+            <span> Your Purchased Orders</span>
+            <h3 className='font-bold text-center mb-5'>{orders.length} Purchased Orders</h3>
+            <button className='bg-indigo-500 p-2 text-white w-1/4 rounded text-center'><Link href="/dashboard#orders"><a>View Purchased Orders</a></Link></button>
+
+
+          </div>
+        </div>
+      </div>
+
     </div>
 
   )
