@@ -10,24 +10,14 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import DashboardOverview from '../../components/dashboardrelated/DashboardOverview';
 import ShopDashboardOverview from '../../components/dashboardrelated/ShopDashboardOverview';
 import OrdersDashboard from '../../components/dashboardrelated/OrdersDashboard';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { passThroughSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
+
 
 const navigation = [
   { name: 'Dashboard', href: '#overview', current: true },
   { name: 'My Shop', href: '#shop', current: false },
   { name: 'Orders', href: '#orders', current: false },
-  { name: 'Mailbox', href: '#mailbox', current: false },
-  { name: 'Settings', href: '#settings', current: false },
+  // { name: 'Mailbox', href: '#mailbox', current: false },
+  // { name: 'Settings', href: '#settings', current: false },
 
 ]
 

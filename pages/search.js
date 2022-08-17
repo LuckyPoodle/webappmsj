@@ -131,7 +131,7 @@ const CategoryPage = () => {
                   />
 
                 </div>
-              )) : <p>Loading</p>}
+              )) : <p className='italic sm'>Loading</p>}
 
             </div>
           </section>

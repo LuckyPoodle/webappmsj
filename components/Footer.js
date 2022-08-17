@@ -1,31 +1,30 @@
 function Footer() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-y-10 bg-gray-100 px-32 py-14 border-t text-gray-600">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 bg-gray-100 px-32 py-14 border-t text-gray-600">
       <div className="space-y-4 text-xs text-gray-800">
         <h5 className="font-bold">ABOUT</h5>
         <p>About us</p>
-        <p>Become a Seller</p>
         <p>FAQ</p>
       </div>
 
       <div className="space-y-4 text-xs text-gray-800">
-        <h5 className="font-bold">COMMUNITY</h5>
-        <p>Accessibility</p>
-        <p>This is not a real site</p>
-        <p>Its a pretty awesome clone</p>
-        <p>Referrals accepted</p>
-        <p>Papafam</p>
+        <h5 className="font-bold">Our Aim</h5>
+        <div className="container w-25 ">
+        <p>Makeshipjoy aims to make it easier
+        to find great deals in your
+        neighbourhoods </p>
+      
+        </div>
       </div>
 
     
 
       <div className="space-y-4 text-xs text-gray-800">
-        <h5 className="font-bold">SUPPORT</h5>
-        <p>Help Centre</p>
-        <p>Trust & Safety</p>
-        <p>Say Hi YouTube</p>
-        <p>Easter Eggs</p>
-        <p>For the Win</p>
+      <h5 className="font-bold">Our Values</h5>
+        <div className="container w-30 ">
+        <p>Integrity, Passion, Creativity </p>
+      
+        </div>
       </div>
     </div>
   );

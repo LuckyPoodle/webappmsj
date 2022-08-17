@@ -45,7 +45,7 @@
     "react-image-file-resizer": "^0.4.7",
     "react-map-gl": "^6.1.16",
     "react-mapbox-gl": "^5.1.1",
-    "react-quill": "^0.0.2",
+    "react-quill": "^2.0.0",
     "react-render-html": "^0.6.0",
     "react-responsive-carousel": "^3.2.23",
     "react-toastify": "^8.2.0",
