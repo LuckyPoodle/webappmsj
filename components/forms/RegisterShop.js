@@ -122,12 +122,21 @@ const RegisterShopForm = ({
 
       console.log("HANDLE SUBMIT")
       const { data } = await axiosAuth.post("/create-shop", { body: { values: values, image: image }, });
-      console.log(data);
+      console.log('back from create shop')
+      alert(JSON.stringify(data));
 
-      notify('Created. Please refresh page', true)
+      if (data.created==false){
+        notify(data.message, false)
+      }else{
+        notify('Created. Please refresh page', true)
+      }
 
-      //router.push("/instructor");
+ 
+
+  
     } catch (err) {
+   
+      console.log(err)
       notify('Something went wrong', false)
     }
 
@@ -160,7 +169,7 @@ const RegisterShopForm = ({
                       Shop Name
                     </label>
                     <p>* Please choose wisely. Name change is bad for SEO.  </p>
-                    <p className="italic">We reserve the right to remove names which are vulgar or violate copyright</p>
+                    <p className="italic">Names which are vulgar or in violation of copyright will be removed </p>
                     <div className="mt-1 flex rounded-md shadow-sm">
 
                       <input

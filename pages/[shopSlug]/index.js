@@ -19,7 +19,7 @@ const ShopFront = ({ shop, products }) => {
           <div class="flex  flex-col items-center text-center w-full mb-20">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{shop.shopTitle}</h1>
             <div className="h-32 w-32 mb-4 lg:mb-0 mr-4 content-center">
-              <img src={shop.shopImage} alt className="h-full w-full rounded-full overflow-hidden shadow" />
+              <img src={shop.shopImage} className="h-full w-full rounded-full overflow-hidden shadow" />
             </div>
 
             <div className='h-20 w-20 rounded-full'>
@@ -29,9 +29,14 @@ const ShopFront = ({ shop, products }) => {
             <p class="lg:w-2/3 mx-auto  font-bold  leading-relaxed text-base">{shop.description}</p>
 
             <p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.address}</p>
+            <p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">Delivery Info: {shop.deliveryPickUpInfo}</p>
+            <p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">Delivery Fee: S${shop.deliveryFee}</p>
             <div className='flex flex-row'><MailIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactEmail}</p></div>
             <div className='flex flex-row'><PhoneIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactNumber}</p></div>
-            <p className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkOne}</p>
+            <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkOne}</a>
+            <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkTwo}</a>
+            <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkThree}</a>
+            <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkFour}</a>
           </div>
           <div class="flex flex-wrap m-10 ">
             {products.map((pdt) => (
@@ -55,7 +60,7 @@ const ShopFront = ({ shop, products }) => {
 }
 
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query ,req,res}) {
 
   console.log(query.shopSlug)
 
@@ -64,6 +69,14 @@ export async function getServerSideProps({ query }) {
   );
   console.log('gotten back DATA ===========>>>>>>>>>>');
   console.log(data)
+ 
+
+    if (!data) {
+      return {
+        notFound: true,
+      }
+    }
+  
   
   console.log('HI i am in getServerSideprops of [shopSlug]/index');
   const productsData = await axios.get(`${process.env.api}/get-shop-products/${query.shopSlug}`);
@@ -71,6 +84,10 @@ export async function getServerSideProps({ query }) {
 
   console.log('gotten back DATA ===========>>>>>>>>>>');
   console.log(productsData.data)
+
+
+
+  
 
   return {
     props: {

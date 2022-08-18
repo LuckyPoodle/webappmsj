@@ -312,14 +312,12 @@ export const getServerSideProps = async ({ req, res }) => {
 
       console.log('statistics is ==>');
       console.log(statistics.data);
-      console.log(statistics.data!==undefined)
-
-  
-
-      if (statistics.data!==undefined){
+      console.log(statistics.length>0)
+      if (statistics.data!==undefined ){
         return { props: { shopData: data, statistics: statistics.data } };
       }else{
-        return { props: { shopData: data, statistics:[] }};
+        console.log('User has SHOP but nothing yet');
+        return { props: { shopData: data,  statistics: { _id: null, totalRevenue: 0, totalCount: 0, ok: false, monthlyOrderCount: [], completedRevenue: { _id: null, totalCompletedRevenue: 0, totalCompletedCount: 0 } }  }};
       }
     } else {
       console.log('User has NO SHOP');

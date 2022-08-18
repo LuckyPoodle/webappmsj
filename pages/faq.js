@@ -12,8 +12,7 @@ const FAQ = () => {
                             Frequently Asked Questions
                         </h2>
                         <p className="max-w-lg px-6 mx-auto text-center text-graishBlue">
-                            Here are some of our FAQs. If you have any other questions you'd like
-                            answered please feel free to email us.
+                            If you have any other questions not found below, feel free to contact us.
                         </p>
                     </div>
                 </section>
@@ -34,7 +33,7 @@ const FAQ = () => {
                                     <div
                                         className="transition duration-500 ease group-hover:text-red-500"
                                     >
-                                        What is Bookmark?
+                                        How do I sell here?
                                     </div>
                        
                                     <div
@@ -56,10 +55,7 @@ const FAQ = () => {
                                     className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                 >
                                     <p className="py-2 text-justify text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                                        repellat amet doloribus consequuntur eos similique provident
-                                        tempora voluptates iure quia fuga dicta voluptatibus culpa
-                                        mollitia recusandae delectus id suscipit labore?
+                                        Simply sign in with your Google account. You will be able to set up your shop in the user dashboard, and then add your products/services.
                                     </p>
                                 </div>
                             </div>
@@ -74,7 +70,7 @@ const FAQ = () => {
                                     <div
                                         className="transition duration-500 ease group-hover:text-red-500"
                                     >
-                                        How can I request a new browser?
+                                        Is this free?
                                     </div>
                                   
                                     <div
@@ -96,10 +92,7 @@ const FAQ = () => {
                                     className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                 >
                                     <p className="py-2 text-justify text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                                        repellat amet doloribus consequuntur eos similique provident
-                                        tempora voluptates iure quia fuga dicta voluptatibus culpa
-                                        mollitia recusandae delectus id suscipit labore?
+                                        Yes it is free to use. MakeShipJoy only extract 6% fee from Card payment to cope with transaction fees. Payment from cards will be distributed to your bank account by 30 Working Days after payment is finalised. 
                                     </p>
                                 </div>
                             </div>
@@ -113,7 +106,7 @@ const FAQ = () => {
                                     <div
                                         className="transition duration-500 ease group-hover:text-red-500"
                                     >
-                                        Is ther a mobile app?
+                                        Who do I complain to for product/services quality issues
                                     </div>
                         
                                     <div
@@ -135,10 +128,8 @@ const FAQ = () => {
                                     className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                 >
                                     <p className="py-2 text-justify text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                                        repellat amet doloribus consequuntur eos similique provident
-                                        tempora voluptates iure quia fuga dicta voluptatibus culpa
-                                        mollitia recusandae delectus id suscipit labore?
+                                        MakeShipJoy is not responsible for the quality of the product/service rendered. However, if a product/service is found to be deceitful or harmful, it will be delisted.
+                                        The aim of this platform is to make it easy for residents to support their nearby micro/budding home-businesses, so if a product/service is lacking in quality, your constructive feedback will be much appreciated by the seller(s)
                                     </p>
                                 </div>
                             </div>
@@ -153,7 +144,7 @@ const FAQ = () => {
                                     <div
                                         className="transition duration-500 ease group-hover:text-red-500"
                                     >
-                                        What about other Chromium browsers
+                                        How do I get a refund?
                                     </div>
                  
                                     <div
@@ -175,10 +166,7 @@ const FAQ = () => {
                                     className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                 >
                                     <p className="py-2 text-justify text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
-                                        repellat amet doloribus consequuntur eos similique provident
-                                        tempora voluptates iure quia fuga dicta voluptatibus culpa
-                                        mollitia recusandae delectus id suscipit labore?
+                                        For payment made via cash, refund has to be given out by the sellers themselves. For card payment, MakeShipJoy will provide the refund if requested by the seller you are seeking the refund from.
                                     </p>
                                 </div>
                             </div>

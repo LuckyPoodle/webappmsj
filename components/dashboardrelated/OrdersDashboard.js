@@ -83,7 +83,7 @@ const OrdersDashboard = ({ shopId }) => {
       <div className='col'>
         {
           orderPurchasedView ? <>
-            <p>Your Purchased Orders!!</p>
+     
 
             <div className=''>
               <div class="flex flex-wrap h-full">
@@ -170,6 +170,7 @@ const OrdersDashboard = ({ shopId }) => {
                             </select></p>
 
                             <p><span className='font-bold'>Payment Method </span>:{order.paymentMethod}</p>
+                            <p><span className='font-bold'>Customer Number </span>:{order.deliveryContactNumber}</p>
                             <p><span className='font-bold'>Delivery Or Pickup</span>:{order.delivery ? 'Delivery' : 'Pickup'}</p>
                             <p><span className='font-bold'>Products In Order :</span></p>
                             {order.shopProductsInOrder.map((pdt) => {

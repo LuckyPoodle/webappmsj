@@ -27,6 +27,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
+
   const cancelButtonRef = useRef(null);
 
   //images
@@ -239,8 +240,21 @@ const ProductsDetailsDashboard = ({ shopData }) => {
 
   };
 
+  const handleProductSetOutOfStock=async(id)=>{
+    const { data } = await axiosAuth.post(`/update-product-availability/${id}`, {outOfStock:true } );
+
+    fetchShopProducts();
+
+
+  }
+
+  const handleProductSetAvailable=async(id)=>{
+    const { data } = await axiosAuth.post(`/update-product-availability/${id}`, { outOfStock:false } );
+    fetchShopProducts();
+  }
+
   const handleDeleteProduct = async () => {
-    console.log("DELETE PRODUCT!!!");
+  
     //router.post("/delete-product/:productSlug",findOrCreateUser,removeProductFromShop);
     try {
       const { result } = await axiosAuth.post(`/delete-product/${productValues.id}`);
@@ -367,6 +381,7 @@ const ProductsDetailsDashboard = ({ shopData }) => {
 
               <div className='flex justify-between'>
                 <button className='text-black' onClick={() => toggleEditProduct(product)}>Edit</button>
+                {product.outOfStock==false?<button className='text-black' onClick={()=>handleProductSetOutOfStock(product._id)}>Set Out-Of-Stock</button>:<button className='text-black' onClick={()=>handleProductSetAvailable(product._id)}>Set Available</button>}
                 <button className='' onClick={() => handleConfirmationDialog(product._id)}>  <TrashIcon className="h-6 w-6 text-black-600" aria-hidden="true" /></button>
               </div>
 

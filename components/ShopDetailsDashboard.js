@@ -50,7 +50,13 @@ const ShopDetailsDashboard
     const [deliveryPickUpOption, setDeliveryPickUpOption] = useState("");
     const [deliveryPickUpInfo, setDeliveryPickUpInfo] = useState("");
     const [deliveryFee, setDeliveryFee] = useState(0);
-    const [shopTitle, setShopTitle] = useState("")
+    const [shopTitle, setShopTitle] = useState("");
+    const [siteLinkOne,setSiteLinkOne]=useState("");
+    const [siteLinkTwo,setSiteLinkTwo]=useState("");
+    const [siteLinkThree,setSiteLinkThree]=useState("");
+    const [siteLinkFour,setSiteLinkFour]=useState("");
+
+
     //image-related editing
     const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -99,6 +105,18 @@ const ShopDetailsDashboard
         setDeliveryFee(e.target.value)
       } else if (fieldToEdit == 'shopTitle') {
         setShopTitle(e.target.value)
+      }else if (fieldToEdit=='siteLinkOne'){
+        setSiteLinkOne(e.target.value)
+
+      }else if (fieldToEdit=='siteLinkTwo'){
+        setSiteLinkTwo(e.target.value)
+        
+      }else if (fieldToEdit=='siteLinkThree'){
+        setSiteLinkThree(e.target.value)
+        
+      }else if (fieldToEdit=='siteLinkFour'){
+        setSiteLinkFour(e.target.value)
+        
       }
     }
 
@@ -294,7 +312,65 @@ const ShopDetailsDashboard
         }
 
       }
+      else if (field == 'siteLinkOne') {
+        try {
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { siteLinkOne: siteLinkOne } } });
+          console.log(data)
+          notify('Updated. Please refresh page', true)
+          setOpen(false)
 
+        } catch (err) {
+          notify('Something went wrong', false)
+          setOpen(false)
+
+        }
+
+      }
+
+      else if (field == 'siteLinkTwo') {
+        try {
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { siteLinkTwo: siteLinkTwo } } });
+          console.log(data)
+          notify('Updated. Please refresh page', true)
+          setOpen(false)
+
+        } catch (err) {
+          notify('Something went wrong', false)
+          setOpen(false)
+
+        }
+
+      }
+
+      else if (field == 'siteLinkThree') {
+        try {
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { siteLinkThree: siteLinkThree } } });
+          console.log(data)
+          notify('Updated. Please refresh page', true)
+          setOpen(false)
+
+        } catch (err) {
+          notify('Something went wrong', false)
+          setOpen(false)
+
+        }
+
+      }
+
+      else if (field == 'siteLinkFour') {
+        try {
+          const { data } = await axiosAuth.post(`/update-shop/${shopData[0]._id}`, { body: { values: { siteLinkFour: siteLinkFour } } });
+          console.log(data)
+          notify('Updated. Please refresh page', true)
+          setOpen(false)
+
+        } catch (err) {
+          notify('Something went wrong', false)
+          setOpen(false)
+
+        }
+
+      }
 
     }
 
@@ -369,6 +445,33 @@ const ShopDetailsDashboard
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Shop Contact Number</dt>
               <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].shopContactNumber}</dd><button onClick={() => handleEdit('shopContactNumber')}>edit</button> </div>
+
+
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Shop Site Link One</dt>
+              <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].siteLinkOne}</dd><button onClick={() => handleEdit('siteLinkOne')}>edit</button> </div>
+
+
+            </div>
+
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Shop Site Link Two</dt>
+              <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].siteLinkTwo}</dd><button onClick={() => handleEdit('siteLinkTwo')}>edit</button> </div>
+
+
+            </div>
+
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Shop Site Link Three</dt>
+              <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].siteLinkThree}</dd><button onClick={() => handleEdit('siteLinkThree')}>edit</button> </div>
+
+
+            </div>
+
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Shop Site Link Four</dt>
+              <div className='row'><dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{shopData[0].siteLinkFour}</dd><button onClick={() => handleEdit('siteLinkFour')}>edit</button> </div>
 
 
             </div>
@@ -485,7 +588,13 @@ const ShopDetailsDashboard
                                             placeholder="E.g 88888888"
                                             defaultValue={''}
                                           />
-                                        </div></div> : fieldToEdit == 'image' ?
+                                        </div></div>
+
+
+
+
+
+                                      : fieldToEdit == 'image' ?
 
                                         <div>
                                           <label className="block text-sm font-medium text-gray-700">Shop Profile Image</label>
@@ -608,14 +717,59 @@ const ShopDetailsDashboard
                                                     onChange={handleChange}
                                                     id="shopName"
                                                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                                                
+
                                                   />
                                                 </> :
+                                                fieldToEdit == 'siteLinkOne' ? <>
+                                                  <input
+                                                    type="text"
+                                                    name="siteLinkOne"
+                                                    onChange={handleChange}
+                                                    id="siteLinkOne"
+                                                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
+
+                                                  />
+                                                </> :
+                                                  fieldToEdit == 'siteLinkTwo' ? <>
+                                                    <input
+                                                      type="text"
+                                                      name="siteLinkTwo"
+                                                      onChange={handleChange}
+                                                      id="siteLinkTwo"
+                                                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
+
+                                                    />
+                                                  </> :
+                                                    fieldToEdit == 'siteLinkThree' ? <>
+                                                      <input
+                                                        type="text"
+                                                        name="siteLinkThree"
+                                                        onChange={handleChange}
+                                                        id="siteLinkThree"
+                                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
+
+                                                      />
+                                                    </> :
+
+
+                                                      fieldToEdit == 'siteLinkFour' ? <>
+                                                        <input
+                                                          type="text"
+                                                          name="siteLinkFour"
+                                                          onChange={handleChange}
+                                                          id="siteLinkFour"
+                                                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
+
+                                                        />
+                                                      </> :
 
 
 
 
-                                                <></>
+
+
+
+                                                        <></>
                             }
 
 

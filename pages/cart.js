@@ -194,8 +194,8 @@ const Cart = () => {
                         <div className="w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-white overflow-y-auto overflow-x-hidden h-screen" id="scroll">
 
                             <p className="text-5xl font-black leading-10 text-gray-800 pt-10">Bag</p>
-
-                            {cartItems.map((item) =>
+{cartItems.length==0?<><h2 className='p-10'>Nothing in cart yet</h2></>:
+                            cartItems.map((item) =>
                                 <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
                                     <div className="w-1/4">
                                         <img src={item.mainImage} alt className="w-full h-full object-center object-cover" />
@@ -240,7 +240,7 @@ const Cart = () => {
                                         <p className="text-2xl leading-normal text-gray-800">Total</p>
                                         <p className="text-2xl font-bold leading-normal text-right text-gray-800">${totalPrice + totalDeliveryPrice}</p>
                                     </div>
-                                    <button onClick={saveCartToDB} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                    <button disabled={cartItems.length==0} onClick={saveCartToDB} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                         Checkout
                                     </button>
                                 </div>

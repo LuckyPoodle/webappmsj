@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/Header'
-import { LockClosedIcon } from '@heroicons/react/solid';
+
 import { loadIdToken } from "../auth/firebaseAdmin";
 import FirebaseAuth from '../components/firebaseAuth'
 const Login = () => {

@@ -11,7 +11,6 @@ const loader = new Loader({
   libraries: ["places"]
 });
 
-console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
 
 
 
@@ -23,13 +22,12 @@ const SearchBox = ({onSelectAddress,defaultValue,searchBoxText}) => {
     loader
     .load()
     .then((google) => {
-      console.log('load in searchbox ');
-      console.log(google);
+
       setLoaded(true);
     
     })
     .catch(e => {
-      console.log("error",e)
+
       setLoaded(false)
     });
   })
@@ -66,8 +64,7 @@ function ReadySearchBox({onSelectAddress,defaultValue,searchBoxText}){
         //we took the address, want to get the lat and long from it
         const results=await getGeocode({address});
         const {lat,lng}=await getLatLng(results[0]);
-        console.log('LAT AND LNG!!!!!!');
-        console.log(lat,lng)
+ 
 
         onSelectAddress(address,lat,lng);
 

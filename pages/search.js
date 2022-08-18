@@ -27,13 +27,11 @@ const CategoryPage = () => {
 
   useEffect(() => {
 
-    console.log('hey in search');
 
     index
       .search(router.query.item)
       .then(({ hits }) => {
-        console.log("INDEX SEARCH HITS")
-        console.log(hits);
+
         setSearchResults(hits)
 
       })
@@ -64,29 +62,27 @@ const CategoryPage = () => {
 
 
   useEffect(() => {
-    console.log('FILTERINNGGGG')
 
     console.log(router.query.latitude == null)
     if (router.query.latitude == 0 && router.query.longitude == 0 || router.query.latitude == 'null' || router.query.longitude == 'null') {
-      console.log('NO LOCATION FILTER');
+
 
       console.log(searchResults)
       setFilteredByLocationResults(searchResults)
     } else {
       let templist = []
       searchResults.map((p) => {
-        console.log('SEARCH RESULTS?')
+
         let distance = getDistanceInKm(p.latitude, p.longitude, router.query.latitude, router.query.longitude);
         console.log('distance is ' + distance);
         if (distance < 5) {
-          console.log('added to filtered results')
+
           templist.push(p);
 
         }
       });
       setFilteredByLocationResults(templist);
 
-      console.log('SETTTITNGG SEARCH OUTPUT')
 
     }
 
@@ -137,7 +133,13 @@ const CategoryPage = () => {
           </section>
           <section className='bg-white w-full h-1/2 xl:w-2/3 md:w-1/2 lg:w-1/2 xl:w-2/3 lg:h-full sm:h-full md:h-full overflow-x-scroll overflow-y-hidden  p-5 '>
 
-            <div className='h-full w-full '> {filteredByLocationResults.length>1?<Map searchResults={filteredByLocationResults} />:<></>}</div>
+            <div className='h-full w-full '> {filteredByLocationResults.length>=1?<Map searchResults={filteredByLocationResults} />:<>
+            
+                <div className='container'>
+                  <h2>No Relevant Search Results</h2>
+
+                </div>
+            </>}</div>
 
 
           </section>

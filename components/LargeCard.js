@@ -16,11 +16,11 @@ function LargeCard({ img, title, description, buttonText }) {
         <h3 className="text-4xl text-white mb-3 w-64">{title}</h3>
         <p className="text-white mb-5"> {description}</p>
 
-        <Link href={'/login'}>
+        {/* <Link href={'/login'}>
         <a className="text-sm  text-white bg-gray-900 rounded-lg px-4 py-2">
           {buttonText}
         </a>
-        </Link>
+        </Link> */}
       </div>
     </section>
   );

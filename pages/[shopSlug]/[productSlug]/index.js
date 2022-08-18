@@ -19,7 +19,7 @@ const ProductDetails = ({ product }) => {
     const { state: { cartItems, accumulatedCartQty }, dispatch } = useContext(Context);
     const router = useRouter();
     const handlePressAddToCart = (pdt) => {
-        console.log("HANDLE PRESS ADD TO CART");
+
         pdt.inclusivePrice = inclusivePrice
         pdt.shipping = shipping;
         pdt.shopId = product.shop._id;
@@ -41,8 +41,7 @@ const ProductDetails = ({ product }) => {
 
     useEffect(() => {
         //to reset shipping state
-        console.log('reset shipping state');
-        console.log(shipping)
+ 
         setShipping("false")
 
     }, [router.query])
@@ -105,7 +104,7 @@ const ProductDetails = ({ product }) => {
                     <Image className="w-full" width={600} height={600} alt={product.mainImageAlt} src={currentImage} />
                     <div className="flex space-x-3 overflow-scroll  p-3 -ml-3">
                         {imagesToShow?.map((image) => (
-                            <img alt="img-tag-one" onClick={() => setCurrentImage(image)} className="md:w-48 md:h-48 w-15 h-15" src={image} />
+                            <img alt={product.mainImageAlt} onClick={() => setCurrentImage(image)} className="md:w-48 md:h-48 w-15 h-15" src={image} />
                         ))}
                     </div>
 
@@ -114,7 +113,7 @@ const ProductDetails = ({ product }) => {
                     <Image className="w-full" width={600} height={600} alt={product.mainImageAlt} src={currentImage} />
                     <div className="flex space-x-3 overflow-scroll  p-3 -ml-3">
                         {imagesToShow?.map((image) => (
-                            <img alt="img-tag-one" onClick={() => setCurrentImage(image)} className="md:w-48 md:h-48 w-20 h-20" src={image} />
+                            <img alt={product.mainImageAlt} onClick={() => setCurrentImage(image)} className="md:w-48 md:h-48 w-20 h-20" src={image} />
                         ))}
                     </div>
 
@@ -137,7 +136,7 @@ const ProductDetails = ({ product }) => {
                             {product.name}
                         </h1>
                         <div className='p-4 italic'> *****   <Link href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link></div>
-                        <span className='text-md'>qty remaining : {product.stockAvailable}</span>
+                        {/* <span className='text-md'>qty remaining : {product.stockAvailable}</span> */}
                         <br />
 
 
@@ -159,7 +158,7 @@ const ProductDetails = ({ product }) => {
 
 
 
-                    {product.stockAvailable > 0 ?
+                    {product.outOfStock!=true ?
                         <button
                             onClick={() => handlePressAddToCart(product)}
                             className="
@@ -197,13 +196,13 @@ const ProductDetails = ({ product }) => {
         "
                         >
 
-                            Out of Stock
+                            Unavailable
                         </button>}
                     <div>
                         <p className="xl:pr-8 text-base lg:leading-tight leading-normal text-gray-600 mt-7">{renderHTML(product.description)}</p>
 
                     </div>
-                    <div>
+                    {/* <div>
                         <div className="border-t border-b py-4 mt-7 border-gray-200">
                             <div onClick={() => setShow(!show)} className="flex justify-between items-center cursor-pointer">
                                 <p className="text-base leading-4 text-gray-800">Shipping and returns</p>
@@ -224,8 +223,8 @@ const ProductDetails = ({ product }) => {
                                 You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are nonrefundable
                             </div>
                         </div>
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                         <div className="border-b py-4 border-gray-200">
                             <div onClick={() => setShow2(!show2)} className="flex justify-between items-center cursor-pointer">
                                 <p className="text-base leading-4 text-gray-800">Contact us</p>
@@ -252,7 +251,7 @@ const ProductDetails = ({ product }) => {
 
 
 
-                    </div>
+                    </div> */}
 
                 </div>
 
@@ -287,12 +286,18 @@ const ProductDetails = ({ product }) => {
 
 
 export async function getStaticProps(context) {
+   try{
     const { params } = context;
     const { shopSlug, productSlug } = params;
     console.log('IN GET STATIC PROPS');
     const { data } = await axios.get(
         `${process.env.api}/read-product/${shopSlug}/${productSlug}`
     );
+    if (!data) {
+        return {
+          notFound: true,
+        }
+      }
     return {
         props: {
             product: data
@@ -300,12 +305,18 @@ export async function getStaticProps(context) {
         },
         revalidate: 600
     }
+   }catch(e){
+    return {
+        notFound: true,
+      }
+   }
 }
 
 export async function getStaticPaths() {
     const { data } = await axios.get(
         `${process.env.api}/get-all-products`
     );
+   
     console.log('gotten back all products ===========>>>>>>>>>>');
     console.log(data)
     const paths = data.map(pdt => ({ params: { productSlug: pdt.slug, shopSlug: pdt.shopSlug } }));

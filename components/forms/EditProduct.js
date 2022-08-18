@@ -46,7 +46,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
     <>
 
       {productValues && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='p-10'>
           <div className='container'>
             <h5 className='font-bold text-black'>Title</h5>
             <input
@@ -121,8 +121,9 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
             />
           </div>
           <br />
-          <div className='container'>
+          {/* <div className='container'>
             <h5 className='font-bold text-black'>Quantity Available</h5>
+            <p className='italic'>Set Quantity to 0 if your product/service is unavailable temporarily</p>
             <input
               type="number"
               name="stockAvailable"
@@ -133,7 +134,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
               min={0}
               onChange={handleChange}
             />
-          </div><br/>
+          </div><br/> */}
           <div className='container'>
             <h5 className='font-bold text-black'>Delivery Available?</h5>
             <input

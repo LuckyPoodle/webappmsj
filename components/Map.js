@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
+// import Map,{Marker,Popup} from 'react-map-gl';
 import getCenter from "geolib/es/getCenter";
 import { Context } from '../context/index'
 import Link from "next/link"
@@ -18,18 +19,14 @@ const Map = ({ searchResults }) => {
   // The latitude and longitude of the center of locations coordinates
   const center = getCenter(coordinates);
 
-  useEffect(()=>{
-    console.log('in map');
-    console.log(searchResults)
 
-  },[])
 
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
     latitude: center.latitude,
     longitude: center.longitude,
-    zoom: 11,
+    zoom: 10,
 
 
 
@@ -50,7 +47,7 @@ const Map = ({ searchResults }) => {
     >
       {searchResults.map((result) => (
         <div key={result.objectID}>
-          {/* The markers for the airbnb properties */}
+       
           <Marker
             latitude={Number(result.latitude)}
             longitude={Number(result.longitude)}
@@ -92,6 +89,7 @@ const Map = ({ searchResults }) => {
 
               <div>
                 <div className="flex w-full items-center dark:bg-gray-900 flex justify-center items-center ">
+           
                   <div>
                     <div className=" flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  border-gray-400 mb-6">
                       <div>

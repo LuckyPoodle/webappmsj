@@ -12,9 +12,9 @@ import CartIcon from "./cartIcon";
 import User from "../../newmakeshipjoy/server/models/user";
 
 const navigation = [
-  { name: 'About ', href: '#', current: false },
+  { name: 'About ', href: '/about', current: false },
   { name: 'FAQ', href: '/faq', current: false },
-  { name: 'Blog', href: '#', current: false },
+  { name: 'Contact', href: '/contact', current: false },
 
 
 ]
@@ -156,14 +156,7 @@ function Header({ placeholder }) {
                     </div>
                   </div>
                 </div>
-                <button
-                    type="button"
-                    className=" p-1 rounded-full text-black"
-                  >
-                    {/* <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
-                    <Link href={'/contact'}><a>Contact Us</a></Link>
-                  </button> 
+               
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <div className="w-8 h-8 bg-gray-800 rounded-full">
 
@@ -216,7 +209,7 @@ function Header({ placeholder }) {
                               </Link>
                           )}
                         </Menu.Item>
-                        <Menu.Item>
+                        {/* <Menu.Item>
                           {({ active }) => (
                             <a
                               href="#"
@@ -225,7 +218,7 @@ function Header({ placeholder }) {
                               Settings
                             </a>
                           )}
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <Menu.Item>
                           {({ active }) => (
                             authenticated ? <a
