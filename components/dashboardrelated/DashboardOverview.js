@@ -104,7 +104,7 @@ const DashboardOverview = ({ purchasedProducts,orders,shopTitle, total, monthlyO
       </div>
 
       <div class=" flex-initial w-full h-full sm:w-1/2 sm:h-1/2">
-      <div className='flex-initial w-1/3 text-sm italic '>  {shopTitle?<p>Total Revenue: ${total}</p>:<p>User has no shop yet</p>}</div>
+      <div className='flex-initial w-1/3 text-sm italic '>  {shopTitle?<p>Total Revenue for {shopTitle}: ${total}</p>:<p>User has no shop yet</p>}</div>
         <><Bar options={optionsRevenue} data={dataRevenue} /></>
       </div>
       <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">

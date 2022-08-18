@@ -131,6 +131,7 @@ function Header({ placeholder }) {
                           onChange={(e) => setSearchInput(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && search()}
                           placeholder={placeholder || "Search for anything"}
+                          
                           className=" flex-grow text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
                         />
                         <span className="p-1 mt-1">|</span>
@@ -265,7 +266,7 @@ function Header({ placeholder }) {
                     as="a"
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}

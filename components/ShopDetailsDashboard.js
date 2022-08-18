@@ -5,9 +5,9 @@ import { PencilIcon } from '@heroicons/react/outline';
 import SearchBox from './searchBox';
 import Image from 'next/image';
 import Resizer from "react-image-file-resizer";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { axiosAuth } from "../actions/axios";
-
+import Link from 'next/link';
 import { Context } from '../context'
 import { useContext } from 'react';
 
@@ -381,7 +381,9 @@ const ShopDetailsDashboard
 
 
           <h3 className="text-lg leading-6 font-medium text-gray-900">Your Shop Details</h3>
-
+          <br/>
+          <h4 >Visit your shop <Link href={`/${shopData[0].slug}`}><a ><span className='text-black'>here</span></a></Link></h4>
+          <br/>
           <button onClick={toggleViewProductsDetails} type="button" class="text-white p-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View/Edit Products</button>
 
 

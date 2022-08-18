@@ -135,7 +135,7 @@ const ProductDetails = ({ product }) => {
                         >
                             {product.name}
                         </h1>
-                        <div className='p-4 italic'> *****   <Link href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link></div>
+                        {/* <div className='p-4 italic'> *****   <Link href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link></div> */}
                         {/* <span className='text-md'>qty remaining : {product.stockAvailable}</span> */}
                         <br />
 

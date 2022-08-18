@@ -52,19 +52,28 @@ const OrdersDashboard = ({ shopId }) => {
   }
 
   async function getShopOrders() {
-    setLoading(true)
+    try{
+      setLoading(true)
     const { data } = await axiosAuth.get(`/get-shop-orders/${shopId}`, {});
     setShopOrders(data);
     setLoading(false)
+    }catch(err){
+       
+       setLoading(false)
+    }
 
 
   }
 
   async function getUserOrders() {
-    setLoading(true)
+    try{
+      setLoading(true)
     const { data } = await axiosAuth.get('/get-user-orders', {});
     setUserOrders(data);
     setLoading(false)
+    }catch(e){
+      setLoading(false)
+    }
 
   }
 
@@ -84,10 +93,10 @@ const OrdersDashboard = ({ shopId }) => {
         {
           orderPurchasedView ? <>
      
-
+            <p className='font-bold text-lg'>Your Purchases</p>
             <div className=''>
               <div class="flex flex-wrap h-full">
-                {userOrders.map((order) => {
+                {userOrders.length>0?userOrders.map((order) => {
                   return <>
 
                     <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">
@@ -122,19 +131,19 @@ const OrdersDashboard = ({ shopId }) => {
 
 
                   </>
-                })}
+                }):<div className='p-10'><p>You have not purchased anything yet!</p></div>}
               </div>
             </div>
           </> : <>
 
-            <p>Your Shop Orders</p>
+            <p className='font-bold text-lg'>Your Shop Orders</p>
             {loading ? <div className='animate-spin h-5 w-5 mr-3 '>
               <FontAwesomeIcon icon={faSpinner} />
             </div> :
               <div className=''>
                 <div class="flex flex-wrap h-full">
 
-                  {shopOrders.map((order) => {
+                  {shopOrders.length>0?shopOrders.map((order) => {
                     return <>
 
                       <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">
@@ -186,7 +195,7 @@ const OrdersDashboard = ({ shopId }) => {
 
 
                     </>
-                  })}
+                  }):<div className='p-10'><span>You have not sold anything yet!</span></div>}
                 </div>
               </div>
 

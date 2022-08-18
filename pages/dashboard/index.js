@@ -331,7 +331,11 @@ export const getServerSideProps = async ({ req, res }) => {
     // res.statusCode = 302;
     // res.end();
     console.log("ERRROR!!!!!! ");
-    console.log(err)
+    console.log(err);
+
+      res.setHeader("location", "/");
+      res.end();
+
   }
 };
 

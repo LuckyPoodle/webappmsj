@@ -87,8 +87,7 @@ const Checkout = ({ }) => {
             type: "SET_DELIVERY_ADDRESS",
             payload: e.target.value,
         });
-        console.log('address!!!')
-        console.log(address)
+
     }
     const handleContactChange = (e) => {
         setContactNumber(e.target.value);
@@ -96,8 +95,7 @@ const Checkout = ({ }) => {
             type: "SET_CONTACT",
             payload: e.target.value,
         });
-        console.log('address!!!')
-        console.log(address)
+       
     }
     const handleCheckBox = (e) => {
         setSaveAddressContact(e.target.checked);
@@ -156,7 +154,8 @@ const Checkout = ({ }) => {
                                     </> :
                                         <></>}
                                     <div className="container">
-                                        <h5 className='font-bold text-black'>Contact Number</h5>
+                                        <h5 className='font-bold text-black'>Contact Number *</h5>
+                                        <span className="italic">Mandatory</span>
                                         <input
                                             type="text"
                                             name="contactNumber"
@@ -191,7 +190,7 @@ const Checkout = ({ }) => {
                                     <p className="text-base leading-4">Cash Payment Not Available For Delivery Order</p>
 
                                 </div>
-                            </button> : <button onClick={createCashOrder} className="border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex flex-row justify-center items-center space-x-2 py-4 rounded w-full">
+                            </button> : <button disabled={contactNumber.length==0} onClick={createCashOrder} className="border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex flex-row justify-center items-center space-x-2 py-4 rounded w-full">
 
                                 <div>
                                     <p className="text-base leading-4">Pay Cash On Pick Up </p>
@@ -209,7 +208,7 @@ const Checkout = ({ }) => {
 
 
 
-                            <button onClick={() => router.push('/payment')} className="mt-8 border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex justify-center items-center py-4 rounded w-full">
+                            <button disabled={contactNumber.length==0} onClick={() => router.push('/payment')} className="mt-8 border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex justify-center items-center py-4 rounded w-full">
                                 <div>
                                     <p className="text-base leading-4">Pay With Card ${total}</p>
                                 </div>

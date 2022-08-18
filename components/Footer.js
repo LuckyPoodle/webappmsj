@@ -15,7 +15,7 @@ function Footer() {
         <h5 className="font-bold">Our Aim</h5>
         <div className="container w-22 ">
         <p>Makeshipjoy aims to make it easier
-        to find great deals in your
+        to find </p><p>great deals in your
         neighbourhoods </p>
       
         </div>
