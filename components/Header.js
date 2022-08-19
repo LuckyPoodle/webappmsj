@@ -7,7 +7,7 @@ import firebase from "../auth/initFirebase";
 import { useState, useContext, useEffect } from "react";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import {  MenuIcon, XIcon, SearchIcon, UserCircleIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon, SearchIcon, UserCircleIcon } from '@heroicons/react/outline'
 import CartIcon from "./cartIcon";
 
 
@@ -64,7 +64,7 @@ function Header({ placeholder }) {
 
   }
 
- 
+
 
   return (
     <header className="sticky z-50 top-0 ">
@@ -118,15 +118,16 @@ function Header({ placeholder }) {
                           {item.name}
                         </a>
                       ))}
-            
+
                       <div className="flex rounded-full flex-grow md:shadow-sm  ">
+                   
                         <input
                           value={searchInput}
                           onChange={(e) => setSearchInput(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && search()}
                           placeholder={placeholder || "Search"}
-                          
-                          className=" text-xs md:text-sm  text-black pl-5 placeholder-gray-400 outline-none bg-transparent sm:w-20"
+
+                          className=" text-xs md:text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
                         />
                         <span className="p-1 mt-1">|</span>
                         {/* <input
@@ -137,29 +138,30 @@ function Header({ placeholder }) {
                               onChange={(e) => setLocation(e.target.value)}
                             /> */}
 
-                        <SearchBox className='z-50 flex-grow text-xs md:text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
+           
+                          <SearchBox className='z-50 flex-grow text-xs md:text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
 
-                          setValues({ "latitude": latitude, "address": address, "longitude": longitude });
+                            setValues({ "latitude": latitude, "address": address, "longitude": longitude });
 
-                        }} defaultValue="" searchBoxText="Anywhere in Singapore" />
+                          }} defaultValue="" searchBoxText="Singapore" />
                         {/* flex-grow so can grow  */}
                         {/* hidden search icon, show only in medium screen */}
                         <SearchIcon onClick={handleSearch} className="sm:h-6 sm:mt-2 sm:p-2  md:inline-flex  mx-auto cursor-pointer md:mx-2 sm:bg-red-400 rounded-full text-white" />
                       </div>
-                
+
 
 
                     </div>
                   </div>
                 </div>
-               
+
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <div className="w-8 h-8 bg-gray-800 rounded-full">
 
                     <CartIcon />
                   </div>
 
-                 
+
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
@@ -246,11 +248,12 @@ function Header({ placeholder }) {
                     placeholder={placeholder || "Search for anything"}
                     className="flex-1 w-300 text-sm text-gray-600 pl-5 placeholder-gray-400 outline-none bg-transparent"
                   />
+                      <span className="p-1 mt-1">|</span>
                   <SearchBox className='flex-1 w-300 text-sm text-gray-600 pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
 
                     setValues({ "latitude": latitude, "address": address, "longitude": longitude });
 
-                  }} defaultValue="" searchBoxText="Region" />
+                  }} defaultValue="" searchBoxText="Singapore" />
                   {/* flex-grow so can grow  */}
                   {/* hidden search icon, show only in medium screen */}
                   <SearchIcon onClick={handleSearch} className="h-8  md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 rounded-full text-black" />
