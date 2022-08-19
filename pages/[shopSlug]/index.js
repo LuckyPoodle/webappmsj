@@ -32,13 +32,13 @@ const ShopFront = ({ shop, products }) => {
             <p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">Delivery Info: {shop.deliveryPickUpInfo}</p>
             <p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">Delivery Fee: S${shop.deliveryFee}</p>
             <div className='flex flex-row'><MailIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactEmail}</p></div>
-            <div className='flex flex-row'><PhoneIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactNumber}</p></div>
+           {shop.shopContactNumber? <div className='flex flex-row'><PhoneIcon className='w-8 h-8' /><p class="lg:w-2/3 mx-auto pt-1 leading-relaxed text-base">{shop.shopContactNumber}</p></div>:<></>}
             <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkOne}</a>
             <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkTwo}</a>
             <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkThree}</a>
             <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkFour}</a>
-          </div>
-          <div class="flex flex-wrap m-10 ">
+
+            <div class="flex flex-wrap m-10 ">
             {products.map((pdt) => (
               <Link href={`/${shop.slug}/${pdt.slug}`}>
                 <a>
@@ -50,6 +50,8 @@ const ShopFront = ({ shop, products }) => {
 
 
           </div>
+          </div>
+          
         </div>
       </section>
 
