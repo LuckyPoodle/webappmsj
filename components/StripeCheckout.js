@@ -22,11 +22,9 @@ const StripeCheckout=()=>{
     const elements=useElements();
 
     useEffect(()=>{
-      console.log('address from ontext')
-      console.log(address);
+   
         axiosAuth.post(`/create-payment-intent`,{address, contactNumber, saveAddressContact}).then((res)=>{
-          console.log('GOT BACK FROM SERVER (STRIPE CHECKOUT) --- ');
-          console.log(res)
+          
             setClientSecret(res.data.clientSecret);
             setCartTotal(res.data.cartTotal);
             setOrderNumber(res.data.orderNumber);
@@ -120,7 +118,7 @@ const StripeCheckout=()=>{
         </div>
       </div>
 
-      <form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
+      <form id="payment-form" className="stripe-form w-full" onSubmit={handleSubmit}>
         <CardElement
           id="card-element"
           options={cartStyle}
