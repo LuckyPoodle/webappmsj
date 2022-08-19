@@ -99,7 +99,7 @@ const OrdersDashboard = ({ shopId }) => {
                 {userOrders.length>0?userOrders.map((order) => {
                   return <>
 
-                    <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">
+                    <div class=" flex-initial pt-10 w-full h-full ">
                       <div className='relative p-5 shadow-md '>
                         <div className='flex flex-col items-center p-5'>
                           <span className='font-bold'> Order Id - {order._id}</span>
@@ -146,7 +146,7 @@ const OrdersDashboard = ({ shopId }) => {
                   {shopOrders.length>0?shopOrders.map((order) => {
                     return <>
 
-                      <div class=" flex-initial pt-10 w-full h-full sm:w-1/2 sm:h-1/2">
+                      <div class=" flex-initial pt-10 w-full h-full ">
                         <div className='relative p-5 shadow-md '>
                           <div className='flex flex-col items-center'>
                             <span className='font-bold'> Order {order._id}</span>
