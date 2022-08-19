@@ -5,7 +5,7 @@ function Banner() {
       <div className="relative h-[150px] sm:h-[250px] lg:h-[350px] xl:h-[450px] 2xl:h-[550px]">
   
         <Image
-          src="https://media.publit.io/file/decor/Keep-Calm-E-Shop-With-Us-851-x-315-px.jpeg"
+          src="https://media.publit.io/file/online_shopping.jpeg"
           layout="fill"
           objectFit="cover"
         />

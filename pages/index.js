@@ -57,7 +57,7 @@ export default function Home({ products }) {
         </section>
 
         <LargeCard
-          img="https://media.publit.io/file/home_business.jpeg"
+          img="https://media.publit.io/file/homebusiness.jpeg"
           title=""
           description=""
           buttonText=""

@@ -13,11 +13,11 @@ const Login = () => {
           
 
           <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-          <div>
+          <div className='pt-5'>
             <img
               className="mx-auto h-12 w-auto"
               src="https://res.cloudinary.com/delhozzsh/image/upload/v1648724247/makeshipjoy_1_wecqeg.png"
-              alt="Workflow"
+              alt="logo"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in/ Sign up</h2>
 
