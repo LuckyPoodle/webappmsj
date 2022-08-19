@@ -350,6 +350,7 @@ const RegisterShopForm = ({
 
                 <div>
                   <label className="block text-md font-medium text-gray-700">External Links</label>
+                  <p>E,g your youtube channel</p>
                   <div class="grid grid-cols-2 gap-2">
                     <div>
                       <h5>External URL Link 1 *</h5>
@@ -358,7 +359,7 @@ const RegisterShopForm = ({
                         type="text"
                         name="siteLinkOne"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g External Blog URL"
+                        placeholder=""
                         onChange={handleChange}
                       />
                     </div>
@@ -370,7 +371,7 @@ const RegisterShopForm = ({
                         type="text"
                         name="siteLinkTwo"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g External Blog URL"
+                        placeholder=""
                         onChange={handleChange}
                       />
                     </div>
@@ -386,7 +387,7 @@ const RegisterShopForm = ({
                         type="text"
                         name="siteLinkThree"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g External Blog URL"
+                        placeholder=""
                         onChange={handleChange}
                       />
                     </div>
@@ -398,7 +399,7 @@ const RegisterShopForm = ({
                         type="text"
                         name="siteLinkFour"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g External Blog URL"
+                        placeholder=""
                         onChange={handleChange}
                       />
                     </div>
