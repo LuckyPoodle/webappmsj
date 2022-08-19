@@ -67,14 +67,14 @@ const CategoryPage = () => {
     if (router.query.latitude == 0 && router.query.longitude == 0 || router.query.latitude == 'null' || router.query.longitude == 'null') {
 
 
-      console.log(searchResults)
+
       setFilteredByLocationResults(searchResults)
     } else {
       let templist = []
       searchResults.map((p) => {
 
         let distance = getDistanceInKm(p.latitude, p.longitude, router.query.latitude, router.query.longitude);
-        console.log('distance is ' + distance);
+     
         if (distance < 5) {
 
           templist.push(p);

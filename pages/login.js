@@ -33,10 +33,7 @@ const Login = () => {
 export const getServerSideProps=async ({ req, res }) => {
   try{
   const uid = await loadIdToken(req);
-  console.log('uid is ===>')
-  console.log(uid)
-  console.log('req token cookies');
-  console.log(req.cookies.token)
+ 
   if (uid) {
     res.setHeader("location", "/dashboard/#shop");
     res.statusCode = 302;

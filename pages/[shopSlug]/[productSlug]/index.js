@@ -70,9 +70,7 @@ const ProductDetails = ({ product }) => {
         product.images.forEach((i) => {
             imagesList.push(i)
         });
-        console.log('----------image list----------')
-        console.log(imagesList);
-        console.log('--------------------------')
+      
         setImagesToShow(imagesList)
 
 
