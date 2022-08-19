@@ -55,6 +55,8 @@ const OrdersDashboard = ({ shopId }) => {
     try{
       setLoading(true)
     const { data } = await axiosAuth.get(`/get-shop-orders/${shopId}`, {});
+    console.log('shop orders ---');
+    console.log(data)
     setShopOrders(data);
     setLoading(false)
     }catch(err){
@@ -69,6 +71,8 @@ const OrdersDashboard = ({ shopId }) => {
     try{
       setLoading(true)
     const { data } = await axiosAuth.get('/get-user-orders', {});
+    console.log('user orders ---');
+    console.log(data)
     setUserOrders(data);
     setLoading(false)
     }catch(e){

@@ -53,8 +53,7 @@ function Dashboard({ shopData, statistics }) {
       setMonthlyRevenueCount(0);
 
     }else{
-      console.log('IN MONTHLY COUNT!!!!');
-      console.log(list)
+
       let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
       let monthorderresults = []
       let monthrevenueresults = []
@@ -69,9 +68,7 @@ function Dashboard({ shopData, statistics }) {
           monthrevenueresults.push(0);
         }
       })
-      console.log('monthly ordrcount!!!jahahahahah');
-      console.log(monthorderresults);
-      console.log(monthrevenueresults)
+      
       setMonthlyOrderCount(monthorderresults);
       setMonthlyRevenueCount(monthrevenueresults);
     }
@@ -95,8 +92,7 @@ function Dashboard({ shopData, statistics }) {
     setTotalCompletedOrders(statistics.completedRevenue.totalCompletedCount)
     let revenuepending = statistics.totalRevenue - statistics.completedRevenue.totalCompletedRevenue;
     let orderspending = statistics.totalCount - statistics.completedRevenue.totalCompletedCount;
-    console.log('montly order count ======');
-    console.log(statistics.monthlyOrderCount)
+ 
     setTotalRevenuePendingCompletion(revenuepending);
     getMonthlyOrderCount(statistics.monthlyOrderCount, true);
     setTotalOrdersPendingCompletion(orderspending);
@@ -117,8 +113,7 @@ function Dashboard({ shopData, statistics }) {
 
   //this only run on mount 
   useEffect(() => {
-    console.log('Obtained ShopData ==========>');
-    console.log(shopData)
+
     setRenderWindow(true);
     setClickedOnNav(true);
     getAccountStatistics();
@@ -127,9 +122,7 @@ function Dashboard({ shopData, statistics }) {
 
   useEffect(() => {
 
-    console.log('hey clickedOnNav changed!!!!!');
-    console.log('current hash is ');
-    console.log(window.location.hash)
+  
     setCurrent(window.location.hash);
 
 
