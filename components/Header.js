@@ -106,9 +106,12 @@ function Header({ placeholder }) {
                   <div className="hidden sm:inline-block ">
                     <div className="flex w-full">
                       {navigation.map((item) => (
+                     <Link
+                     key={item.name}
+                     href={item.href} >
                         <a
                           key={item.name}
-                          href={item.href}
+                          
                           className={classNames(
                             item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
                             'px-3 py-3 rounded-md text-sm font-medium'
@@ -117,6 +120,7 @@ function Header({ placeholder }) {
                         >
                           {item.name}
                         </a>
+                     </Link>
                       ))}
 
                       <div className="flex rounded-full flex-grow md:shadow-sm  ">
