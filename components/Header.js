@@ -126,7 +126,7 @@ function Header({ placeholder }) {
                           onKeyDown={(e) => e.key === "Enter" && search()}
                           placeholder={placeholder || "Search"}
                           
-                          className="text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent sm:w-20"
+                          className=" text-xs md:text-sm  text-black pl-5 placeholder-gray-400 outline-none bg-transparent sm:w-20"
                         />
                         <span className="p-1 mt-1">|</span>
                         {/* <input
@@ -137,14 +137,14 @@ function Header({ placeholder }) {
                               onChange={(e) => setLocation(e.target.value)}
                             /> */}
 
-                        <SearchBox className='z-50 flex-grow text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
+                        <SearchBox className='z-50 flex-grow text-xs md:text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent' onSelectAddress={(address, latitude, longitude) => {
 
                           setValues({ "latitude": latitude, "address": address, "longitude": longitude });
 
                         }} defaultValue="" searchBoxText="Anywhere in Singapore" />
                         {/* flex-grow so can grow  */}
                         {/* hidden search icon, show only in medium screen */}
-                        <SearchIcon onClick={handleSearch} className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
+                        <SearchIcon onClick={handleSearch} className="sm:h-6 sm:mt-2 sm:p-2  md:inline-flex  mx-auto cursor-pointer md:mx-2 sm:bg-red-400 rounded-full text-white" />
                       </div>
                 
 
