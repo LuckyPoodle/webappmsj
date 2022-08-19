@@ -64,14 +64,7 @@ function Header({ placeholder }) {
 
   }
 
-  useEffect(() => {
-
-    console.log('in header ');
-    console.log(authenticated);
-
-    authenticated ? console.log('is true') : console.log('is false')
-
-  }, [])
+ 
 
   return (
     <header className="sticky z-50 top-0 ">
@@ -110,7 +103,7 @@ function Header({ placeholder }) {
 
 
                   {/*  DESKTOP MENU  */}
-                  <div className="hidden sm:block sm:ml-6">
+                  <div className="hidden sm:inline-block ">
                     <div className="flex w-full">
                       {navigation.map((item) => (
                         <a
@@ -125,14 +118,15 @@ function Header({ placeholder }) {
                           {item.name}
                         </a>
                       ))}
-                      <div className="flex rounded-full flex-grow md:shadow-sm py-2">
+            
+                      <div className="flex rounded-full flex-grow md:shadow-sm  ">
                         <input
                           value={searchInput}
                           onChange={(e) => setSearchInput(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && search()}
-                          placeholder={placeholder || "Search for anything"}
+                          placeholder={placeholder || "Search"}
                           
-                          className=" flex-grow text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
+                          className="text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent sm:w-20"
                         />
                         <span className="p-1 mt-1">|</span>
                         {/* <input
@@ -152,6 +146,7 @@ function Header({ placeholder }) {
                         {/* hidden search icon, show only in medium screen */}
                         <SearchIcon onClick={handleSearch} className="h-8 hidden md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
                       </div>
+                
 
 
                     </div>
