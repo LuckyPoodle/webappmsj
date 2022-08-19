@@ -284,10 +284,11 @@ export const getServerSideProps = async ({ req, res }) => {
     const uid = await loadIdToken(req);
 
     if (!uid) {
-      console.log('NO UID!!!')
-      res.setHeader("location", "/login");
-      res.statusCode = 302;
-      res.end();
+      // console.log('NO UID!!!')
+      // res.setHeader("location", "/login");
+   
+      // res.end();
+      throw error;
     }
     const { data } = await axios.get(`${process.env.api}/get-shop-details-for-owner`, {
       headers: {
@@ -326,7 +327,7 @@ export const getServerSideProps = async ({ req, res }) => {
     console.log("ERRROR!!!!!! ");
     console.log(err);
 
-      res.setHeader("location", "/");
+      res.setHeader("location", "/login");
       res.end();
 
   }
