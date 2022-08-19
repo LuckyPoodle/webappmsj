@@ -59,6 +59,11 @@ const DashboardOverview = ({ purchasedProducts,orders,shopTitle, total, monthlyO
 
 
 
+  useEffect(()=>{
+    console.log('PROCESS ENV API ');
+    console.log(process.env.api);
+  })
+
   const dataOrders = {
     labels,
     datasets: [
