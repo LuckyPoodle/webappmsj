@@ -81,7 +81,7 @@ const Map = ({ searchResults }) => {
                 setSelectedLocation({})}}
               closeOnClick={true}
               latitude={Number(result.latitude)}
-              className='p-2'
+           
               longitude={Number(result.longitude)}
             >
               {/* <span className="italic bold">{result.shopName}</span>
@@ -99,7 +99,7 @@ const Map = ({ searchResults }) => {
                       <div>
                         <div className="flex items-center justify-between text-gray-800">
                           <p className="text-sm dark:text-gray-100">${result.price}</p>
-                          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full mt-2 bg-gray-800 flex items-center justify-center">
                            <Link href={`${result.shopSlug}/${result.slug}`} >
                             <a>
                             <ArrowRightIcon className="h-6 w-6 text-white cursor-pointer"  />
