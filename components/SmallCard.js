@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from "next/image";
-import shop from '../../newmakeshipjoy/server/models/shop';
+
 const SmallCard = ({ shopName, shopSlug,slug, img, name,address, price }) => {
 
 

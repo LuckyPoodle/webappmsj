@@ -7,9 +7,9 @@ import firebase from "../auth/initFirebase";
 import { useState, useContext, useEffect } from "react";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon, SearchIcon, UserCircleIcon } from '@heroicons/react/outline'
+import {  MenuIcon, XIcon, SearchIcon, UserCircleIcon } from '@heroicons/react/outline'
 import CartIcon from "./cartIcon";
-import User from "../../newmakeshipjoy/server/models/user";
+
 
 const navigation = [
   { name: 'About ', href: '/about', current: false },
