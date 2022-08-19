@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 
 import axios from "axios";
 import { axiosAuth } from '../../actions/axios';
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Disclosure } from '@headlessui/react'
+import {  MenuIcon, XIcon } from '@heroicons/react/outline'
 import DashboardOverview from '../../components/dashboardrelated/DashboardOverview';
 import ShopDashboardOverview from '../../components/dashboardrelated/ShopDashboardOverview';
 import OrdersDashboard from '../../components/dashboardrelated/OrdersDashboard';
