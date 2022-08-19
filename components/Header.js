@@ -131,7 +131,7 @@ function Header({ placeholder }) {
                           onKeyDown={(e) => e.key === "Enter" && search()}
                           placeholder={placeholder || "Search"}
 
-                          className=" text-xs md:text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
+                          className="w-1/2  text-xs md:text-sm text-black pl-5 placeholder-gray-400 outline-none bg-transparent"
                         />
                         <span className="p-1 mt-1">|</span>
                         {/* <input
