@@ -4,11 +4,11 @@ import firebase from "../auth/initFirebase";
 
 //if dunnid send token then use this
 export const axiosPublic = axios.create({
-  baseURL: process.env.api,
+  baseURL: process.env.api?process.env.api:'https://coral-app-ss6jg.ondigitalocean.app/api',
 });
 
 export const axiosAuth = axios.create({
-  baseURL: process.env.api,
+  baseURL: process.env.api?process.env.api:'https://coral-app-ss6jg.ondigitalocean.app/api',
 });
 
 axiosAuth.interceptors.request.use(
