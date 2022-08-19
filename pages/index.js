@@ -58,9 +58,9 @@ export default function Home({ products }) {
 
         <LargeCard
           img="https://media.publit.io/file/home_business.jpeg"
-          title="Value Creation is Everywhere"
-          description="List your own business "
-          buttonText="Start now"
+          title=""
+          description=""
+          buttonText=""
         />
       </main>
       <Footer />
@@ -70,7 +70,7 @@ export default function Home({ products }) {
 }
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const { data } = await axios.get(
     `${process.env.api}/get-all-products`
