@@ -112,7 +112,7 @@ const DashboardOverview = ({ purchasedProducts,orders,shopTitle, total, monthlyO
           <div className='flex flex-col items-center'>
             <span>{shopTitle?shopTitle:'User has no shop yet'}</span>
             <h3 className='font-bold text-center mb-5'>{totalOrdersPendingCompletion} Orders pending completion</h3>
-            <button className='bg-indigo-500 p-2 text-white w-1/4 rounded text-center'><Link href="/dashboard#orders"><a>View Shop Orders</a></Link></button>
+            {/* <button className='bg-indigo-500 p-2 text-white w-1/4 rounded text-center'><Link href="/dashboard#orders"><a>View Shop Orders</a></Link></button> */}
 
 
           </div>
@@ -123,7 +123,7 @@ const DashboardOverview = ({ purchasedProducts,orders,shopTitle, total, monthlyO
           <div className='flex flex-col items-center'>
             <span> Your Purchased Orders</span>
             <h3 className='font-bold text-center mb-5'>{orders.length} Purchased Orders</h3>
-            <button className='bg-indigo-500 p-2 text-white w-1/4 rounded text-center'><Link href="/dashboard#orders"><a>View Purchases</a></Link></button>
+            {/* <button className='bg-indigo-500 p-2 text-white w-1/4 rounded text-center'><Link href="/dashboard#orders"><a>View Purchases</a></Link></button> */}
 
 
           </div>

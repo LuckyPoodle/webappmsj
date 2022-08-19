@@ -48,12 +48,13 @@ const OrdersDashboard = ({ shopId }) => {
 
   function toggleOrderView() {
     setOrderPurchasedView(!orderPurchasedView);
-    getShopOrders()
+
   }
 
   async function getShopOrders() {
     try{
       setLoading(true)
+      console.log('hi in getShopOrders ......')
     const { data } = await axiosAuth.get(`/get-shop-orders/${shopId}`, {});
     console.log('shop orders ---');
     console.log(data)
@@ -70,6 +71,7 @@ const OrdersDashboard = ({ shopId }) => {
   async function getUserOrders() {
     try{
       setLoading(true)
+      console.log('hi in getUserOrders ......')
     const { data } = await axiosAuth.get('/get-user-orders', {});
     console.log('user orders ---');
     console.log(data)
