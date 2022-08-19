@@ -253,7 +253,7 @@ function Header({ placeholder }) {
                   }} defaultValue="" searchBoxText="Region" />
                   {/* flex-grow so can grow  */}
                   {/* hidden search icon, show only in medium screen */}
-                  <SearchIcon onClick={handleSearch} className="h-8  md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 bg-red-400 rounded-full text-white" />
+                  <SearchIcon onClick={handleSearch} className="h-8  md:inline-flex p-2 mx-auto cursor-pointer md:mx-2 rounded-full text-black" />
                 </div>
                 {navigation.map((item) => (
                   <Disclosure.Button
