@@ -288,7 +288,7 @@ export const getServerSideProps = async ({ req, res }) => {
       // res.setHeader("location", "/login");
    
       // res.end();
-      throw error;
+      throw new Error('Not authenticated');
     }
     const { data } = await axios.get(`${process.env.api}/get-shop-details-for-owner`, {
       headers: {
