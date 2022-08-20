@@ -66,6 +66,8 @@ const ProductDetails = ({ product }) => {
 
     useEffect(() => {
 
+        alert(product.ratingsTotal)
+
         setCurrentImage(product.mainImage);
         setInclusivePrice(product.price)
         var imagesList = [product.mainImage];
@@ -148,7 +150,7 @@ const ProductDetails = ({ product }) => {
                             {product.name}
                         </h1>
 
-                        <div className="py-4 border-b border-gray-200 flex items-center justify-between">
+                        <div className="py-4 border-b flex items-center justify-between">
 
                             {/* <div className='flex w-full'>
 
@@ -166,10 +168,10 @@ const ProductDetails = ({ product }) => {
                             <div className='flex w-full'>
 
                                 {product.ratingsTotal == 0 ? <div className='flex flex-row'><Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /><Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                    product.ratingsTotal == 1 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                        product.ratingsTotal == 2 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                            product.ratingsTotal == 3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                                product.ratingsTotal == 4 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />    <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span> </div> :
+                                    product.ratingsTotal >=1 && product.ratingsTotal<2?<div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                    product.ratingsTotal >=2 && product.ratingsTotal<3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                    product.ratingsTotal >=3 && product.ratingsTotal<4 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                    product.ratingsTotal >=4 && product.ratingsTotal<5 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />    <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span> </div> :
                                                     product.ratingsTotal == 5 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> : <></>
                                 }
                               
@@ -190,7 +192,7 @@ const ProductDetails = ({ product }) => {
                         <span className='text-black text-lg  '>$ {inclusivePrice}</span>
                     </div>
                     {product.deliveryAvailable ?
-                        <div className="py-4 border-b  flex items-center justify-between">
+                        <div className="py-4   flex items-center justify-between">
                             <p className="text-base leading-4 text-gray-800">Local Delivery?</p>
                             <div className="flex items-center justify-center">
 
