@@ -174,7 +174,7 @@ const ProductDetails = ({ product }) => {
                                 }
                               
 
-                                <br /> </div>
+                                </div>
                             
 
                             <Link className='leading-4' href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}&productName=${product.name}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link>
@@ -190,7 +190,7 @@ const ProductDetails = ({ product }) => {
                         <span className='text-black text-lg  '>$ {inclusivePrice}</span>
                     </div>
                     {product.deliveryAvailable ?
-                        <div className="py-4 border-b border-gray-200 flex items-center justify-between">
+                        <div className="py-4 border-b  flex items-center justify-between">
                             <p className="text-base leading-4 text-gray-800">Local Delivery?</p>
                             <div className="flex items-center justify-center">
 
