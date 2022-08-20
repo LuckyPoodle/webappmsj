@@ -265,15 +265,14 @@ function Header({ placeholder }) {
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
-                    as="a"
-                    href={item.href}
+                    
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >
-                    {item.name}
+                    <Link href={item.href}><a>{item.name}</a></Link>
                   </Disclosure.Button>
                 ))}
               </div>
