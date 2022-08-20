@@ -350,7 +350,7 @@ export async function getStaticProps(context) {
                 product: data
 
             },
-            revalidate: 600
+            revalidate: 60
         }
     } catch (e) {
         return {
