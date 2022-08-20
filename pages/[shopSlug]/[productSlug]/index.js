@@ -77,7 +77,7 @@ const ProductDetails = ({ product }) => {
         setImagesToShow(imagesList)
         if (product.ratingCount !== 0) {
             setRating(Math.round(product.ratingsTotal / product.ratingCount));
-            alert('rating is ' + Math.round(product.ratingsTotal / product.ratingCount));
+           
         }
 
 
@@ -145,7 +145,7 @@ const ProductDetails = ({ product }) => {
                 mt-2
             "
                         >
-                            {product.name}   {product.ratingsTotal}
+                            {product.name}
                         </h1>
 
                         <div className="py-4 border-b border-gray-200 flex items-center justify-between">
@@ -165,16 +165,17 @@ const ProductDetails = ({ product }) => {
 
                             <div className='flex w-full'>
 
-                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" /><Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" /></div> :
-                                    product.ratingsTotal == 1 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" /> <Image src="/blackstar.png" alt="me" width="50" height="50" /> <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
-                                        product.ratingsTotal == 2 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
-                                            product.ratingsTotal == 3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
-                                                product.ratingsTotal == 4 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />    <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
-                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" /> </div> : <></>
+                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /><Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                    product.ratingsTotal == 1 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                        product.ratingsTotal == 2 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                            product.ratingsTotal == 3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                                product.ratingsTotal == 4 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />    <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span> </div> :
+                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> : <></>
                                 }
-
+                              
 
                                 <br /> </div>
+                            
 
                             <Link className='leading-4' href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}&productName=${product.name}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link>
 
@@ -255,7 +256,7 @@ const ProductDetails = ({ product }) => {
                                 <button
                                     className="
                         cursor-pointer
-                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300
                         rounded
                     "
                                     aria-label="show or hide"
@@ -277,7 +278,7 @@ const ProductDetails = ({ product }) => {
                                 <button
                                     className="
                         cursor-pointer
-                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300
                         rounded
                     "
                                     aria-label="show or hide"
