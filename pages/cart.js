@@ -126,8 +126,7 @@ const Cart = () => {
     }
 
     useEffect(() => {
-        console.log('cart items!!!!')
-        console.log(cartItems)
+    
         let price = 0;
 
         cartItems.map((item) => {

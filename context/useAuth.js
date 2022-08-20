@@ -50,7 +50,7 @@ const AuthProvider=({children})=>{
     //make the state and dispatch available
 
     useEffect(()=>{
-        console.log('hi in useEffect authprovider, firebase is ',firebase);
+    
         const cancelAuthListener=firebase.auth().onIdTokenChanged(async (user)=>{
 
             if(user){

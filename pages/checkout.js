@@ -31,8 +31,7 @@ const Checkout = ({ }) => {
             setDeliveryCost(res.data.deliveryCost);
             setPayableByCard(res.data.cartPayableByCreditCard);
             setPayableByCash(res.data.cartPayableByCash);
-            console.log(' ORDERED BY!!!!!!!')
-            console.log(res.data.orderedBy);
+          
             if (res.data.orderedBy.deliveryAddress) {
                 setAddress(res.data.orderedBy.deliveryAddress);
                 dispatch({

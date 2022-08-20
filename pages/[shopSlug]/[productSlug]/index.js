@@ -1,7 +1,9 @@
 import { useEffect, useState, useContext } from 'react'
 import { Context } from '../../../context'
 import Link from 'next/link'
-
+import { StarIcon } from '@heroicons/react/outline'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import renderHTML from "react-render-html";
 import Header from '../../../components/Header'
 import Image from 'next/image'
@@ -38,10 +40,11 @@ const ProductDetails = ({ product }) => {
     const [imagesToShow, setImagesToShow] = useState([]);
     const [shipping, setShipping] = useState("false");
     const [inclusivePrice, setInclusivePrice] = useState(0);
+    const [rating, setRating] = useState(0)
 
     useEffect(() => {
         //to reset shipping state
- 
+
         setShipping("false")
 
     }, [router.query])
@@ -70,8 +73,12 @@ const ProductDetails = ({ product }) => {
         product.images.forEach((i) => {
             imagesList.push(i)
         });
-      
+
         setImagesToShow(imagesList)
+        if (product.ratingCount !== 0) {
+            setRating(Math.round(product.ratingsTotal / product.ratingCount));
+            alert('rating is ' + Math.round(product.ratingsTotal / product.ratingCount));
+        }
 
 
     }, []);
@@ -116,9 +123,16 @@ const ProductDetails = ({ product }) => {
                     </div>
 
                 </div>
+                <div>
+
+                </div>
                 <div className="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
                     <div className=" border-b border-gray-200 pb-6">
-                        <Link href={`/${product.shop.slug}`}><a className="text-sm leading-none text-gray-600">{product.shop.shopTitle}</a></Link>
+                        <Link href={`/${product.shop.slug}`}><a className="text-sm underline leading-none text-gray-600">{product.shop.shopTitle}</a></Link>
+
+
+
+
 
                         <h1
                             className="
@@ -131,11 +145,45 @@ const ProductDetails = ({ product }) => {
                 mt-2
             "
                         >
-                            {product.name}
+                            {product.name}   {product.ratingsTotal}
                         </h1>
-                        {/* <div className='p-4 italic'> *****   <Link href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link></div> */}
-                        {/* <span className='text-md'>qty remaining : {product.stockAvailable}</span> */}
-                        <br />
+
+                        <div className="py-4 border-b border-gray-200 flex items-center justify-between">
+
+                            {/* <div className='flex w-full'>
+
+                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><h2>hiiiiii</h2><FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
+                                    product.ratingsTotal == 1 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
+                                        product.ratingsTotal == 2 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-black' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
+                                            product.ratingsTotal == 3 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
+                                                product.ratingsTotal == 4 ? <div className='flex flex-row'>  <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />  <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-black' /> </div> :
+                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />  <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' /></div> : <></>
+                                }
+
+                           
+                                <br /> </div> */}
+
+                            <div className='flex w-full'>
+
+                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" /><Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" /></div> :
+                                    product.ratingsTotal == 1 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" /> <Image src="/blackstar.png" alt="me" width="50" height="50" /> <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
+                                        product.ratingsTotal == 2 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/blackstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
+                                            product.ratingsTotal == 3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
+                                                product.ratingsTotal == 4 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />    <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/yellowstar.png" alt="me" width="50" height="50" />   <Image src="/blackstar.png" alt="me" width="50" height="50" /> </div> :
+                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" />  <Image src="/yellowstar.png" alt="me" width="50" height="50" /> </div> : <></>
+                                }
+
+
+                                <br /> </div>
+
+                            <Link className='leading-4' href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}&productName=${product.name}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link>
+
+
+
+                        </div>
+
+
+
 
 
                         <span className='text-black text-lg  '>$ {inclusivePrice}</span>
@@ -156,7 +204,7 @@ const ProductDetails = ({ product }) => {
 
 
 
-                    {product.outOfStock!=true ?
+                    {product.outOfStock != true ?
                         <button
                             onClick={() => handlePressAddToCart(product)}
                             className="
@@ -284,37 +332,37 @@ const ProductDetails = ({ product }) => {
 
 
 export async function getStaticProps(context) {
-   try{
-    const { params } = context;
-    const { shopSlug, productSlug } = params;
-    console.log('IN GET STATIC PROPS');
-    const { data } = await axios.get(
-        `${process.env.api}/read-product/${shopSlug}/${productSlug}`
-    );
-    if (!data) {
-        return {
-          notFound: true,
+    try {
+        const { params } = context;
+        const { shopSlug, productSlug } = params;
+        console.log('IN GET STATIC PROPS');
+        const { data } = await axios.get(
+            `${process.env.api}/read-product/${shopSlug}/${productSlug}`
+        );
+        if (!data) {
+            return {
+                notFound: true,
+            }
         }
-      }
-    return {
-        props: {
-            product: data
+        return {
+            props: {
+                product: data
 
-        },
-        revalidate: 600
+            },
+            revalidate: 600
+        }
+    } catch (e) {
+        return {
+            notFound: true,
+        }
     }
-   }catch(e){
-    return {
-        notFound: true,
-      }
-   }
 }
 
 export async function getStaticPaths() {
     const { data } = await axios.get(
         `${process.env.api}/get-all-products`
     );
-   
+
     console.log('gotten back all products ===========>>>>>>>>>>');
     console.log(data)
     const paths = data.map(pdt => ({ params: { productSlug: pdt.slug, shopSlug: pdt.shopSlug } }));
