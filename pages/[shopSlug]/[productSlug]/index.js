@@ -66,8 +66,7 @@ const ProductDetails = ({ product }) => {
 
     useEffect(() => {
 
-        alert(product.ratingsTotal)
-
+       
         setCurrentImage(product.mainImage);
         setInclusivePrice(product.price)
         var imagesList = [product.mainImage];
@@ -129,7 +128,7 @@ const ProductDetails = ({ product }) => {
 
                 </div>
                 <div className="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
-                    <div className=" border-b border-gray-200 pb-6">
+                    <div className="  pb-6">
                         <Link href={`/${product.shop.slug}`}><a className="text-sm underline leading-none text-gray-600">{product.shop.shopTitle}</a></Link>
 
 
@@ -150,7 +149,7 @@ const ProductDetails = ({ product }) => {
                             {product.name}
                         </h1>
 
-                        <div className="py-4 border-b flex items-center justify-between">
+                        <div className="py-4 flex items-center justify-between">
 
                             {/* <div className='flex w-full'>
 
