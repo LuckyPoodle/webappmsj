@@ -327,9 +327,17 @@ export const getServerSideProps = async ({ req, res }) => {
     console.log("ERRROR!!!!!! ");
     console.log(err);
 
-      res.setHeader("location", "/login");
-      res.statusCode = 302;
-      res.end();
+    // res.setHeader("location", "/login");
+    // res.statusCode = 302;
+    // res.end();
+    return{
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props:{},
+    }
+  
 
   }
 };
