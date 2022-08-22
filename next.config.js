@@ -10,8 +10,7 @@ module.exports ={
     contentfulspaceid:"nq1x3bfv0pp7",
     algoliaAdminApiKey:'65ca633d589f2e767de76b207c09d5a5',
     algoliaApp:'K0O3Z1XZV4',
-    api:'http://localhost:8000/api',
-
+  
 
     NEXT_STRIPE_KEY:"pk_test_51HcYnSCzQqyN0N2r04TJVJCfdYRSYiK43EMVQQeqQFRBIk6zcOYYxWEZiKjzOJKCEjSdPCPNVdMBrKjuieAQ3vdt00AQuJjQfH"           
   },
