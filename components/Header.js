@@ -150,7 +150,7 @@ function Header({ placeholder }) {
                           }} defaultValue="" searchBoxText="Singapore" />
                         {/* flex-grow so can grow  */}
                         {/* hidden search icon, show only in medium screen */}
-                        <SearchIcon onClick={handleSearch} className="sm:h-6 sm:mt-2 sm:p-2  md:inline-flex  mx-auto cursor-pointer md:mx-2 sm:bg-red-400 rounded-full text-white" />
+                        <SearchIcon onClick={handleSearch} className="sm:h-7 sm:mt-2 sm:p-2  md:inline-flex  mx-auto cursor-pointer md:mx-2  rounded-full text-black" />
                       </div>
 
 

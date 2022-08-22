@@ -22,7 +22,7 @@ const CartIcon = () => {
                 <ShoppingBagIcon className='h-6 w-6 text-white'  />
          
                 </Link>
-                <span class='text-sm text-white'> {accumulatedCartQty} </span>
+                <span className='text-sm text-white'> {accumulatedCartQty} </span>
                </div>
     
     )

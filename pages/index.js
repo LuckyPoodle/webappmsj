@@ -34,7 +34,7 @@ export default function Home({ products }) {
         <section className='pt-10'>
           {/* <h2 className='text-2xl italic font-semibold text-black-600 pb-5'>Latest Products/Services</h2> */}
           <div
-            className="flex overflow-x-scroll pb-3 hide-scroll-bar"
+            className="flex overflow-x-scroll pb-3 hide-scroll-bar w-full"
           >
             <div
               className="flex flex-nowrap md:ml-10 ml-5 "
@@ -141,6 +141,27 @@ export default function Home({ products }) {
 
                 </div>
               </div>
+
+              <div className="inline-block px-3 ">
+                <div
+                  className="w-30 h-30 overflow-hidden rounded-lg  "
+                >
+                  <div onClick={() => {
+                    setSelectedCategory('Pet Accessories');
+
+                  }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Pet Accessories' ? 'border-b-8' : ''} `}>
+                    <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
+                      <img src="/petaccessories.png" className="h-full w-full hover:border-b-8 rounded-full overflow-hidden shadow" />
+                    </div>
+                    <p className='text-center text-xs pt-1 mb-2 text-black'>Pet Accessories</p>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+
               <div className="inline-block px-3 ">
                 <div
                   className="w-30 h-30 overflow-hidden rounded-lg  "
@@ -175,6 +196,43 @@ export default function Home({ products }) {
 
                 </div>
               </div>
+
+
+              <div className="inline-block px-3 ">
+                <div
+                  className="w-30 h-30 overflow-hidden rounded-lg  "
+                >
+                  <div onClick={() => {
+                    setSelectedCategory('Gardening');
+
+                  }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Gardening' ? 'border-b-8' : ''} `}>
+                    <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
+                      <img src="/gardening.png" className="h-full w-full hover:border-b-8 rounded-full overflow-hidden shadow" />
+                    </div>
+                    <p className='text-center text-xs pt-1 mb-2 text-black'>Gardening</p>
+                  </div>
+
+
+                </div>
+              </div>
+
+              <div className="inline-block px-3 ">
+                <div
+                  className="w-30 h-30 overflow-hidden rounded-lg  "
+                >
+                  <div onClick={() => {
+                    setSelectedCategory('Beauty');
+
+                  }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Beauty' ? 'border-b-8' : ''} `}>
+                    <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
+                      <img src="/beauty.png" className="h-full w-full hover:border-b-8 rounded-full overflow-hidden shadow" />
+                    </div>
+                    <p className='text-center text-xs pt-1 mb-2 text-black'>Beauty</p>
+                  </div>
+
+
+                </div>
+              </div>
               
 
 
@@ -194,6 +252,8 @@ export default function Home({ products }) {
                 key={pdt._id}
                 img={pdt.mainImage}
                 price={pdt.price}
+                rating={pdt.ratingsTotal}
+                ratingCount={pdt.ratingCount}
                 name={pdt.name}
                 address={pdt.shop.address}
               />

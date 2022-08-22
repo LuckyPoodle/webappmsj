@@ -1,22 +1,31 @@
 import { useEffect, useState, useContext } from 'react'
 import { Context } from '../../../context'
 import Link from 'next/link'
-import { StarIcon } from '@heroicons/react/outline'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+
 import renderHTML from "react-render-html";
 import Header from '../../../components/Header'
 import Image from 'next/image'
 import axios from "axios";
-
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { useRouter } from "next/router";
+
+
 const ProductDetails = ({ product }) => {
 
     if (!product) {
-        return <div> NIL </div>
+        return <div className='h-screen'> Loading </div>
     }
-    const [menu, setMenu] = useState(true);
-    const [menu1, setMenu1] = useState(false);
+
+
+    const [viewport, setViewport] = useState({
+        width: "100%",
+        height: "100%",
+        latitude:1.287953,
+        longitude: 103.851784,
+        zoom: 10,
+      });
+
+  
 
     const { state: { cartItems, accumulatedCartQty }, dispatch } = useContext(Context);
     const router = useRouter();
@@ -66,7 +75,7 @@ const ProductDetails = ({ product }) => {
 
     useEffect(() => {
 
-       
+
         setCurrentImage(product.mainImage);
         setInclusivePrice(product.price)
         var imagesList = [product.mainImage];
@@ -78,7 +87,7 @@ const ProductDetails = ({ product }) => {
         setImagesToShow(imagesList)
         if (product.ratingCount !== 0) {
             setRating(Math.round(product.ratingsTotal / product.ratingCount));
-           
+
         }
 
 
@@ -88,23 +97,16 @@ const ProductDetails = ({ product }) => {
 
 
 
-    const [show, setShow] = useState(false);
-    const [show2, setShow2] = useState(false);
 
     return (
-        <div>
+        <div className='h-screen'>
 
             <Header />
 
-            <div className="h-full md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
+            <div className="h-full bg-white overflow-y-scroll md:flex items-start justify-center py-12 pb-50 2xl:px-20 md:px-6 px-4">
 
 
-                {/* <div className="xl:w-2/6 h-1/2 overflow-scroll lg:w-2/5 w-80 md:block hidden">
-    {imagesToShow.map((image)=>(
-        <img className="w-full pt-3" alt="img of a girl posing" src={image} />
-    ))}
-
-</div> */}
+        
 
                 <div className='flex-col md:block hidden'>
                     <Image className="w-full" width={600} height={600} alt={product.mainImageAlt} src={currentImage} />
@@ -130,11 +132,6 @@ const ProductDetails = ({ product }) => {
                 <div className="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
                     <div className="  pb-6">
                         <Link href={`/${product.shop.slug}`}><a className="text-sm underline leading-none text-gray-600">{product.shop.shopTitle}</a></Link>
-
-
-
-
-
                         <h1
                             className="
                 lg:text-2xl
@@ -151,43 +148,27 @@ const ProductDetails = ({ product }) => {
 
                         <div className="py-4 flex items-center justify-between">
 
-                            {/* <div className='flex w-full'>
 
-                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><h2>hiiiiii</h2><FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
-                                    product.ratingsTotal == 1 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
-                                        product.ratingsTotal == 2 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-black' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
-                                            product.ratingsTotal == 3 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />  <FontAwesomeIcon icon={faStar} className='text-black' />   <FontAwesomeIcon icon={faStar} className='text-black' /></div> :
-                                                product.ratingsTotal == 4 ? <div className='flex flex-row'>  <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />  <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-black' /> </div> :
-                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' />  <FontAwesomeIcon icon={faStar} className='text-yellow-300' />   <FontAwesomeIcon icon={faStar} className='text-yellow-300' /></div> : <></>
-                                }
-
-                           
-                                <br /> </div> */}
 
                             <div className='flex w-full'>
 
-                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /><Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                    product.ratingsTotal >=1 && product.ratingsTotal<2?<div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" /> <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                    product.ratingsTotal >=2 && product.ratingsTotal<3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                    product.ratingsTotal >=3 && product.ratingsTotal<4 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
-                                    product.ratingsTotal >=4 && product.ratingsTotal<5 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />    <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <Image src="/blackstar.png" alt="me" width="30" height="30" />  <span className='mt-5'>{product.ratingCount} review(s)</span> </div> :
-                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />  <Image src="/yellowstar.png" alt="me" width="30" height="30" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> : <></>
+                                {product.ratingsTotal == 0 ? <div className='flex flex-row'><Image src="/blackstar.png" alt="me" width="20" height="20" />  <Image src="/blackstar.png" alt="me" width="20" height="20" />  <Image src="/blackstar.png" alt="me" width="20" height="20" /><Image src="/blackstar.png" alt="me" width="20" height="20" />  <Image src="/blackstar.png" alt="me" width="20" height="20" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                    product.ratingsTotal >= 1 && product.ratingsTotal < 2 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/blackstar.png" alt="me" width="20" height="20" />  <Image src="/blackstar.png" alt="me" width="20" height="20" /> <Image src="/blackstar.png" alt="me" width="20" height="20" /> <Image src="/blackstar.png" alt="me" width="20" height="20" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                        product.ratingsTotal >= 2 && product.ratingsTotal < 3 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/yellowstar.png" alt="me" width="20" height="20" />  <Image src="/blackstar.png" alt="me" width="20" height="20" />   <Image src="/blackstar.png" alt="me" width="20" height="20" />   <Image src="/blackstar.png" alt="me" width="20" height="20" />  <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                            product.ratingsTotal >= 3 && product.ratingsTotal < 4 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/blackstar.png" alt="me" width="20" height="20" />   <Image src="/blackstar.png" alt="me" width="20" height="20" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> :
+                                                product.ratingsTotal >= 4 && product.ratingsTotal < 5 ? <div className='flex flex-row'>  <Image src="/yellowstar.png" alt="me" width="20" height="20" />  <Image src="/yellowstar.png" alt="me" width="20" height="20" />    <Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/yellowstar.png" alt="me" width="20" height="20" />   <Image src="/blackstar.png" alt="me" width="20" height="20" />  <span className='mt-5'>{product.ratingCount} review(s)</span> </div> :
+                                                    product.ratingsTotal == 5 ? <div className='flex flex-row'><Image src="/yellowstar.png" alt="me" width="20" height="20" />  <Image src="/yellowstar.png" alt="me" width="20" height="20" />  <Image src="/yellowstar.png" alt="me" width="20" height="20" />  <Image src="/yellowstar.png" alt="me" width="20" height="20" />  <Image src="/yellowstar.png" alt="me" width="20" height="20" />   <span className='mt-5'>{product.ratingCount} review(s)</span></div> : <></>
                                 }
-                              
 
-                                </div>
-                            
+
+                            </div>
+
 
                             <Link className='leading-4' href={`/${product.shop.slug}/${product.slug}/reviews?product=${product._id}&productName=${product.name}`}><a className="text-sm leading-none text-gray-600">Read/Write Reviews</a></Link>
 
 
 
                         </div>
-
-
-
-
-
                         <span className='text-black text-lg  '>$ {inclusivePrice}</span>
                     </div>
                     {product.deliveryAvailable ?
@@ -202,7 +183,11 @@ const ProductDetails = ({ product }) => {
 
                                 </select>
                             </div>
+
                         </div> : <p>Pick Up Only</p>}
+
+                    <p>{product.address}</p>
+                    🔍 <a href={`https://www.google.com/maps/search/?api=1&query=${product.latitude},${product.longitude}`} target="_blank" className="text-black underline text-xs">Open Google Map</a>
 
 
 
@@ -243,13 +228,44 @@ const ProductDetails = ({ product }) => {
            
         "
                         >
-
                             Unavailable
                         </button>}
                     <div>
                         <p className="xl:pr-8 text-base lg:leading-tight leading-normal text-gray-600 mt-7">{renderHTML(product.description)}</p>
 
                     </div>
+
+                  {/* {product.latitude && product.longitude?
+                  <div className='p-5 w-500 h-500'>
+                        <ReactMapGL
+
+                            mapStyle="mapbox://styles/happyjui/cl3e2574q002r14rsrdthvi59"
+                            mapboxApiAccessToken={process.env.mapbox_key}
+                            height={500}
+                            width={500}
+                       
+                            minZoom={5}
+                            maxZoom={15}
+                        >
+                                    <Marker
+                                        latitude={Number(product.latitude)}
+                                        longitude={Number(product.longitude)}
+                                        offsetLeft={-20}
+                                        offsetTop={-10}
+                                    >
+                                        <a>
+                                            <p
+                                                role="img"
+                                                className="cursor-pointer text-2xl animate-bounce"
+                                                aria-label="push-pin"
+                                            >
+                                                📌
+
+                                            </p>
+                                        </a>
+                                    </Marker>
+                        </ReactMapGL>
+                    </div>:<div className='p1'>no location data</div>} */}
                     {/* <div>
                         <div className="border-t border-b py-4 mt-7 border-gray-200">
                             <div onClick={() => setShow(!show)} className="flex justify-between items-center cursor-pointer">
@@ -257,7 +273,7 @@ const ProductDetails = ({ product }) => {
                                 <button
                                     className="
                         cursor-pointer
-                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200
                         rounded
                     "
                                     aria-label="show or hide"
@@ -279,7 +295,7 @@ const ProductDetails = ({ product }) => {
                                 <button
                                     className="
                         cursor-pointer
-                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200
                         rounded
                     "
                                     aria-label="show or hide"

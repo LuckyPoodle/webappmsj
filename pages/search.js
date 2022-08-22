@@ -63,7 +63,7 @@ const CategoryPage = () => {
 
   useEffect(() => {
 
-    console.log(router.query.latitude == null)
+  
     if (router.query.latitude == 0 && router.query.longitude == 0 || router.query.latitude == 'null' || router.query.longitude == 'null') {
 
 
@@ -106,7 +106,7 @@ const CategoryPage = () => {
         <main className='flex flex-wrap h-screen w-full'>
           <section className='w-full h-1/2 md:h-full  md:w-1/2 lg:w-1/2 xl:w-1/3  overflow-scroll  '>
 
-            <div className=' h-screen grid grid-cols-2 '>
+            <div className=' grid grid-cols-2 gap-4  '>
               {filteredByLocationResults ? filteredByLocationResults.map((pdt) => (
                 <div onMouseEnter={() => dispatch({
                   type: "SET_CURRENT_SELECTED_PRDT_ID",
@@ -124,6 +124,8 @@ const CategoryPage = () => {
                     price={pdt.price}
                     name={pdt.name}
                     address={pdt.address}
+                    ratingCount={pdt.ratingCount}
+                    rating={pdt.ratingsTotal}
                   />
 
                 </div>
