@@ -65,6 +65,9 @@ const reducer = (state, action) => {
             return { ...state, contactNumber: action.payload }
         case 'SET_SAVE_DELIVERY_CONTACT':
             return { ...state, saveAddressContact: action.payload }
+        case "SET_LAT_LONG": {
+            return { ...state, latLong: action.payload.latLong };
+        }
         default:
             return state;
     }
@@ -81,7 +84,8 @@ const initialState = {
     currentSelectedPdtId: '',
     contactNumber: '',
     address: '',
-    saveAddressContact: false
+    saveAddressContact: false,
+    latLong: "",
 
 }
 

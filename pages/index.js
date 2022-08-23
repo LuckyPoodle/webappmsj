@@ -1,19 +1,58 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SmallCard from '../components/SmallCard'
 import Footer from "../components/Footer";
-import MediumCard from '../components/MediumCard';
+import toast from 'react-hot-toast';
 import LargeCard from '../components/LargeCard';
 import Header from '../components/Header';
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGifts } from '@fortawesome/free-solid-svg-icons'
-import Hero from '../components/Hero';
+import { useRouter } from "next/router";
+
 import Banner from '../components/banner';
+
+
+
 export default function Home({ products }) {
+  const router = useRouter();
+
+
+ 
   const [selectedCategory, setSelectedCategory] = useState('Everything');
+  const notify = (message, success) => toast(message, {
+    style: {
+      border: success ? '1px solid green' : '1px solid red',
+    },
+  });
+  
+
+  const handleBannerClick=()=>{
+    console.log('hi in handlebannerclick')
+    if (navigator.geolocation) {
+
+      if (!navigator.geolocation) {
+        notify('Unable to retrieve your location',false)
+      } else {
+        console.log('Locating...');
+        navigator.geolocation.getCurrentPosition((position) => {
+          
+          console.log(position.coords.latitude);
+          console.log(position.coords.longitude);
+          router.push(`/search?item=${''}&longitude=${position.coords.longitude}&latitude=${position.coords.latitude}&address=${position.coords.longitude+'-'+position.coords.latitude}`)
+
+        }, () => {
+          notify('Unable to retrieve your location',false)
+        });
+      }
+     
+    } else {
+      notify('Unable to retrieve your location',false)
+    }
+
+  }
+
+
 
 
 
@@ -28,7 +67,8 @@ export default function Home({ products }) {
       </Head>
       <Header />
       {/* <Hero /> */}
-      <Banner />
+      <Banner handleClick={handleBannerClick}  />
+     
 
       <main className='max-w-7xl mx-auto px-8 sm:px-16'>
         <section className='pt-10'>
