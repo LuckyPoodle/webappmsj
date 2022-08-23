@@ -79,6 +79,15 @@ export default function Home({ products }) {
 
   }
 
+  const handleViewMoreClick=(category)=>{
+    if(category==='Everything'){
+      router.push(`/search?item=${''}&longitude=${''}&latitude=${''}&address=${''}`)
+ 
+    }else{
+      router.push(`/search?item=${category}&longitude=${''}&latitude=${''}&address=${''}`)
+    }
+  }
+
   
 
 
@@ -311,8 +320,8 @@ export default function Home({ products }) {
           
 
           {/* on mobile grid has 1 column, sm screen 2 col, and so on */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {obtainedProducts.length>0?obtainedProducts?.map((pdt) => (
+         {obtainedProducts.length>0? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {obtainedProducts?.map((pdt) => (
 
               <SmallCard
                 shopName={pdt.shop.shopTitle}
@@ -326,10 +335,11 @@ export default function Home({ products }) {
                 name={pdt.name}
                 address={pdt.shop.address}
               />
-            )):<div className='p-10'><span className='font-bold text-lg text-black'>Nothing in this category yet... </span></div>}
+            ))} 
+            {obtainedProducts.length>=7?<div className='p-20'><span onClick={()=>handleViewMoreClick(selectedCategory)} className='italic font-bold text-black cursor-pointer'>...View More</span></div>:<></>}
 
             {/* <button className='place-content-end' >See More...</button> */}
-          </div>
+          </div>:<div className='p-10'><span className='font-bold text-lg text-black'>Nothing in this category yet... </span></div>}
 
         </section>
 
