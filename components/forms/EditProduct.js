@@ -95,15 +95,15 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
               className='text-gray-900 '
             >
               <option value={'Food'}  >Food</option>
-              <option value={"Beverage"}  >Beverage</option>
+              <option value={"Drink"}  >Drink</option>
               <option value={"Crafts"}  >Crafts</option>
+              <option value={"Services"}  >Services</option>
               <option value={"Tutoring"}  >Tutoring</option>
               <option value={"Pet Food"}  >Pet Food</option>
               <option value={"Pet Accessories"}  >Pet Accessories</option>
               <option value={"Pet Services"}  >Pet Services</option>
-              <option value={"Delivery"}  >Delivery</option>
-              <option value={"Other Services"}  >Other Services</option>
-              <option value={"Other Products"}  >Other Products</option>
+              <option value={"Gardening"}  >Gardening</option>
+              <option value={"Beauty"}  >Beauty</option>
             </select>
           </div>
           <br />

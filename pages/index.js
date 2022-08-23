@@ -18,8 +18,35 @@ export default function Home({ products }) {
   const router = useRouter();
 
 
+  useEffect(()=>{
+    setObtainedProducts(products);
+  },[])
+
+
  
   const [selectedCategory, setSelectedCategory] = useState('Everything');
+  const [obtainedProducts,setObtainedProducts]=useState([]);
+
+
+  const handleCategoryClick=(category)=>{
+    setSelectedCategory(category);
+    if (category==='Everything'){
+      setObtainedProducts(products)
+
+    }else{
+      let temp=[]
+      products.map((pdt)=>{
+        if (pdt.category===category){
+          temp.push(pdt)
+        }
+      });
+      setObtainedProducts(temp)
+    }
+
+  }
+
+
+
   const notify = (message, success) => toast(message, {
     style: {
       border: success ? '1px solid green' : '1px solid red',
@@ -51,6 +78,8 @@ export default function Home({ products }) {
     }
 
   }
+
+  
 
 
 
@@ -84,7 +113,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Everything');
+                    handleCategoryClick('Everything');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Everything' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -101,7 +130,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Services');
+                    handleCategoryClick('Services');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Services' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0 content-center">
@@ -118,7 +147,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Food');
+                    handleCategoryClick('Food');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Food' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0 content-center">
@@ -135,7 +164,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Drink');
+                    handleCategoryClick('Drink');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Drink' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -152,7 +181,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Pet Food');
+                    handleCategoryClick('Pet Food');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Pet Food' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -169,13 +198,13 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Pet Service');
+                    handleCategoryClick('Pet Services');
 
-                  }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Pet Service' ? 'border-b-8' : ''} `}>
+                  }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Pet Services' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
                       <img src="/petservice-2.png" className="h-full w-full hover:border-b-8 rounded-full overflow-hidden shadow" />
                     </div>
-                    <p className='text-center text-xs pt-1 mb-2 text-black'>Pet Service</p>
+                    <p className='text-center text-xs pt-1 mb-2 text-black'>Pet Services</p>
                   </div>
 
 
@@ -187,7 +216,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Pet Accessories');
+                    handleCategoryClick('Pet Accessories');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Pet Accessories' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -207,7 +236,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Crafts');
+                    handleCategoryClick('Crafts');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Crafts' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0 content-center">
@@ -224,7 +253,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Tutoring');
+                    handleCategoryClick('Tutoring');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Tutoring' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -243,7 +272,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Gardening');
+                    handleCategoryClick('Gardening');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Gardening' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -261,7 +290,7 @@ export default function Home({ products }) {
                   className="w-30 h-30 overflow-hidden rounded-lg  "
                 >
                   <div onClick={() => {
-                    setSelectedCategory('Beauty');
+                    handleCategoryClick('Beauty');
 
                   }} className={`w-full h-full flex flex-col justify-center  ${selectedCategory === 'Beauty' ? 'border-b-8' : ''} `}>
                     <div className="h-20 w-20 mb-4 lg:mb-0  content-center">
@@ -283,7 +312,7 @@ export default function Home({ products }) {
 
           {/* on mobile grid has 1 column, sm screen 2 col, and so on */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products?.map((pdt) => (
+            {obtainedProducts.length>0?obtainedProducts?.map((pdt) => (
 
               <SmallCard
                 shopName={pdt.shop.shopTitle}
@@ -297,7 +326,7 @@ export default function Home({ products }) {
                 name={pdt.name}
                 address={pdt.shop.address}
               />
-            ))}
+            )):<div className='p-10'><span className='font-bold text-lg text-black'>Nothing in this category yet... </span></div>}
 
             {/* <button className='place-content-end' >See More...</button> */}
           </div>
