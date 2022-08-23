@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/Header';
 import { PhoneIcon,MailIcon } from '@heroicons/react/outline'
 import axios from "axios";
-import ProductCard from "../../components/ProductCard";
+import SmallCard from "../../components/SmallCard";
 import Link from 'next/link'
 const ShopFront = ({ shop, products }) => {
 
@@ -38,18 +38,38 @@ const ShopFront = ({ shop, products }) => {
             <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkThree}</a>
             <a className='lg:w-2/3 mx-auto pt-1 leading-relaxed text-base'>{shop.siteLinkFour}</a>
 
-            <div class="flex flex-wrap m-10 ">
+            {/* <div class="flex flex-wrap m-10 ">
             {products.map((pdt) => (
               <Link href={`/${shop.slug}/${pdt.slug}`}>
                 <a>
                   <ProductCard product={pdt} />
                 </a>
               </Link>
+            ))} */}
+
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {products?.map((pdt) => (
+
+              <SmallCard
+                shopName={pdt.shop.shopTitle}
+                shopSlug={pdt.shop.slug}
+                slug={pdt.slug}
+                key={pdt._id}
+                img={pdt.mainImage}
+                price={pdt.price}
+                rating={pdt.ratingsTotal}
+                ratingCount={pdt.ratingCount}
+                name={pdt.name}
+                address={pdt.shop.address}
+              />
             ))}
 
-
-
+            {/* <button className='place-content-end' >See More...</button> */}
           </div>
+
+
+
+      
           </div>
           
         </div>
