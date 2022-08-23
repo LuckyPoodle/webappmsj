@@ -9,6 +9,7 @@
 @layer base {
   body {
     @apply bg-white;
+    box-sizing: border-box;
 
   }
 

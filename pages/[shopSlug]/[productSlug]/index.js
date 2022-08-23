@@ -184,11 +184,13 @@ const ProductDetails = ({ product }) => {
                                 </select>
                             </div>
 
-                        </div> : <p>Pick Up Only</p>}
+                        </div> : <p className='text-sm font-bold pb-2'>Pick Up Only</p>}
 
-                    <p>{product.address}</p>
+                      <div className='mb-10'>
+                      <span className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 p-2 rounded dark:bg-blue-200 dark:text-blue-800 ">{product.address}</span>
                     🔍 <a href={`https://www.google.com/maps/search/?api=1&query=${product.latitude},${product.longitude}`} target="_blank" className="text-black underline text-xs">Open Google Map</a>
 
+                      </div>
 
 
                     {product.outOfStock != true ?
