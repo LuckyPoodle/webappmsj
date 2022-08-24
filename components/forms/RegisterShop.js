@@ -336,7 +336,7 @@ const RegisterShopForm = ({
                 <label htmlFor="shop-delivery-pickup" className="block text-md font-bold text-black">
                 Additional Delivery and Pickup Info
                     </label>
-                    <p className="italic text-xs"> E.g Will use Singpost Registered Mail / Will meet at lobby for pickup/ Call xxxx-xxxx to arange delivery</p>
+                    <p className="text-gray-500 italic text-xs"> E.g Will use Singpost Registered Mail / Will meet at lobby for pickup/ Call xxxx-xxxx to arange delivery</p>
 
                 <div >
                   <textarea
@@ -354,7 +354,7 @@ const RegisterShopForm = ({
                 <label htmlFor="shop-name" className="block text-md font-bold text-black">
                       Shop External Links
                     </label>
-                    <span className='text-gray-600 text-xs'>E.g your personal blog or youtube channel </span>
+                    <span className='text-gray-500 italic text-xs'>E.g your personal blog or youtube channel </span>
                   <div class="grid grid-cols-2 gap-2">
                     <div>
                       <h5 className="block text-sm font-bold text-black">External URL Link 1 *</h5>
