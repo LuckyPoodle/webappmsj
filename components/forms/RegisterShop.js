@@ -42,7 +42,7 @@ const RegisterShopForm = ({
     bankName: "",
     deliveryPickUpOption: "Delivery and Pickup Available",
     deliveryPickUpInfo: "",
-    deliveryFee:0
+    deliveryFee: 0
 
 
   });
@@ -125,17 +125,17 @@ const RegisterShopForm = ({
       console.log('back from create shop')
       alert(JSON.stringify(data));
 
-      if (data.created==false){
+      if (data.created == false) {
         notify(data.message, false)
-      }else{
+      } else {
         notify('Created. Please refresh page', true)
       }
 
- 
 
-  
+
+
     } catch (err) {
-   
+
       console.log(err)
       notify('Something went wrong', false)
     }
@@ -155,7 +155,7 @@ const RegisterShopForm = ({
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900 p-5">Enter your shop details</h3>
               <p className="mt-1 text-md text-gray-600">
-                
+
               </p>
             </div>
           </div>
@@ -165,11 +165,11 @@ const RegisterShopForm = ({
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
-                    <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
+                    <label htmlFor="shop-name" className="block text-md font-bold text-black">
                       Shop Name
                     </label>
-                    <p>* Please choose wisely. Name change is bad for SEO.  </p>
-                    <p className="italic">Names which are vulgar or in violation of copyright will be removed </p>
+                    <span className='text-gray-600 text-xs'>Choose your shop name carefully. Subsequent name change is bad for SEO. </span>
+                    <p className='text-gray-500 italic text-xs'> No vulgar names or names that violate copyright</p>
                     <div className="mt-1 flex rounded-md shadow-sm">
 
                       <input
@@ -178,7 +178,7 @@ const RegisterShopForm = ({
                         onChange={handleChange}
                         id="shopName"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g Cheerful Donuts"
+
                       />
                     </div>
                   </div>
@@ -186,7 +186,7 @@ const RegisterShopForm = ({
 
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
-                    <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
+                    <label htmlFor="shop-email" className="block text-md font-bold text-black">
                       Shop Contact Email
                     </label>
 
@@ -198,16 +198,17 @@ const RegisterShopForm = ({
                         onChange={handleChange}
                         id="shopContactEmail"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g example@example.com"
+
                       />
                     </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
-                    <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
+                  <label htmlFor="shop-contact" className="block text-md font-bold text-black">
                       Shop Contact Number
                     </label>
+         
 
                     <div className="mt-1 flex rounded-md shadow-sm">
 
@@ -224,7 +225,7 @@ const RegisterShopForm = ({
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
-                    <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
+                    <label htmlFor="shop-bank-number" className="block text-md font-bold text-black">
                       Bank Account Number
                     </label>
 
@@ -236,14 +237,14 @@ const RegisterShopForm = ({
                         onChange={handleChange}
                         id="bankAccountNumber"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g xxxx-xxxx-xxxx"
+
                       />
                     </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
-                    <label htmlFor="company-website" className="block text-md font-medium text-gray-700">
+                    <label htmlFor="bank-name" className="block text-md font-bold text-black">
                       Bank Name
                     </label>
 
@@ -255,15 +256,15 @@ const RegisterShopForm = ({
                         onChange={handleChange}
                         id="bankName"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                        placeholder="E.g ABC Bank"
+
                       />
                     </div>
                   </div>
                 </div>
 
                 <div >
-                  <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                    Description
+                  <label htmlFor="shop-descriptiom" className="block text-md font-bold text-black">
+                    Shop Description
                   </label>
                   <div className="mt-1">
                     <textarea
@@ -272,15 +273,15 @@ const RegisterShopForm = ({
                       rows={3}
                       onChange={handleChange}
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                      placeholder="E.g I am passionate about baking healthy yet mouth-watering donuts. "
+
                       defaultValue={''}
                     />
                   </div>
 
 
-                  <div>
-                    <label htmlFor="Location" className="block pt-2 text-md font-medium text-gray-700">
-                      Select Your Shop Location
+                  <div className="pt-3">
+                    <label htmlFor="shop-location" className="block text-md font-bold text-black">
+                      Select your shop location
                     </label>
                     <div className="mt-1 border">
                       <SearchBox className='z-50' onSelectAddress={(address, latitude, longitude) => {
@@ -296,8 +297,8 @@ const RegisterShopForm = ({
                 </div>
 
                 <div>
-                  <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                    Delivery and Pickup Option for your shop
+                  <label htmlFor="shop-delivery-pickup" className="block text-md font-bold text-black">
+                    Delivery and Pickup Option
                   </label>
                   <select
                     style={{ width: "100%" }}
@@ -316,8 +317,8 @@ const RegisterShopForm = ({
 
                   </select>
                 </div>
-                <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                  Delivery Fee (if Delivery is provided)
+                <label htmlFor="shop-delivery-pickup" className="block text-md font-bold text-black">
+                  Delivery Fee (If Delivery Option Available)
                 </label>
 
                 <div >
@@ -325,16 +326,17 @@ const RegisterShopForm = ({
                     type="number"
                     name="deliveryFee"
                     min={0}
-                    className="w-full text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                    className="w-1/4 text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                     placeholder="Delivery Price"
                     value={values.deliveryFee}
                     onChange={handleChange}
                   />
                 </div>
 
-                <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                  Additional Delivery / Pickup Information.
-                </label>
+                <label htmlFor="shop-delivery-pickup" className="block text-md font-bold text-black">
+                Additional Delivery and Pickup Info
+                    </label>
+                    <p className="italic text-xs"> E.g Will use Singpost Registered Mail / Will meet at lobby for pickup/ Call xxxx-xxxx to arange delivery</p>
 
                 <div >
                   <textarea
@@ -343,17 +345,19 @@ const RegisterShopForm = ({
                     rows={3}
                     onChange={handleChange}
                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-md border border-gray-300 rounded-md"
-                    placeholder="E.g Will use Singpost Registered Mail / Will meet at lobby for pickup/ Call xxxx-xxxx to arange delivery "
+
                     defaultValue={''}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-md font-medium text-gray-700">External Links</label>
-                  <p>E,g your youtube channel</p>
+                <label htmlFor="shop-name" className="block text-md font-bold text-black">
+                      Shop External Links
+                    </label>
+                    <span className='text-gray-600 text-xs'>E.g your personal blog or youtube channel </span>
                   <div class="grid grid-cols-2 gap-2">
                     <div>
-                      <h5>External URL Link 1 *</h5>
+                      <h5 className="block text-sm font-bold text-black">External URL Link 1 *</h5>
 
                       <input
                         type="text"
@@ -365,7 +369,7 @@ const RegisterShopForm = ({
                     </div>
 
                     <div>
-                      <h5>External URL Link 2 *</h5>
+                    <h5 className="block text-sm font-bold text-black">External URL Link 2 *</h5>
 
                       <input
                         type="text"
@@ -381,7 +385,7 @@ const RegisterShopForm = ({
                   </div>
                   <div class="grid grid-cols-2 gap-2">
                     <div>
-                      <h5>External URL Link 3 *</h5>
+                    <h5 className="block text-sm font-bold text-black">External URL Link 3 *</h5>
 
                       <input
                         type="text"
@@ -393,7 +397,7 @@ const RegisterShopForm = ({
                     </div>
 
                     <div>
-                      <h5>External URL Link 4 *</h5>
+                    <h5 className="block text-sm font-bold text-black">External URL Link 4 *</h5>
 
                       <input
                         type="text"
@@ -413,7 +417,7 @@ const RegisterShopForm = ({
                 </div>
 
                 <div>
-                  <label className="block text-md font-medium text-gray-700">Shop Profile Image</label>
+                  <label className="block text-md font-bold text-black">Shop Profile Image</label>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block h-16 w-16 rounded-full overflow-hidden bg-gray-100">
                       {preview ? <div className="row">

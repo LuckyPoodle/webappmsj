@@ -49,12 +49,14 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
         <form onSubmit={handleSubmit} className='p-10'>
           <div className='container'>
             <h5 className='font-bold text-black'>Title</h5>
+       
+            <p className='text-gray-900 italic text-xs'> E.g Strawberry Cake / Dogwalking 1 hour</p>
             <input
               type="text"
               required
               name="name"
               className="w-full  text-gray-900  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-              placeholder="Product Title - e.g Strawberry Cake / Dogwalking 1 hour"
+       
               value={productValues.name ?? ''}
               onChange={handleChange}
             />
@@ -63,7 +65,10 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
           <br />
         
         <div className='container'>
-          <ReactQuill modules={QuillModules} formats={QuillFormats} value={description} placeholder={"Describe"} onChange={handleDescription} />
+        <h5 className='font-bold text-black'>Description</h5>
+       
+       <p className='text-gray-900 italic text-xs'> Describe your product/service in details</p>
+          <ReactQuill modules={QuillModules} formats={QuillFormats} value={description} onChange={handleDescription} />
         </div>
 
 
@@ -85,14 +90,14 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
           <div className='container'>
             <h5 className='font-bold text-black'>Select Product Type</h5>
             <select
-              style={{ width: "100%" }}
+              style={{ width: "30%" }}
               size="large"
               required
               value={productValues.category ?? 'Food'}
               name="category"
               defaultValue={'Food'}
               onChange={handleChange}
-              className='text-gray-900 '
+              className='text-gray-900 border-2'
             >
               <option value={'Food'}  >Food</option>
               <option value={"Drink"}  >Drink</option>
@@ -113,7 +118,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
               type="number"
               name="price"
               required
-              className="w-full text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+              className="w-1/4 text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
               placeholder="Product Price"
               value={productValues.price ?? 0}
               min={0}
@@ -189,12 +194,13 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
 
           <div className='container'>
             <h5 className='font-bold text-black'>Main Product Alt Text</h5>
-            <span>Describe your main product image. This is useful for SEO</span>
+            <span className='text-gray-900'>Describe your main product image. This is useful for SEO</span>
+            <p className='text-gray-900 italic text-xs'> E.g Picture of a freshly baked strawberry cake</p>
             <input
               type="text"
               name="mainImageAlt"
-              className="w-full text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-              placeholder="Picture of a freshly baked strawberry cake"
+              className="w-full text-gray-900 shadow-sm placeholder focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+           
               value={productValues.mainImageAlt}
               onChange={handleChange}
             />
@@ -231,7 +237,7 @@ const EditProductForm = ({ isEditing, cancelButtonRef, exitEditProduct, handleSu
 
 
 
-          <div className=''>
+          <div className='pb-10'>
             <h5 className='font-bold py-4 text-black'>Upload Other Product Images (Optional)</h5>
             {loading ? <span>Uploading</span> : <label className="ml-5 p-6  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Upload Images
