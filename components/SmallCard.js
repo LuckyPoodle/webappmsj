@@ -20,7 +20,7 @@ const SmallCard = ({ shopName, shopSlug, slug, img, name, address, rating, ratin
     //   </div>
     //   </Link>
 
-    <div className='h-400 w-400'>
+    <div className='h-400 w-400 m-4'>
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div className='flex justify-center'>
           <div className=''>
