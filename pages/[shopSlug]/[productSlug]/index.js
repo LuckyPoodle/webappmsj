@@ -103,14 +103,14 @@ const ProductDetails = ({ product }) => {
 
             <Header />
 
-            <div className="h-full bg-white overflow-y-scroll md:flex items-start justify-center py-12 pb-50 2xl:px-20 md:px-6 px-4">
+            <div className="h-full bg-white overflow-y-scroll hide-scroll-bar md:flex items-start justify-center py-12 pb-50 2xl:px-20 md:px-6 px-4">
 
 
         
 
                 <div className='flex-col md:block hidden'>
                     <Image className="w-full" width={600} height={600} alt={product.mainImageAlt} src={currentImage} />
-                    <div className="flex space-x-3 overflow-scroll  p-3 -ml-3">
+                    <div className="flex space-x-3 overflow-scroll hide-scroll-bar p-3 -ml-3">
                         {imagesToShow?.map((image) => (
                             <img alt={product.mainImageAlt} onClick={() => setCurrentImage(image)} className="md:w-48 md:h-48 w-15 h-15" src={image} />
                         ))}
