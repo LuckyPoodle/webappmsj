@@ -339,7 +339,7 @@ export default function Home({ products }) {
             {obtainedProducts.length>=7?<div className='p-20'><span onClick={()=>handleViewMoreClick(selectedCategory)} className='italic font-bold text-black cursor-pointer'>...View More</span></div>:<></>}
 
             {/* <button className='place-content-end' >See More...</button> */}
-          </div>:<div className='p-10'><span className='font-bold text-lg text-black'>Nothing in this category yet... </span></div>}
+          </div>:<div className='h-400 w-400'><span className='font-bold text-lg text-black p-10'>Nothing in this category yet... </span></div>}
 
         </section>
 
