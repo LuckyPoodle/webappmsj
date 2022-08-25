@@ -4,11 +4,17 @@ import { axiosAuth } from '../actions/axios';
 import { AuthContext } from "../context/useAuth";
 import { Context } from '../context'
 import { useRouter } from "next/router";
-
+import toast from 'react-hot-toast';
 
 const Cart = () => {
 
     const router = useRouter();
+    const notify = (message, success) => toast(message, {
+        style: {
+          border: success ? '1px solid green' : '1px solid red',
+        },
+      });
+    
 
     const { state: { cartItems }, dispatch } = useContext(Context);
     const { state: { authenticated, user }, } = useContext(AuthContext);
@@ -42,14 +48,12 @@ const Cart = () => {
                       }
                 }
                 
-                console.log('templist now ');
-                console.log(tempList)
+             
             }
 
 
         });
-        console.log('THE LIST OF DELIVERYOBJECS');
-        console.log(tempList)
+      
         setShopsInvolvedWithDelivery(tempList);
         getTotalShippingFee(tempList)
 
@@ -86,8 +90,7 @@ const Cart = () => {
 
 
         })
-        console.log('TOTAL SHIPPING FEE!!!!');
-        console.log(price)
+        
 
 
         setTotalDeliveryPrice(price);
@@ -97,24 +100,21 @@ const Cart = () => {
   
 
     const saveCartToDB = async () => {
-        console.log(totalPrice)
+        if (cartItems.length==0){
+            notify('Nothing to check out', false);
+            return;
+        }
         let totalCostToPay=totalPrice+totalDeliveryPrice;
         let deliveryCost=totalDeliveryPrice;
         if (!authenticated || user == null) {
-            console.log('LOGIN FIRST')
+  
             router.push('/login')
         } else {
-            console.log('SEND CART TO SERVER')
-            console.log(cartPayableByCreditCard);
-            console.log(cartPayableByCash)
-            console.log('CART ITEMS ==================>');
-            console.log(cartItems)
+       
             axiosAuth.post(`/cart`, { cartItems,totalCostToPay ,deliveryCost , cartPayableByCash,cartPayableByCreditCard,delivery} ).then((res) => {
-                console.log('RESPONSE BACK FOR SAVING CART');
-                console.log(res.data)
-
+          
                 if (res.data.ok) {
-                    console.log('ok is true!!!')
+                
                     router.push("/checkout");
 
                 }
@@ -148,10 +148,7 @@ const Cart = () => {
         setTotalPrice(price);
         for (var i in shopsInvolvedWithDelivery) {
             if (shopsInvolvedWithDelivery[i].shopName == product.shopName && shopsInvolvedWithDelivery[i].name==product.name) {
-                console.log('============================')
-                console.log(shopsInvolvedWithDelivery[i]);
-                console.log(shopsInvolvedWithDelivery[i].quantity)
-                console.log('============================')
+         
                 if (shopsInvolvedWithDelivery[i].quantity-1==0){
                     shopsInvolvedWithDelivery.pop(i);
                 }else{
@@ -239,7 +236,7 @@ const Cart = () => {
                                         <p className="text-2xl leading-normal text-gray-800">Total</p>
                                         <p className="text-2xl font-bold leading-normal text-right text-gray-800">${totalPrice + totalDeliveryPrice}</p>
                                     </div>
-                                    <button disabled={cartItems.length==0} onClick={saveCartToDB} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                    <button onClick={saveCartToDB} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                         Checkout
                                     </button>
                                 </div>

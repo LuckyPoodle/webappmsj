@@ -186,7 +186,7 @@ const Checkout = ({ }) => {
                             </div>
 
                             <div className="p-8 bg-white flex flex-col lg:w-full xl:w-3/5">
-                                {payableByCard > 0 ? <button className="border border-transparent  bg-white text-white flex flex-row justify-center items-center space-x-2 py-4 rounded w-full">
+                                {payableByCard > 0 ? <button className="border border-transparent  bg-gray-900 text-white flex flex-row justify-center items-center space-x-2 py-4 rounded w-full">
 
                                     <div>
                                         <p className="text-base leading-4">Cash Payment Not Available For Delivery Order</p>
@@ -202,7 +202,7 @@ const Checkout = ({ }) => {
 
                                 <div className="flex flex-row justify-center items-center mt-6">
                                     <hr className="border w-full" />
-                                    <p className="flex flex-shrink-0 px-4 text-base leading-4 text-gray-600">or pay with card</p>
+                                    <p className="flex flex-shrink-0 px-4 text-base leading-4 text-gray-600">pay with card</p>
                                     <hr className="border w-full" />
                                 </div>
 

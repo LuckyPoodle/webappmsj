@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
+
 import { useEffect, useState } from 'react'
 import SmallCard from '../components/SmallCard'
 import Footer from "../components/Footer";
@@ -66,17 +65,16 @@ export default function Home({ products }) {
 
 
   const handleBannerClick = () => {
-    console.log('hi in handlebannerclick')
+
     if (navigator.geolocation) {
 
       if (!navigator.geolocation) {
         notify('Unable to retrieve your location', false)
       } else {
-        console.log('Locating...');
+
         navigator.geolocation.getCurrentPosition((position) => {
 
-          console.log(position.coords.latitude);
-          console.log(position.coords.longitude);
+      
           router.push(`/search?item=${''}&longitude=${position.coords.longitude}&latitude=${position.coords.latitude}&address=${position.coords.longitude + '-' + position.coords.latitude}`)
 
         }, () => {
