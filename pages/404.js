@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import Header from '../components/Header'
-  ;
+import Header from '../components/Header';
 export default function Custom404() {
   return <div className='container h-screen '>
     <Header />

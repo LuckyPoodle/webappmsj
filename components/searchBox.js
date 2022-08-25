@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import usePlacesAutocomplete,{getGeocode,getLatLng} from 'use-places-autocomplete';
-import { useGoogleMapsScript, Libraries } from 'use-google-maps-script';
-import {Combobox,ComboboxInput,ComboboxPopover,ComboboxList,ComboboxOption} from "@reach/combobox"
+
+import {Combobox,ComboboxInput,ComboboxPopover,ComboboxOption} from "@reach/combobox"
 import "@reach/combobox/styles.css"
 
 import { Loader } from '@googlemaps/js-api-loader';
@@ -34,7 +34,7 @@ const SearchBox = ({onSelectAddress,defaultValue,searchBoxText}) => {
 
   
   return (
-   loaded? <ReadySearchBox onSelectAddress={onSelectAddress} defaultValue={defaultValue } searchBoxText={searchBoxText}/>:<h1>loading</h1>
+   loaded? <ReadySearchBox onSelectAddress={onSelectAddress} defaultValue={defaultValue } searchBoxText={searchBoxText}/>:<span className='text-xs text-gray-600'>loading</span>
   )
 
 
