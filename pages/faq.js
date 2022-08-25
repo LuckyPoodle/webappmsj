@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 
 const FAQ = () => {
     const [show, setShow] = useState(false);
@@ -184,7 +184,7 @@ const FAQ = () => {
 
             </div>
 
-            <Footer />
+
         </div>
 
 
