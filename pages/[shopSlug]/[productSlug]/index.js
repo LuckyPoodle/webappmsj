@@ -6,7 +6,7 @@ import renderHTML from "react-render-html";
 import Header from '../../../components/Header'
 import Image from 'next/image'
 import axios from "axios";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+
 import { useRouter } from "next/router";
 
 
