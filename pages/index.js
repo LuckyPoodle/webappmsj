@@ -109,7 +109,7 @@ export default function Home({ products }) {
 
     <div>
       <Head>
-        <title>Makeshipjoy</title>
+        <title>SMALLSHOPS</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
