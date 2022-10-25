@@ -56,7 +56,7 @@ function Hero () {
           <a href={`#${i+1}`} className="btn btn-circle">❯</a>
         </div>
       </div> 
-    }):<h1>hi!!!!!!!!!!!!!!!!!!!!!!!!</h1>}
+    }):<h1>hi!!!!</h1>}
     
      </div>
 

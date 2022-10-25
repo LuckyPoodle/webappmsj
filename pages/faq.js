@@ -96,7 +96,7 @@ const FAQ = () => {
                                         className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                     >
                                         <p className="py-2 text-justify text-gray-400">
-                                            Yes it is free to use. MakeShipJoy only extract 6% fee from Card payment to cope with transaction fees. Payment from cards will be distributed to your bank account by 30 Working Days after payment is finalised.
+                                            Yes it is free to use. SMALLSHOPS only extract 6% fee from Card payment to cope with transaction fees. Payment from cards will be distributed to your bank account by 30 Working Days after payment is finalised.
                                         </p>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ const FAQ = () => {
                                         className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                     >
                                         <p className="py-2 text-justify text-gray-400">
-                                            MakeShipJoy is not responsible for the quality of the product/service rendered. However, if a product/service is found to be deceitful or harmful, it will be delisted.
+                                            SMALLSHOPS is not responsible for the quality of the product/service rendered. However, if a product/service is found to be deceitful or harmful, it will be delisted.
                                             The aim of this platform is to make it easy for residents to support their nearby micro/budding home-businesses, so if a product/service is lacking in quality, your constructive feedback will be much appreciated by the seller(s)
                                         </p>
                                     </div>
@@ -170,7 +170,7 @@ const FAQ = () => {
                                         className="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
                                     >
                                         <p className="py-2 text-justify text-gray-400">
-                                            For payment made via cash, refund has to be given out by the sellers themselves. For card payment, MakeShipJoy will provide the refund if requested by the seller you are seeking the refund from.
+                                            For payment made via cash, refund has to be given out by the sellers themselves. For card payment, SMALLSHOPS will provide the refund if requested by the seller you are seeking the refund from.
                                         </p>
                                     </div>
                                 </div>

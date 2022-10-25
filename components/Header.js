@@ -90,13 +90,13 @@ function Header({ placeholder }) {
                     <img
                       onClick={() => router.push('/')}
                       className="block lg:hidden h-8 w-auto"
-                      src="https://res.cloudinary.com/delhozzsh/image/upload/v1648724247/makeshipjoy_1_wecqeg.png"
+                      src="https://res.cloudinary.com/delhozzsh/image/upload/v1666667256/logo_transparent_wpvjm4.png"
                       alt="Makeshipjoy"
                     />
                     <img
                       onClick={() => router.push('/')}
                       className="hidden lg:block h-8 w-auto"
-                      src="https://res.cloudinary.com/delhozzsh/image/upload/v1648724247/makeshipjoy_1_wecqeg.png"
+                      src="https://res.cloudinary.com/delhozzsh/image/upload/v1666667256/logo_transparent_wpvjm4.png"
                       alt="Makeshipjoy"
                     />
                   </div>
