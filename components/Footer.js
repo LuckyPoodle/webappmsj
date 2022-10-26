@@ -14,7 +14,7 @@ function Footer() {
       <div className="space-y-4 text-xs text-gray-800">
         <h5 className="font-bold">Our Aim</h5>
         <div className="container w-22 ">
-        <p>Makeshipjoy aims to make it easier
+        <p>Make it easier
         to find </p><p>great deals in your
         neighbourhoods </p>
       
