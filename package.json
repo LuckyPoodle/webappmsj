@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.1.2",
@@ -59,7 +61,14 @@
   "devDependencies": {
     "@faker-js/faker": "^7.2.0",
     "autoprefixer": "^10.2.6",
+    "eslint-config-next": "^13.1.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
     "postcss": "^8.3.5",
+    "prettier": "^2.8.1",
     "tailwindcss": "^2.2.4"
   }
 }
