@@ -7,13 +7,9 @@ const AboutUs = () => {
       <Header />
       <div className='bg-gray-100 h-screen'>
         <div className='container p-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-          <p className='font-bold'>About SMALLSHOPS</p>
+          <p className='font-bold'>Lorem Ipsum</p>
           <p>
-            I built SMALLSHOPS because I enjoy staying at home to accompany my
-            dog, Dylan, who loves staying at home too. Dylan told me once how
-            nice it would be if he could start a home-based business to sell to
-            his buddies in our neighbourhood. Hence, SMALLSHOPS is created.
-            --Kory{' '}
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.{' '}
           </p>
         </div>
       </div>

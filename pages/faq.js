@@ -7,27 +7,26 @@ const FAQ = () => {
     <div className='h-screen  '>
       <Header />
 
-      <div className=' h-1/2  mb-10 '>
+      <div className=' h-1/2  mb-10  mt-20 flex flex-col justify-center items-center '>
         <section className='pt-10' id='faq'>
           <div className='container mx-auto'>
             <h2 className='mb-6 text-3xl font-semibold text-center md:text-4xl'>
               Frequently Asked Questions
             </h2>
             <p className='max-w-lg px-6 mx-auto text-center text-graishBlue'>
-              If you have any other questions not found below, feel free to
-              contact us.
+            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur
             </p>
           </div>
         </section>
 
-        <div className='container pb-20 bg-white'>
+        <div className='container pb-20 bg-white '>
           <section id='faq-accordion'>
             <div className='container mx-auto px-6 mb-32'>
               <div className='max-w-2xl m-8 mx-auto overflow-hidden'>
                 <div className='py-1 border-b outline-none group' tabindex='1'>
                   <div className='flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease'>
                     <div className='transition duration-500 ease group-hover:text-red-500'>
-                      How do I sell here?
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
                     </div>
 
                     <div className='transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500'>
@@ -48,9 +47,7 @@ const FAQ = () => {
 
                   <div className='overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease'>
                     <p className='py-2 text-justify text-gray-400'>
-                      Simply sign in with your Google account. You will be able
-                      to set up your shop in the user dashboard, and then add
-                      your products/services.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                   </div>
                 </div>
@@ -58,7 +55,7 @@ const FAQ = () => {
                 <div className='py-1 border-b outline-none group' tabindex='2'>
                   <div className='flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease'>
                     <div className='transition duration-500 ease group-hover:text-red-500'>
-                      Is this free?
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
                     </div>
 
                     <div className='transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500'>
@@ -79,10 +76,7 @@ const FAQ = () => {
 
                   <div className='overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease'>
                     <p className='py-2 text-justify text-gray-400'>
-                      Yes it is free to use. SMALLSHOPS only extract 6% fee from
-                      Card payment to cope with transaction fees. Payment from
-                      cards will be distributed to your bank account by 30
-                      Working Days after payment is finalised.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                   </div>
                 </div>
@@ -90,7 +84,7 @@ const FAQ = () => {
                 <div className='py-1 border-b outline-none group' tabindex='3'>
                   <div className='flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease'>
                     <div className='transition duration-500 ease group-hover:text-red-500'>
-                      Who do I complain to for product/services quality issues
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
                     </div>
 
                     <div className='transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500'>
@@ -111,13 +105,7 @@ const FAQ = () => {
 
                   <div className='overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease'>
                     <p className='py-2 text-justify text-gray-400'>
-                      SMALLSHOPS is not responsible for the quality of the
-                      product/service rendered. However, if a product/service is
-                      found to be deceitful or harmful, it will be delisted. The
-                      aim of this platform is to make it easy for residents to
-                      support their nearby micro/budding home-businesses, so if
-                      a product/service is lacking in quality, your constructive
-                      feedback will be much appreciated by the seller(s)
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                   </div>
                 </div>
@@ -125,7 +113,7 @@ const FAQ = () => {
                 <div className='py-1 border-b outline-none group' tabindex='4'>
                   <div className='flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease'>
                     <div className='transition duration-500 ease group-hover:text-red-500'>
-                      How do I get a refund?
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
                     </div>
 
                     <div className='transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500'>
@@ -146,10 +134,7 @@ const FAQ = () => {
 
                   <div className='overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease'>
                     <p className='py-2 text-justify text-gray-400'>
-                      For payment made via cash, refund has to be given out by
-                      the sellers themselves. For card payment, SMALLSHOPS will
-                      provide the refund if requested by the seller you are
-                      seeking the refund from.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                   </div>
                 </div>
